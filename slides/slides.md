@@ -869,18 +869,40 @@ layout: end
 
 # Thanks
 
-<div class="!mt-10 !text-[1.6rem] !leading-relaxed space-y-4">
+<div class="flex justify-center gap-10 !mt-8">
 
-<p><strong>Docs</strong> — pulumi.com/docs/ai/neo/integrations/</p>
-<p><strong>Ten More Things You Can Do With Neo</strong> — pulumi.com/blog/10-more-things-you-can-do-with-neo/</p>
-<p><strong>EMEA repeat</strong> — Sep 30, with Engin Diri</p>
+  <div class="text-center">
+    <img src="/img/qr-repo.png" class="w-52" alt="Workshop repo" />
+    <p class="!mt-3 !text-[1.15rem] opacity-80 !m-0">Slides &amp; repo</p>
+  </div>
+
+  <div class="text-center">
+    <img src="/img/qr-blog.png" class="w-52" alt="Ten More Things blog post" />
+    <p class="!mt-3 !text-[1.15rem] opacity-80 !m-0">Ten More Things</p>
+  </div>
+
+  <div class="text-center">
+    <img src="/img/qr-docs.png" class="w-52" alt="Neo integrations docs" />
+    <p class="!mt-3 !text-[1.15rem] opacity-80 !m-0">Integrations docs</p>
+  </div>
+
+  <div class="text-center">
+    <img src="/img/qr-emea.png" class="w-52" alt="EMEA session Sep 30" />
+    <p class="!mt-3 !text-[1.15rem] opacity-80 !m-0">EMEA — Sep 30</p>
+  </div>
 
 </div>
 
-<p class="!mt-12 !text-[2rem] !font-semibold">Questions?</p>
+<p class="!mt-10 !text-[1.9rem] !font-semibold text-center">Questions?</p>
 
 <!--
-QR codes still to add: repo, LinkedIn, blog post.
+⚠️ THESE QR CODES ARE PLACEHOLDERS — grey, hatched, and labelled so they cannot
+ship by accident. Three of the four already point at real URLs (blog, docs,
+event page); the repo one points at github.com/PLACEHOLDER/... and must be
+regenerated once the repo has a home.
 
-Leave this up through Q&A.
+Regenerate: scripts/make-qr.py (segno + pillow). Drop the hatch and the bar,
+switch dark= to the brand violet, and fix the repo URL.
+
+Leave this slide up through Q&A.
 -->
