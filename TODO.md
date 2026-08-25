@@ -8,10 +8,16 @@ Build-only work I can do alone isn't listed; it lives in git.
 - [ ] **Start the PagerDuty trial — on or after Thu Aug 27.** Trial is 14 days.
       Aug 27 + 14 = Sep 10, so Sep 8 lands on day 12. Starting it any earlier
       expires it before or on the workshop. Sign up as the `pulumi-bot` user.
-- [ ] **Connect the integrations** in the demo org (Settings → Integrations):
-      PagerDuty, Linear, and one of Datadog/Honeycomb. Org-admin only.
-- [ ] **Confirm the org login slug.** Slides and `pulumi env run` examples assume
-      `adam-gordon-bell-org`. If it's different, one find-and-replace fixes it.
+- [ ] **Connect the integrations** in `adamgordonbell-org` (Neo Settings →
+      Integrations). Org-admin only. Two sections, connected separately:
+      - **MCP tools:** PagerDuty, Linear, and one of Datadog/Honeycomb.
+      - **CLI tools:** AWS → point it at the **new read-only** environment.
+      ⛔ **Do NOT point the AWS CLI integration at `shared/cloud-creds`.** That
+      environment assumes `pulumi-environments-oidc`, which has
+      **AdministratorAccess** (verified). Connecting it would make the
+      read-only claim on stage false and make the precedence test undecidable.
+- [x] ~~Confirm the org login slug.~~ It's `adamgordonbell-org` (confirmed via
+      `pulumi whoami -v`). Slides and `pulumi env run` examples updated.
 - [ ] **Send the questions to Engin** — draft is at `docs/engin-ask.md`, not sent.
 - [ ] **Pick the repo remote** — `adamgordonbell/*` or under `dirien/*`.
       Blocks the repo QR code on the closing slide.

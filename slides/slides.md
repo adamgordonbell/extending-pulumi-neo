@@ -282,7 +282,7 @@ Don't spend the December comparison here; you come back to it properly in
 </div>
 
 <div class="demo-foot">
-  <DemoCta href="https://app.pulumi.com/adam-gordon-bell-org/settings/integrations" label="Open the integrations page" />
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/integrations" label="Open the integrations page" />
 </div>
 
 <!--
@@ -746,7 +746,7 @@ into an IAM role.
 ---
 
 ```bash
-pulumi env run myorg/neo-workshop/aws-readonly -- aws rds describe-db-instances
+pulumi env run adamgordonbell-org/neo-workshop/aws-readonly -- aws rds describe-db-instances
 ```
 
 <div class="zoom-content">
