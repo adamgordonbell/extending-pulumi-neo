@@ -273,14 +273,23 @@ Don't spend the December comparison here; you come back to it properly in
 
 ---
 
-# Watch the toggle
+# Demo
 
-<div class="flex justify-center !mt-6">
-  <video src="/video/honey-comb.mp4" autoplay loop muted class="rounded-xl shadow-2xl max-h-[62vh]" />
+<p class="demo-sub">Turning one on — Honeycomb, 24 seconds</p>
+
+<div class="demo-stage">
+  <video src="/video/honey-comb.mp4" autoplay loop muted />
+</div>
+
+<div class="demo-foot">
+  <DemoCta href="https://app.pulumi.com/adam-gordon-bell-org/settings/integrations" label="Open the integrations page" />
 </div>
 
 <!--
 🎬 honey-comb.mp4 — 24 seconds, silent, loops.
+
+The button goes to the real settings page. Click it if the room looks
+skeptical that it's this small; otherwise let the video carry it.
 
 TALK OVER IT. It loops, so there's no rush and no dead air.
 
@@ -298,8 +307,18 @@ layout: statement
 
 <p class="!mt-6 !text-[2rem] text-[var(--p-fg-muted)]">Neo proposes. A human merges.</p>
 
+<div class="demo-foot !mt-10">
+  <DemoCta href="https://github.com/adamgordonbell/neo-examples/pull/7" label="A real one: neo-examples #7" />
+</div>
+
 <!--
 LOAD-BEARING. Say it clearly and let it sit.
+
+The button opens a genuine merged PR — Neo removing three unused resources it
+found: an EBS volume for a database that doesn't exist, an ALB with no
+listeners, a security group for an absent API Gateway. Scroll the body if you
+open it — it says what each one was and why it was safe to delete. That body
+is the argument.
 
 Two reasons it's here, before any demo:
 1. If every demo fails, the argument still landed.
@@ -324,32 +343,65 @@ routeAlias: stage-ask
 
 # The work that never reaches the top
 
-<div class="zoom-content">
+<div class="queue">
 
-<p class="!mt-10 !text-[1.7rem] !leading-relaxed">
-Tickets pile up not because they're unimportant — because they're <strong>never urgent</strong>.
-</p>
+<div class="queue-col">
+  <div class="queue-label">wins the morning</div>
+  <div class="tkt hot">SEV-2 · checkout 500s</div>
+  <div class="tkt hot">Customer escalation</div>
+  <div class="tkt hot">Release cut</div>
+</div>
 
-<p class="!mt-8 !text-[1.7rem] !leading-relaxed opacity-85">
-Bump a provider version. Centralize a secret. Close out a small policy violation.
-Each one matters. None of them ever wins the morning.
-</p>
-
-<p class="!mt-8 !text-[1.7rem] !leading-relaxed">
-And explaining each one to an agent is its own overhead — which is the part
-integrations remove.
-</p>
+<div class="queue-col">
+  <div class="queue-label">never urgent, never done</div>
+  <div class="tkt cold">Bump the provider version</div>
+  <div class="tkt cold">Centralize that secret</div>
+  <div class="tkt cold">Close a policy violation</div>
+  <div class="tkt cold">Narrow an over-broad IAM role</div>
+  <div class="tkt cold">Tag the untagged resources</div>
+</div>
 
 </div>
 
 <style scoped>
-.zoom-content { zoom: 1.4; }
+.queue { display: flex; gap: 4.5rem; justify-content: center; margin-top: 2.4rem; }
+.queue-col { display: flex; flex-direction: column; gap: 0.85rem; width: 24rem; }
+.queue-label {
+  font-size: 1.15rem; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--p-fg-muted); margin-bottom: 0.4rem;
+}
+.tkt {
+  font-size: 1.32rem; padding: 0.8rem 1.15rem; border-radius: 0.55rem;
+  border: 2px solid var(--p-primary);
+}
+.tkt.hot { font-weight: 600; }
+/* The right-hand column fades down the stack — the visual argument is that
+   these sink, not that they are a different category. Opacity + dashes only;
+   no colour coding. */
+.tkt.cold { border-style: dashed; border-color: var(--p-fg-muted); }
+.tkt.cold:nth-child(2) { opacity: 0.85; }
+.tkt.cold:nth-child(3) { opacity: 0.68; }
+.tkt.cold:nth-child(4) { opacity: 0.51; }
+.tkt.cold:nth-child(5) { opacity: 0.34; }
+.tkt.cold:nth-child(6) { opacity: 0.22; }
 </style>
 
 <!--
-Last line is the pivot: the fix isn't a better prompt, it's letting Neo read the
-ticket itself — title, description, acceptance criteria — the way an engineer
-would.
+Let the two columns do the talking. The right column fades as it goes down —
+that IS the point, so don't explain it.
+
+What to say over it:
+
+- These pile up not because they're unimportant, but because they're never
+  urgent. Each one matters. None of them ever wins the morning.
+- Bump a provider version. Centralize a secret. Close out a small policy
+  violation. Narrow a role. Everyone in the room has this list.
+
+PIVOT — this is the line that earns the next slide:
+  Explaining each one to an agent is its own overhead. That is the part
+  integrations remove. The fix isn't a better prompt — it's letting Neo read
+  the ticket itself: title, description, acceptance criteria, the way an
+  engineer would.
 -->
 
 ---
@@ -361,6 +413,10 @@ layout: statement
 <p class="!mt-8 !text-[2.6rem] !text-[var(--p-primary)] !font-semibold">A Linear ticket, start to pull request</p>
 
 <p class="!mt-8 !text-[1.7rem] text-[var(--p-fg-muted)]">pulumi neo</p>
+
+<div class="demo-foot !mt-10">
+  <DemoCta href="https://linear.app/" label="Open the ticket" />
+</div>
 
 <!--
 🔴 LIVE DEMO 1 — target 5 minutes, hard stop 7.
@@ -421,29 +477,67 @@ routeAlias: stage-delegate
 
 # On-call triage is the first twenty minutes
 
-<div class="zoom-content">
+<div class="triage">
 
-<p class="!mt-10 !text-[1.7rem] !leading-relaxed">
-You get paged because something is red. You don't know why yet.
-</p>
+<div class="triage-bar">
+  <div class="seg seg-assemble">
+    <div class="seg-title">assembling</div>
+    <div class="seg-body">what deployed recently · what changed in the stack · what the metrics did · when it started</div>
+    <div class="seg-tools">PagerDuty → Pulumi → Datadog → the console</div>
+  </div>
+  <div class="seg seg-fix">
+    <div class="seg-title">fixing</div>
+  </div>
+</div>
 
-<p class="!mt-8 !text-[1.7rem] !leading-relaxed opacity-85">
-So the first twenty minutes aren't fixing. They're <strong>assembling</strong> — what deployed
-recently, what changed in the stack, what the metrics did, when it started.
-</p>
+<div class="triage-axis">
+  <span>the page fires</span>
+  <span>~20 minutes</span>
+</div>
 
-<p class="!mt-8 !text-[1.7rem] !leading-relaxed">
-That assembly is reading. Which is exactly what an integration is for.
-</p>
+<p class="triage-note">That assembly is <strong>reading</strong>. Which is exactly what an integration is for.</p>
 
 </div>
 
 <style scoped>
-.zoom-content { zoom: 1.4; }
+.triage { margin-top: 2.6rem; }
+.triage-bar { display: flex; gap: 0.6rem; align-items: stretch; }
+.seg { border-radius: 0.6rem; padding: 1.3rem 1.5rem; }
+.seg-assemble {
+  flex: 4;
+  border: 2px dashed var(--p-fg-muted);
+  background: color-mix(in srgb, var(--p-fg-muted) 8%, transparent);
+}
+.seg-fix {
+  flex: 1;
+  border: 2px solid var(--p-primary);
+  display: flex; align-items: center; justify-content: center;
+}
+.seg-title {
+  font-size: 1.5rem; font-weight: 700; letter-spacing: 0.03em;
+  text-transform: lowercase; color: var(--p-primary);
+}
+.seg-body { margin-top: 0.7rem; font-size: 1.24rem; line-height: 1.5; opacity: 0.85; }
+.seg-tools { margin-top: 0.85rem; font-size: 1.16rem; font-family: var(--p-font-mono, monospace); opacity: 0.7; }
+.triage-axis {
+  display: flex; justify-content: space-between;
+  margin-top: 0.7rem; font-size: 1.1rem; color: var(--p-fg-muted);
+}
+.triage-note { margin-top: 2.4rem; font-size: 1.62rem; line-height: 1.5; }
 </style>
 
 <!--
-Room-recognition slide. Anyone who has carried a pager knows the twenty minutes.
+Room-recognition slide. Anyone who has carried a pager knows these twenty
+minutes — point at the wide box, not the narrow one.
+
+What to say over it:
+
+- You get paged because something is red. You don't know why yet.
+- So the first twenty minutes aren't fixing. They're assembling: what deployed
+  recently, what changed in the stack, what the metrics did, when it started.
+- Four tools, one person, and you haven't touched the problem yet.
+
+Then the line on the slide.
 
 Don't claim Neo fixes incidents. Claim it collapses the assembly step — that's
 both true and the more credible pitch.
@@ -455,58 +549,9 @@ layout: two-cols
 
 ::header::
 
-# December: what this took
+# What's a toggle now, and what isn't
 
-::left::
-
-<p class="!mt-2 !mb-4 !font-semibold !text-[var(--p-primary)] !text-[1.5rem]">Engin Diri, Dec 2025 — <em class="!font-normal">Day-2 Autonomous Infrastructure Management</em></p>
-
-```mermaid {theme:'neutral', scale:1.05}
-flowchart TB
-  subgraph D["detection, on a K8s cluster"]
-    direction LR
-    F["Falco<br/>runtime"] ~~~ T["Trivy<br/>CVEs"] ~~~ K["Kyverno<br/>policy"] ~~~ P["Prometheus<br/>metrics"]
-  end
-  D -->|"Falcosidekick / Alertmanager"| PD["PagerDuty"]
-  PD --> WH["webhook service<br/><b>he wrote and deployed</b>"]
-  WH -->|creates a task| NEO["Neo API"]
-
-  style WH fill:#efe9ff,stroke:#7e6bff,stroke-width:3px
-  style PD fill:#fff,stroke:#7e6bff,stroke-width:2px
-  style NEO fill:#fff,stroke:#7e6bff,stroke-width:2px
-```
-
-::right::
-
-<div class="!mt-4 !text-[1.4rem] !leading-relaxed space-y-6">
-
-<p>Detection was the easy part. The hard part was <strong>the glue</strong>.</p>
-
-<p class="opacity-85">A service that catches <code>incident.trigger</code>, pulls the alert
-detail, and hands Neo the repo, org, project, stack, and environment as context.</p>
-
-<p class="opacity-85">Every one of those wires was code someone had to write, deploy,
-and keep running.</p>
-
-</div>
-
-<!--
-Credit him properly — this was his workshop, and I co-presented it.
-
-Recording: youtube.com/watch?v=nx6oJvX2JNE
-Repo: github.com/dirien/pulumi-ai-workshop-base
-
-The point of the slide is not "look how hard it was." It's setting up an honest
-comparison on the next slide — which is NOT "all of this is gone."
--->
-
----
-layout: two-cols
----
-
-::header::
-
-# What changed, precisely
+<p class="credit">The wiring below is what <strong>Engin Diri</strong> built and we co-presented in December — <em>Day-2 Autonomous Infrastructure Management</em>.</p>
 
 ::left::
 
@@ -537,8 +582,16 @@ flowchart LR
 
 <p class="!mt-4 !text-[1.5rem] !font-semibold opacity-85">Still the webhook. Still yours to wire.</p>
 
+<style scoped>
+.credit { margin-top: -0.4rem; font-size: 1.16rem; line-height: 1.5; color: var(--p-fg-muted); }
+</style>
+
 <!--
 ⛔ DO NOT SAY the integration replaced what Engin built. It didn't.
+
+Credit him out loud, not just on the slide — it was his workshop, I co-presented.
+  Recording: youtube.com/watch?v=nx6oJvX2JNE
+  Repo: github.com/dirien/pulumi-ai-workshop-base
 
 Inbound vs outbound:
 - his webhook = INBOUND. PagerDuty fires -> Neo API creates a task.
@@ -559,6 +612,10 @@ layout: statement
 <p class="!mt-8 !text-[2.6rem] !text-[var(--p-primary)] !font-semibold">A real page, to a merged fix</p>
 
 <p class="!mt-8 !text-[1.7rem] text-[var(--p-fg-muted)]">PagerDuty + aws, from the terminal</p>
+
+<div class="demo-foot !mt-10">
+  <DemoCta href="https://app.pagerduty.com/incidents" label="Open the incident" />
+</div>
 
 <!--
 🔴 LIVE DEMO 2 — target 15 minutes. THE session. Never cut.
@@ -723,22 +780,74 @@ ran read-only.
 
 # Least privilege, from the thing you suspect has too much
 
-<div class="flex justify-center !mt-4">
-  <video src="/video/iam-narrow.mp4" autoplay loop muted class="rounded-xl shadow-2xl max-h-[58vh]" />
+<div class="setup">
+
+<div class="setup-row">
+  <div class="setup-k">You have</div>
+  <div class="setup-v">Forty roles in production. Half of them start with <code>s3:*</code>, because nobody had time to scope them.</div>
 </div>
 
-<!--
-🎬 iam-narrow.mp4 — 60 seconds. Long enough to narrate straight through.
+<div class="setup-row">
+  <div class="setup-k">You ask</div>
+  <div class="setup-v"><em>"Audit these policies against what the stack code actually calls, and narrow them."</em></div>
+</div>
 
-"Forty roles in production. Half of them started with s3:* because nobody had
-time to scope them."
+<div class="setup-row">
+  <div class="setup-k">You get</div>
+  <div class="setup-v">A PR per role — with the API calls it found listed in the body as the justification.</div>
+</div>
+
+</div>
+
+<style scoped>
+.setup { margin-top: 2.6rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.setup-row { display: flex; gap: 1.8rem; align-items: baseline; }
+.setup-k {
+  flex: 0 0 9rem; text-align: right;
+  font-size: 1.3rem; font-weight: 700; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--p-primary);
+}
+.setup-v { flex: 1; font-size: 1.5rem; line-height: 1.55; }
+</style>
+
+<!--
+Setup slide — say these three lines and move on. The video is next and it runs
+60 seconds, so don't spend the story here.
+
+The pattern worth naming: the evidence sits next to the diff.
+-->
+
+---
+
+# Demo
+
+<p class="demo-sub">Narrowing IAM policies to what the code actually calls — 60 seconds</p>
+
+<div class="demo-stage demo-stage-xl">
+  <video src="/video/iam-narrow.mp4" autoplay loop muted />
+</div>
+
+<div class="demo-foot">
+  <DemoCta href="https://github.com/adamgordonbell/iam-narrow-demo/pull/1" label="Open the PR it produced" />
+</div>
+
+<style scoped>
+:deep(.pulumi-accent-bar), :deep(.pulumi-footer) { display: none }
+</style>
+
+<!--
+🎬 iam-narrow.mp4 — 60 seconds, the longest clip in the deck. Chrome is hidden
+so it runs as big as the slide allows; narrate straight through it.
 
 Neo cross-references each role's policy against what the stack code actually
-calls, and opens a PR per role. The PR body lists the API calls it found —
-s3:GetObject on audit-logs-*, s3:PutObject on audit-logs-staging — as the
-justification.
+calls, then opens a PR per role.
 
-The evidence sits next to the diff. That's the pattern worth pointing at.
+The button opens the real PR. Its body has the before/after table —
+s3:* becomes s3:ListBucket + s3:GetObject, scoped to the two audit-logs
+buckets. Open it if you want to show the evidence up close.
+
+⚠️ That PR is CLOSED, not merged. Don't call it merged. The diff and the
+evidence-in-the-body point both still read fine.
 -->
 
 ---
@@ -805,27 +914,54 @@ Everything so far has been you asking. The last move is not asking.
 
 ---
 
-# Set it once
+# Demo
 
-<div class="flex justify-center gap-8 !mt-6">
-  <video src="/video/neo-schedule-setup.mp4" autoplay loop muted class="rounded-xl shadow-2xl max-h-[52vh]" />
-  <video src="/video/neo-cis-pr.mp4" autoplay loop muted class="rounded-xl shadow-2xl max-h-[52vh]" />
+<p class="demo-sub">Set it once — the scheduling UI, 18 seconds</p>
+
+<div class="demo-stage demo-stage-xl">
+  <video src="/video/neo-schedule-setup.mp4" autoplay loop muted />
 </div>
 
 <!--
-🎬 Two short clips, 18s and 17s, side by side and looping.
+🎬 neo-schedule-setup.mp4 — 18 seconds. SHORT. Narrate deliberately or it
+reads as motion rather than content.
 
-They're SHORT — narrate deliberately or they read as motion rather than content.
-
-Left: the scheduling UI.
+Read the instruction out loud as it's typed:
   > Every morning, read CIS Benchmark failures from Security Hub. For every
   > failure on an IaC-managed resource, open a PR with the fix.
 
-Right: what shows up the next morning. Point at the PR body — the CIS rule
-number, the resource id, the diff, and a clean preview against live infra.
+That is the whole setup. No schedule config, no runner, no glue.
 
-Note out loud: this is the one thing I cannot demo live. A task that runs at
-6 AM does not run at 12:45 PM.
+Say it plainly: this is the one thing I cannot demo live. A task that runs at
+6 AM does not run at 12:45 PM. The next slide is what showed up.
+-->
+
+---
+
+# The next morning
+
+<p class="demo-sub">Nobody asked for this one — 17 seconds</p>
+
+<div class="demo-stage demo-stage-xl">
+  <video src="/video/neo-cis-pr.mp4" autoplay loop muted />
+</div>
+
+<div class="demo-foot">
+  <DemoCta href="https://github.com/adamgordonbell/neo-examples/pull/9" label="See what it changed" />
+</div>
+
+<!--
+🎬 neo-cis-pr.mp4 — 17 seconds.
+
+This is the beat the whole section is for: a pull request that exists because
+of a schedule, not because someone opened a session.
+
+Point at the PR body — the CIS rule number, the resource id, the diff, and a
+clean preview against live infra.
+
+The button opens the real thing: neo-examples #9, restricting bastion SSH from
+0.0.0.0/0 to the VPC CIDR. Merged. If anyone doubts the PR bodies are this
+specific, click it.
 -->
 
 ---
@@ -854,6 +990,77 @@ unsupervised." The judgment stays in a file your team wrote.
 
 The PR body names the resource, the change, when it happened, and the runbook
 section. That citation is the trust mechanism.
+-->
+
+---
+
+# What it left behind
+
+<p class="!mt-3 !text-[1.45rem] text-[var(--p-fg-muted)]">Real pull requests, from real sessions. Click any of them.</p>
+
+<div class="trail">
+
+<a class="trail-row" href="https://github.com/adamgordonbell/neo-examples/pull/9" target="_blank" rel="noopener">
+  <span class="trail-num">#9</span>
+  <span class="trail-title">Restrict bastion SSH access to VPC only</span>
+  <span class="trail-note">policy violation · merged</span>
+</a>
+
+<a class="trail-row" href="https://github.com/adamgordonbell/neo-examples/pull/7" target="_blank" rel="noopener">
+  <span class="trail-num">#7</span>
+  <span class="trail-title">Remove unused infrastructure resources</span>
+  <span class="trail-note">cost · merged</span>
+</a>
+
+<a class="trail-row" href="https://github.com/adamgordonbell/neo-examples/pull/5" target="_blank" rel="noopener">
+  <span class="trail-num">#5</span>
+  <span class="trail-title">Add burst node group with 2-4 t3.small nodes</span>
+  <span class="trail-note">capacity · merged</span>
+</a>
+
+<a class="trail-row" href="https://github.com/adamgordonbell/iam-narrow-demo/pull/1" target="_blank" rel="noopener">
+  <span class="trail-num">#1</span>
+  <span class="trail-title">Narrow IAM policies to least privilege</span>
+  <span class="trail-note">access · closed</span>
+</a>
+
+</div>
+
+<style scoped>
+.trail { margin-top: 1.9rem; display: flex; flex-direction: column; gap: 0.85rem; }
+.trail-row {
+  display: flex; align-items: baseline; gap: 1.3rem;
+  padding: 0.95rem 1.4rem;
+  border: 2px solid var(--p-primary); border-radius: 0.6rem;
+  text-decoration: none; color: inherit;
+  transition: background 0.15s ease;
+}
+.trail-row:hover { background: color-mix(in srgb, var(--p-primary) 12%, transparent); }
+.trail-num {
+  flex: 0 0 3.2rem;
+  font-family: var(--p-font-mono, monospace);
+  font-size: 1.45rem; font-weight: 700; color: var(--p-primary);
+}
+.trail-title { flex: 1; font-size: 1.42rem; }
+.trail-note {
+  font-size: 1.08rem; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--p-fg-muted);
+}
+</style>
+
+<!--
+Closing move of the section: the output is a paper trail you can read.
+
+Every row is live — open one if the room wants to see a body up close. #9 is
+the best one to open: policy rule name, security group id, preview results.
+
+⚠️ #1 is CLOSED, not merged. Say "closed" if you open it.
+
+UPGRADE (needs work before Sep 8): what would be better here is browsing the
+Neo sessions themselves in Pulumi Cloud and showing the PR each one produced.
+The PRs survived; the sessions behind them didn't leave links. Recreating them
+in the demo org is on the Aug 27 list. If that doesn't happen, this slide
+stands on its own.
 -->
 
 ---

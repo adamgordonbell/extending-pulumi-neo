@@ -207,3 +207,32 @@ html {
   padding: 0.12em 0.5em;
   white-space: nowrap;
 }
+
+/* --- Demo slides -------------------------------------------------------
+   Every demo slide uses the same shape: a "Demo" title, one line of what
+   it is, the artifact (video or live), and a click-through to the real
+   thing. Consistency is the point — the audience learns the pattern once. */
+.demo-sub {
+  margin-top: 0.6rem;
+  font-size: 1.55rem;
+  line-height: 1.4;
+  color: var(--p-fg-muted);
+}
+.demo-stage {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.1rem;
+}
+.demo-stage video {
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.45);
+  max-height: 66vh;
+  width: auto;
+}
+.demo-foot {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.1rem;
+}
+/* Full-attention demo slides: chrome hidden, video as large as the slide allows. */
+.demo-stage-xl video { max-height: 74vh; }
