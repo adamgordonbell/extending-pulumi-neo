@@ -33,27 +33,28 @@ scrollback, no unrelated env vars, no other orgs in view, font size up.
 
 | # | Beat | Target | Slide |
 |---|------|--------|-------|
-| 1 | Opener — ticket to infra change (Linear) | 12:03–12:10 | |
-| 2 | The incident walkthrough (PagerDuty + `aws`) | 12:10–12:32 | |
-| 3 | Scope and blast radius | 12:32–12:42 | |
-| 4 | Beyond the interactive task | 12:42–12:50 | |
-| 5 | Q&A | 12:50–1:00 | |
+| 1 | Why — Neo could always write Pulumi | 12:02–12:07 | |
+| 2 | **Ask** — a ticket becomes a PR (Linear) | 12:07–12:14 | |
+| 3 | **Delegate** — the incident (PagerDuty + `aws`) | 12:14–12:34 | |
+| 4 | **Scope** — what Neo can reach, and who decided | 12:34–12:44 | |
+| 5 | **Stop initiating** — it runs without you | 12:44–12:52 | |
+| 6 | Q&A | 12:52–1:00 | |
 
 Full beat content lives in [`OUTLINE.md`](OUTLINE.md). This file is the clock and the
 failure plan.
 
 ## Cuts, decided in advance
 
-1. **Beat 4 goes first.** It is a single forward-looking slide; narrate it and move on.
-2. **Beat 1 becomes a screenshot.** The Linear opener is proof, not payoff.
-3. **Beat 2 never gets cut.** If beat 2 cannot run, the session has no content.
+1. **Beat 5 goes first.** One slide plus `neo-cis-pr.mp4`; narrate it and move on.
+2. **Beat 2 degrades to the clip.** Play `neo-linear.mp4` instead of driving it live.
+3. **Beat 3 never gets cut.** If beat 3 cannot run, the session has no content.
 
 ## When it breaks
 
 - **An integration is missing from the composer.** Neo reads connected integrations at task start; if one was disconnected or its ESC environment deleted, Neo skips it and continues. Say so and keep going — it is a real behaviour worth showing, not an outage.
 - **Neo says it can't run the CLI.** Usually the ESC environment is missing a variable, or the credentials are not authorized for what Neo tried. Reproduce with `pulumi env run <ref> -- <cli> <args>`. Do not debug live past one attempt.
 - **The page never fires.** Fall back to an incident you triggered before the session and left open.
-- **Everything is down.** The argument is complete without the demos. Walk the slides.
+- **Everything is down.** ⭐ **Every beat has a recording** — the six videos from the *Ten More Things* post are in `slides/public/`. Switch that beat to its clip; the show does not change. This is the fallback R2 never had.
 
 ## Things not to say
 

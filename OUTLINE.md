@@ -3,70 +3,116 @@
 **Tue Sep 8 2026 · 12:00–1:00 PM ET · 60 minutes · BigMarker `f4d6709a7b01`**
 Adam Gordon Bell presents. EU repeat Wed Sep 30, Engin Diri.
 
-> **Shape: demo-only.** Adam drives; attendees watch and clone the repo afterward.
-> There is no follow-along block — 60 minutes has no room for one, and MCP integrations
-> are an org-admin toggle attendees cannot perform on their own org mid-session.
-> ⛔ Do not reintroduce a `chapters/` directory.
-
-**Delivery surface:** `pulumi neo` in the terminal. Integrations carry over from Pulumi
-Cloud, so ESC-backed CLI integrations work the same way from the CLI.
+> **Shape: demo-only.** Adam drives from `pulumi neo` in the terminal; attendees watch and
+> clone the repo afterward. No follow-along block — 60 minutes has no room, and MCP
+> integrations are an org-admin toggle attendees cannot perform on their own org
+> mid-session. ⛔ Do not reintroduce a `chapters/` directory.
 
 ---
 
-## The argument
+## The concept: "Ten More Things," live
 
-Neo could always write Pulumi. What it could not do was *look at the systems the incident
-actually lives in*. Integrations close that gap in two different ways, and the difference
-is the spine of the session:
+The session is the **`neo-things` series done on stage** — Adam's May 2026 post
+[*Ten More Things You Can Do With Pulumi Neo*](https://www.pulumi.com/blog/10-more-things-you-can-do-with-neo/)
+(`content/blog/10-more-things-you-can-do-with-neo/`), narrowed to the items that turn on
+an integration, and performed instead of described.
 
-- **MCP integrations** — Neo reads your SaaS: PagerDuty, Linear, Datadog, Honeycomb, Atlassian, Supabase. Credentials encrypted per-org, decrypted at task time, never shown to the model.
-- **CLI integrations** — Neo runs `aws`, `gcloud`, `az`, `kubectl` against credentials **you** scope in Pulumi ESC. Pulumi Cloud never stores them.
+**The post's own arc is the session's arc:**
 
-Ending state of every demo is the same and it matters: **a reviewable pull request.**
-Neo proposes; a human merges.
+> Items 1–7 are things you *ask for*. Items 8–10 run *without you*.
+> *"Platform engineers used to keep things in their heads, then they delegated them to Neo,
+> then those tasks started running on a schedule without anyone initiating them."*
+
+That progression — **ask → delegate → stop initiating** — is the spine. Integrations are
+what makes each step possible, which is why this workshop is the one that earns the arc.
+
+### Which of the ten, and why
+
+| # | Item | Integration | In session? |
+|---|------|-------------|-------------|
+| 4 | Implement a Linear/Jira ticket end-to-end | Linear MCP | ✅ **opener** — video already shot in the CLI |
+| 3 | PagerDuty incident response | PagerDuty MCP | ✅ **the spine** |
+| 5 | Audit over-privileged IAM roles | `aws` CLI + ESC | ✅ **the scope beat** |
+| 8/9/10 | Drift · Lambda upgrades · CIS Benchmark | automations + `aws` | ✅ **the closer** — pick one |
+| 2 | Diagnose a slow API from metrics | Datadog / Honeycomb MCP | 🟡 only if Honeycomb lands; no Datadog account |
+| 1, 6, 7 | Deploy to AWS · CDK migration · containerize | — | ❌ not integration-driven; cut |
+
+⚠️ **Accuracy notes.** Item 3 is written as **Slack**-invoked; this session drives from the
+CLI, so re-frame rather than quote. Item 2 depends on Datadog, which we have no account
+for — Honeycomb is the cheaper substitute but shows traces, not metrics.
+
+---
+
+## 🎬 The assets already exist
+
+Six videos and four screenshots, shot by Adam in May, live in
+`~/sandbox/docs/content/blog/10-more-things-you-can-do-with-neo/`:
+
+| File | Shows | Use |
+|------|-------|-----|
+| `neo-linear.mp4` | **Neo in the Pulumi CLI**, Linear issue → PR | Opener — and it's already the right surface |
+| `honey-comb.mp4` | Toggling an integration on | The "it's just a toggle" beat |
+| `iam-narrow.mp4` | IAM audit → scoped policy, with evidence | Scope beat |
+| `neo-schedule-setup.mp4` | Scheduled Tasks UI | Closer |
+| `neo-cis-pr.mp4` | Morning CIS Benchmark PR | Closer |
+| `deploy-to-aws2.mp4` | Repo → plan mode → PR | Spare |
+| `neo-integration-catalog.png` | The six integrations, Authorize buttons | Anchor slide |
+| `neo-drift-pr.png` · `neo-migration-prs.png` | PR bodies citing the runbook | Scope beat |
+
+⭐ **This closes the fallback gap that was live risk on the Aug 12 workshop** — `PRESENTER.md`
+wanted a recording per beat, none existed, and R2 ran without them. Here every beat has one
+already, in Adam's own voice, on assets he owns.
+
+**Backing repos, both local:** `~/sandbox/iam-narrow-demo` (item 5) ·
+`~/sandbox/neo-examples` (EKS, `ca-central-1`, ESC `oidc/oidc`, policy pack, and a
+`docs/script.md` that is probably the shooting script for the videos).
 
 ---
 
 ## Run of show (60 min)
 
-| # | Beat | Time | Purpose |
-|---|------|------|---------|
-| 1 | **Opener — ticket to infra change** (Linear) | ~7 | Cheapest possible proof. 30 seconds of setup, one integration, ends in a PR. |
-| 2 | **The incident walkthrough** (PagerDuty + `aws`) | ~22 | The spine. Real page, real diagnosis, real PR, resolved back to PagerDuty. |
-| 3 | **Scope and blast radius** | ~10 | What Neo can reach, and who decided. Per-task toggles, ESC scoping, the credential story. |
-| 4 | **Beyond the interactive task** | ~8 | One of: per-automation CLI integrations, or Neo in the editor via ACP. Pick one. |
-| 5 | **Q&A** | ~10 | |
+| # | Beat | Time | The claim |
+|---|------|------|-----------|
+| 1 | **Why** — Neo could always write Pulumi | ~5 | It couldn't see the systems the incident lives in |
+| 2 | **Ask** — a ticket becomes a PR (Linear) | ~7 | An integration is a toggle; the output is reviewable |
+| 3 | **Delegate** — the incident (PagerDuty + `aws`) | ~20 | Page → diagnosis → PR → resolved, live |
+| 4 | **Scope** — what Neo can reach, and who decided | ~10 | It never needed write access |
+| 5 | **Stop initiating** — it runs without you | ~8 | Drift / CIS / upgrades on a schedule |
+| 6 | **Q&A** | ~10 | |
 
-**Cut order if running long:** beat 4 first, then trim beat 1 to a screenshot. **Beat 2 never gets cut** — it is the session.
+**Cut order:** beat 5 first (it's one slide plus a video), then beat 2 degrades to the
+`neo-linear.mp4` clip. **Beat 3 never gets cut** — it is the session.
 
 ---
 
 ## Beat detail
 
-### 1 — Opener: ticket to infra change
+### 2 — Ask: a ticket becomes a PR
 
-Linear MCP integration, personal API key, minutes to set up. Ask Neo to pick up a ticket
-describing an infra change; it reads the ticket, edits the program, opens a PR.
+Item 4 of the post. Linear MCP integration, personal API key, about thirty seconds of
+setup. Ask Neo to pick up a ticket; it reads title, description and acceptance criteria,
+plans against the stack, opens a PR, and comments back on the ticket.
 
-Point being made: *an integration is a toggle, and the output is reviewable.*
+*An integration is a toggle, and the output is reviewable.*
 
-### 2 — The incident walkthrough
+### 3 — Delegate: the incident walkthrough
 
-Prior art to credit and build on: **Engin Diri's "Day-2 Autonomous Infrastructure
-Management," Dec 9 2025** — recording <https://www.youtube.com/watch?v=nx6oJvX2JNE>,
-repo <https://github.com/dirien/pulumi-ai-workshop-base>. Adam co-presented.
+Item 3 of the post, and the through-line of Engin Diri's **"Day-2 Autonomous
+Infrastructure Management"** (Dec 9 2025 — recording
+<https://www.youtube.com/watch?v=nx6oJvX2JNE>, repo
+<https://github.com/dirien/pulumi-ai-workshop-base>). Adam co-presented.
 
-1. **Cause a real page.** Not a fixture — a live incident with a real timestamp.
-2. **Neo reads the incident** through the PagerDuty MCP integration.
-3. **Neo inspects live infrastructure** through the `aws` CLI integration, ESC-backed.
-4. **Neo edits the Pulumi program** and previews the change.
-5. **PR opened. Human reviews.** Resolve back to PagerDuty.
+1. **Cause a real page** — not a fixture; a live incident with a real timestamp
+2. **Neo reads the incident** — PagerDuty MCP
+3. **Neo inspects what's actually running** — `aws` CLI, ESC-backed
+4. **Neo edits the program** and previews
+5. **PR opened. Human reviews.** Resolve back to PagerDuty
 
 🔑 **The finding must be configuration-shaped, not trend-shaped.** A fresh account has no
-history, so "storage grew 5 GB/day for 30 days" — the launch blog's marquee beat — cannot
-be demonstrated. Use findings visible in a single look: a queue with no redrive policy,
-`maxReceiveCount` of 1, `AllocatedStorage == MaxAllocatedStorage`, an alarm wired to no
-action.
+history, so the launch blog's *"5 GB/day over 30 days"* cannot be demonstrated — and
+neither can the post's own *"last 7 days of metrics"* framing in item 2. Use findings
+visible in a single look: a queue with no redrive policy, `maxReceiveCount` of 1,
+`AllocatedStorage == MaxAllocatedStorage`, an alarm wired to no action.
 
 ⛔ **Do not claim the MCP integration replaces Engin's webhook.** His glue was the
 **inbound** leg — PagerDuty `incident.trigger` → Neo API *creates* a task. The MCP
@@ -74,35 +120,42 @@ integration is the **outbound** leg — Neo *reading* PagerDuty during a task al
 running. Honest framing: *"the reading half is now a toggle; the triggering half is still
 yours to wire."*
 
-### 3 — Scope and blast radius
+### 4 — Scope: what Neo can reach
 
-The question the room is actually holding: *what can this thing reach?*
+The question the room is actually holding. Item 5 (IAM narrowing) is the natural vehicle —
+it's a demo *about* least privilege, delivered by a tool people are worried has too much.
 
-- Integrations are enabled by an org admin, and any single task can toggle them **off** from the composer without touching org config.
-- MCP credentials: encrypted at rest per-org, decrypted at task time, never exposed to the model, never in task state.
-- CLI credentials: owned by ESC, not Pulumi Cloud. Neo runs `pulumi env run <ref> -- <cli> <args>` **as the acting user** — an integration works only for someone who could open that environment themselves. Connecting one grants nobody access they did not already have.
-- Named instances — `production-aws` vs `staging-aws` — each with its own ESC environment and a Notes field Neo reads when choosing.
-- **Neo never needed write access to do beat 2.** The remediation was a pull request. Say this out loud.
+- An org admin enables an integration; any single task can toggle it **off** from the composer, without touching org config
+- **MCP credentials** — encrypted at rest per-org, decrypted at task time, never exposed to the model, never in task state
+- **CLI credentials** — owned by ESC, not Pulumi Cloud. Neo runs `pulumi env run <ref> -- <cli> <args>` **as the acting user**; an integration works only for someone who could open that environment themselves. Connecting one grants nobody access they didn't already have
+- Named instances — `production-aws` vs `staging-aws` — each with its own environment and a Notes field Neo reads when choosing
+- **Neo never needed write access to do beat 3.** The remediation was a pull request. Say this out loud.
 
-### 4 — Beyond the interactive task
+### 5 — Stop initiating
 
-Pick **one**:
+Items 8, 9, 10 — drift detection, Lambda runtime upgrades, CIS Benchmark fixes. **Pick
+one**; `neo-cis-pr.mp4` and `neo-schedule-setup.mp4` cover it. Per-automation CLI
+integration selection is what makes these work with cloud access (merged 2026-08-06 —
+confirm the surface before demoing).
 
-- **Per-automation CLI integration selection** — CLI integrations inside scheduled Automations, not just interactive tasks. (Merged 2026-08-06; confirm the surface before demoing.)
-- **Neo in your editor via ACP** — Zed, JetBrains, VS Code, Cursor.
+The payoff line is the post's: *you delegate a task, and then you stop initiating it.*
 
-Optional callback if time allows: the [Neo handoff skill](https://github.com/pulumi/agent-skills/tree/main/delegation) lets Claude Code start a `pulumi neo` task — ties back to the Aug 12 *DevOps AI Skills* workshop.
+Optional callback if time allows: the
+[Neo handoff skill](https://github.com/pulumi/agent-skills/tree/main/delegation) lets
+Claude Code start a `pulumi neo` task — ties back to the Aug 12 *DevOps AI Skills*
+workshop.
 
 ---
 
 ## Open before build (Thu Aug 27, 1:00–2:30)
 
-- [ ] Watch the Dec 9 recording (`nx6oJvX2JNE`) — closest prior art, Adam is in it
-- [ ] Stand up the PagerDuty trial (dedicated `pulumi-bot` user; MCP tokens are user-scoped) and confirm the trial term against Sep 8
-- [ ] Seed it with Engin's July "Incident Response as Code" program
+- [ ] Re-read the post end to end and mark which items get performed vs mentioned
+- [ ] Watch the Dec 9 recording (`nx6oJvX2JNE`) — Engin's beat order, and the only capture of that workshop
+- [ ] Copy the six videos + four screenshots into `slides/public/` and cut them into the deck
+- [ ] Decide beat 5: drift, Lambda, or CIS
+- [ ] PagerDuty trial — dedicated `pulumi-bot` user (MCP tokens are user-scoped); confirm the trial term survives to Sep 8
+- [ ] Seed it with Engin's July *Incident Response as Code* program
 - [ ] Narrow ESC environment for the `aws` integration — see `docs/credentials.md`
-- [ ] Resolve credential precedence for `pulumi neo` — see `docs/credentials.md`
-- [ ] Decide beat 4: automations or editor
 - [ ] Confirm the live event page and Luma copy no longer say 90 minutes
 
 Planning record: `~/para/projects/neo-mcp-workshop/PLAN.md`
