@@ -22,7 +22,8 @@ Lights, all of which must be green:
 - [ ] `aws` CLI integration connected, pointed at the **narrow** ESC environment (not `shared/cloud-creds` — see `docs/credentials.md`)
 - [ ] Linear integration connected, with a ticket already filed and waiting
 - [ ] `pulumi env run <ref> -- aws sts get-caller-identity` returns the expected role
-- [ ] The incident trigger works — you can cause a real page on demand
+- [ ] The incident trigger works — `demo/prewarm.sh` passes, and you have caused a page at least once today
+- [ ] The PagerDuty **trial has not expired** — 14-day term, so it must have been started on or after **Aug 27** to reach Sep 8 (which lands on day 12 of 14)
 - [ ] GitHub connected, so Neo can actually open the PR
 - [ ] Region agreement: ESC env, the Pulumi program, and the alarm all in the same region
 
@@ -35,13 +36,26 @@ scrollback, no unrelated env vars, no other orgs in view, font size up.
 |---|------|--------|-------|
 | 1 | Why — Neo could always write Pulumi | 12:02–12:07 | |
 | 2 | **Ask** — a ticket becomes a PR (Linear) | 12:07–12:14 | |
-| 3 | **Delegate** — the incident (PagerDuty + `aws`) | 12:14–12:34 | |
+| 3 | **Delegate** — the incident (PagerDuty + `aws`) | 12:14–12:34 | ⏱ trigger it during beat 2 |
 | 4 | **Scope** — what Neo can reach, and who decided | 12:34–12:44 | |
 | 5 | **Stop initiating** — it runs without you | 12:44–12:52 | |
 | 6 | Q&A | 12:52–1:00 | |
 
 Full beat content lives in [`OUTLINE.md`](OUTLINE.md). This file is the clock and the
 failure plan.
+
+## ⏱ The one timing trap
+
+**Run `demo/trigger-incident.sh` during beat 2, not at the top of beat 3.**
+
+The page is not instant. Even with `maxReceiveCount: 1` and a 5-second visibility
+timeout, the CloudWatch alarm evaluates on a 60-second period, so budget **1–2 minutes**
+from running the script to the incident opening. Engin's original chain, at
+`maxReceiveCount: 3`, took **3m45s** — longer than the entire Linear beat.
+
+So: start the Linear demo, run the trigger in a second pane while Neo is working, and by
+the time you reach beat 3 the incident is already open and waiting. Standing in silence
+watching an alarm is the most avoidable dead air in the session.
 
 ## Cuts, decided in advance
 

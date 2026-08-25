@@ -436,23 +436,22 @@ layout: two-cols
 
 ::left::
 
-<div class="!mt-4 !text-[1.35rem] !leading-relaxed space-y-4">
+<p class="!mt-2 !mb-4 !font-semibold !text-[var(--p-primary)] !text-[1.5rem]">Engin Diri, Dec 2025 — <em class="!font-normal">Day-2 Autonomous Infrastructure Management</em></p>
 
-<p class="!font-semibold !text-[var(--p-primary)] !text-[1.6rem]">Engin Diri, Dec 2025</p>
+```mermaid {theme:'neutral', scale:1.05}
+flowchart TB
+  subgraph D["detection, on a K8s cluster"]
+    direction LR
+    F["Falco<br/>runtime"] ~~~ T["Trivy<br/>CVEs"] ~~~ K["Kyverno<br/>policy"] ~~~ P["Prometheus<br/>metrics"]
+  end
+  D -->|"Falcosidekick / Alertmanager"| PD["PagerDuty"]
+  PD --> WH["webhook service<br/><b>he wrote and deployed</b>"]
+  WH -->|creates a task| NEO["Neo API"]
 
-<p><em>Day-2 Autonomous Infrastructure Management</em></p>
-
-<p class="opacity-85">Falco · Trivy · Kyverno · Prometheus, on a Kubernetes cluster</p>
-
-<p class="opacity-85">→ Falcosidekick / Alertmanager</p>
-
-<p class="opacity-85">→ <strong>PagerDuty</strong></p>
-
-<p class="opacity-85">→ a webhook service he wrote and deployed</p>
-
-<p class="opacity-85">→ the Neo API, creating a task</p>
-
-</div>
+  style WH fill:#efe9ff,stroke:#7e6bff,stroke-width:3px
+  style PD fill:#fff,stroke:#7e6bff,stroke-width:2px
+  style NEO fill:#fff,stroke:#7e6bff,stroke-width:2px
+```
 
 ::right::
 
@@ -488,27 +487,32 @@ layout: two-cols
 
 ::left::
 
-<div class="!mt-6 !text-[1.5rem] !leading-relaxed">
+<p class="!mt-2 !text-[1.75rem] !font-semibold !text-[var(--p-primary)]">The reading half</p>
 
-<p class="!text-[1.9rem] !font-semibold !text-[var(--p-primary)]">The reading half</p>
+```mermaid {theme:'neutral', scale:1.55}
+flowchart LR
+  NEO["Neo<br/>mid-task"] -->|reads| PD["PagerDuty"]
+  style NEO fill:#efe9ff,stroke:#7e6bff,stroke-width:3px
+  style PD fill:#fff,stroke:#7e6bff,stroke-width:2px
+```
 
-<p class="!mt-4 opacity-85">Neo pulling incident detail while it works.</p>
+<p class="!mt-4 !text-[1.4rem] opacity-85">Neo pulling incident detail while it works.</p>
 
-<p class="!mt-6 !font-semibold">That's now a toggle.</p>
-
-</div>
+<p class="!mt-4 !text-[1.5rem] !font-semibold">That's now a toggle.</p>
 
 ::right::
 
-<div class="!mt-6 !text-[1.5rem] !leading-relaxed">
+<p class="!mt-2 !text-[1.75rem] !font-semibold opacity-70">The triggering half</p>
 
-<p class="!text-[1.9rem] !font-semibold opacity-70">The triggering half</p>
+```mermaid {theme:'neutral', scale:1.05}
+flowchart LR
+  PD2["PagerDuty"] -->|"incident<br/>.trigger"| WH2["your<br/>webhook"] -->|creates| NEO2["Neo task"]
+  style WH2 fill:#f4f4f6,stroke:#9aa0ad,stroke-width:3px,stroke-dasharray:6 4
+```
 
-<p class="!mt-4 opacity-85">A page automatically starting a task.</p>
+<p class="!mt-4 !text-[1.4rem] opacity-85">A page automatically starting a task.</p>
 
-<p class="!mt-6 !font-semibold opacity-85">Still the webhook. Still yours to wire.</p>
-
-</div>
+<p class="!mt-4 !text-[1.5rem] !font-semibold opacity-85">Still the webhook. Still yours to wire.</p>
 
 <!--
 ⛔ DO NOT SAY the integration replaced what Engin built. It didn't.
