@@ -23,9 +23,43 @@ Build-only work I can do alone isn't listed; it lives in git.
       Blocks the repo QR code on the closing slide.
 - [ ] **Check the live event page + Luma copy** still say 90 minutes. It's 60.
 
+## ⚠️ Decide first: which AWS account the workshop runs in
+
+**Verified Aug 25 — ESC → AWS OIDC works.** `pulumi up` created an S3 bucket in
+5s and `pulumi destroy` removed it, driven by `shared/cloud-creds`. The
+mechanism is sound. The account is the problem.
+
+`shared/cloud-creds` assumes `pulumi-environments-oidc` in account
+**616138583583**, which is a **member of Pulumi's corporate AWS organization**
+(master `153052954103`, `joe@pulumi.com`). It has no account alias and is full
+of CI leftovers — dozens of `*-tf-test-bucket` and timestamp-named buckets.
+The role carries **AdministratorAccess**.
+
+That's a shared corporate account, with admin, on a recorded session where the
+terminal is on screen. Three things follow:
+
+- `aws s3 ls` on stage lists every bucket in a corporate account. Assume
+  anything Neo prints is visible.
+- The read-only role program (`demo/esc-readonly-role/`) currently deploys
+  *into* that account. Fine, but it's a corp account gaining a workshop role.
+- The demo program (`demo/pulumi-ts`) creates SQS, RDS and CloudWatch there.
+
+Options, roughly in order of preference:
+
+1. **A separate personal AWS account** for the workshop. Cleanest — you control
+   what's visible, and the read-only story is unambiguous. Costs the most setup:
+   new account, new OIDC trust, new ESC environment.
+2. **Stay in 616138583583, but only ever through the new read-only environment**,
+   never `shared/cloud-creds`. Cheapest. Still means corporate bucket names are
+   one `aws s3 ls` away.
+3. Ask internally whether there's a sanctioned demo account already.
+
+Needs deciding before the Thursday build block, because it determines where
+both programs get deployed.
+
 ## Together, Thursday Aug 27 build block
 
-- [ ] `pulumi up` both programs — `demo/pulumi-ts` and `demo/esc-readonly-role`.
+- [ ] `pulumi up` both programs (into whichever account the decision above picks) — `demo/pulumi-ts` and `demo/esc-readonly-role`.
       Neither has been deployed; they only typecheck.
 - [ ] **Credential-precedence test.** The open question: when `pulumi neo` runs
       locally and asks for `aws`, does it resolve the org's ESC integration or
