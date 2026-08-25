@@ -25,7 +25,7 @@ defaults:
     MCP servers and cloud CLIs — giving Neo the systems your incidents live in
   </p>
   <p class="!mt-6 !text-[1.8rem] text-[var(--p-fg-muted)] !m-0 !leading-relaxed">
-    Adam Gordon Bell · Pulumi
+    Adam Gordon Bell · Engin Diri · Pulumi
   </p>
 </div>
 
@@ -61,6 +61,37 @@ today is about giving it everything around the Pulumi."
 
 <!--
 Short. Nobody came for the bio.
+-->
+
+---
+
+<div class="absolute inset-0 flex items-center px-24 gap-20">
+  <div class="flex-shrink-0">
+    <img src="/img/engin-diri.jpg" class="w-[28rem] rounded-2xl shadow-xl border-4" style="border-color: rgba(126,107,255,0.45)" alt="Engin Diri" />
+  </div>
+  <div class="flex-1">
+    <h1 class="!text-[7rem] !leading-[1.02] !font-semibold !tracking-tight !mb-4 !text-[var(--p-primary)]">Engin Diri</h1>
+    <p class="!text-[2.5rem] !leading-relaxed !m-0 opacity-90">
+      Senior Solutions Architect at <strong class="!text-[var(--p-primary)]">Pulumi</strong>
+    </p>
+    <div class="!mt-8 flex items-center gap-8 !text-[1.5rem] opacity-70">
+      <span class="flex items-center gap-2"><carbon-logo-x /> @_ediri</span>
+      <span class="flex items-center gap-2"><carbon-logo-linkedin /> engin-diri</span>
+      <span class="flex items-center gap-2"><carbon-logo-github /> dirien</span>
+    </div>
+    <p class="!mt-10 !text-[1.75rem] !leading-relaxed opacity-70 !m-0">
+      Building platform tooling and infrastructure-as-code.<br/>
+      Helping teams ship cloud infrastructure faster. With and without agents.
+    </p>
+  </div>
+</div>
+
+<!--
+Engin built the December workshop this session's incident beat comes from, and
+he runs the EMEA session on Sep 30.
+
+Say it here rather than saving it — it sets up "December: what this took" later,
+so that slide lands as credit rather than as a detour.
 -->
 
 ---
