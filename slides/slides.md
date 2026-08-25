@@ -698,45 +698,49 @@ layout: two-cols
 
 ::header::
 
-# Two credential models
+# It reads with the CLI. It writes with Pulumi.
 
 ::left::
 
-<div class="!mt-6 !text-[1.4rem] !leading-relaxed space-y-5">
+<div class="!mt-5 !text-[1.4rem] !leading-relaxed space-y-4">
 
-<p class="!text-[1.8rem] !font-semibold !text-[var(--p-primary)]">MCP</p>
+<p class="!text-[1.8rem] !font-semibold !text-[var(--p-primary)]">Reading — <code>aws</code>, <code>gcloud</code>, <code>az</code>, <code>kubectl</code></p>
 
-<ul class="space-y-3 opacity-85">
-  <li>Encrypted at rest, per organization</li>
-  <li>Decrypted at task time</li>
-  <li><strong>Never exposed to the model</strong></li>
-  <li>Never written into task state</li>
-</ul>
+<p class="opacity-85">Neo shells out to the CLI to <strong>look</strong>: list the buckets, describe the instance, check the firewall rule.</p>
+
+<p class="opacity-85">That's how it sees the live account — including the parts <strong>Pulumi never managed</strong>.</p>
 
 </div>
 
 ::right::
 
-<div class="!mt-6 !text-[1.4rem] !leading-relaxed space-y-5">
+<div class="!mt-5 !text-[1.4rem] !leading-relaxed space-y-4">
 
-<p class="!text-[1.8rem] !font-semibold !text-[var(--p-primary)]">Cloud CLI</p>
+<p class="!text-[1.8rem] !font-semibold !text-[var(--p-primary)]">Writing — one path only</p>
 
-<ul class="space-y-3 opacity-85">
-  <li>Owned by <strong>Pulumi ESC</strong>, not Pulumi Cloud</li>
-  <li>Short-lived, issued at task time via OIDC</li>
-  <li>Run <strong>as the user asking</strong></li>
-  <li>Only works if <em>you</em> could open that environment</li>
-</ul>
+<p class="opacity-85">A change to the program. A preview. A pull request. You merge it, and <strong>Pulumi</strong> makes the change.</p>
+
+<p class="opacity-85">Neo never calls <code>aws</code> to <em>alter</em> anything. If it did, you'd have infrastructure that no code describes.</p>
 
 </div>
 
 <!--
-The last bullet is the one that settles the room:
+This slide exists because it's the question a good audience asks: "wait, is
+Neo running the AWS CLI against my account?"
 
-"Connecting an integration grants nobody access they didn't already have."
+Yes — to READ. Never to change. Say both halves in one breath.
 
-Neo isn't a new identity with its own permissions. It acts as you, bounded by
-what you could already do.
+WHY IT MATTERS, and it's not a detail: if an agent mutates your cloud through
+the CLI, you've just created drift that no program describes. The whole value
+of doing this inside Pulumi is that the change arrives as code. Reading is a
+lookup; writing is a diff.
+
+⛔ SCOPE THE CLAIM to the cloud account. Over MCP, Neo does write — it resolves
+the PagerDuty incident and comments on the Linear ticket. That's fine and it's
+not the same thing. If someone conflates them, that's the distinction.
+
+Sets up the next slide, which is where this stops being a philosophy and turns
+into an IAM role.
 -->
 
 ---
@@ -753,11 +757,12 @@ credentials, runs the command, tears it back down.
 </p>
 
 <p class="!mt-8 !text-[1.65rem] !leading-relaxed !text-[var(--p-primary)] !font-semibold">
-Read the role name again. Neo never needed write access to do any of this.
+Read the role name again. Everything you watched today ran against a read-only role.
 </p>
 
 <p class="!mt-8 !text-[1.65rem] !leading-relaxed opacity-85">
-Because the output was always a pull request.
+It runs as <strong>you</strong>, too — if you couldn't open that environment, neither can Neo.
+Connecting an integration grants nobody access they didn't already have.
 </p>
 
 </div>
@@ -767,13 +772,20 @@ Because the output was always a pull request.
 </style>
 
 <!--
-THE PAYOFF. This is why slide 9 exists.
+THE PAYOFF, and it follows straight from the previous slide: if the only write
+path is a pull request, the role never needs write access. Read-only isn't a
+precaution here — it's the natural shape.
 
-Pause after "never needed write access." Let them do the arithmetic themselves.
+Pause after "read-only role." Let them do the arithmetic themselves.
 
-If someone pushes on it: yes, you can scope it wider, and named instances let you
-run production-aws and staging-aws side by side. But the demo they just watched
-ran read-only.
+The second point is the one that settles a room with a security lead in it:
+Neo is not a new identity with its own permissions. `pulumi env run` executes
+as the acting user, so an integration only works for people who could already
+open that ESC environment.
+
+If someone pushes: yes, you can scope it wider, and named instances let you run
+production-aws and staging-aws side by side. But the demo they just watched ran
+read-only.
 -->
 
 ---
