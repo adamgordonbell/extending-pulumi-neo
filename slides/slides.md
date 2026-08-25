@@ -137,13 +137,14 @@ initiating them at all.
 
 ---
 layout: section
+routeAlias: stage-why
 ---
 
 # Why
 
 ## the gap between writing infrastructure and understanding it
 
-<StageMap current="why" />
+<StageMap size="lg" />
 
 ---
 
@@ -287,13 +288,14 @@ Called back explicitly on the `pulumi env run` slide.
 
 ---
 layout: section
+routeAlias: stage-connect
 ---
 
 # Ask
 
 ## a ticket becomes a pull request
 
-<StageMap current="connect" />
+<StageMap size="lg" />
 
 ---
 
@@ -383,13 +385,14 @@ Keep this tight — 60 seconds. It's a landing, not a recap.
 
 ---
 layout: section
+routeAlias: stage-incident
 ---
 
 # Delegate
 
 ## a page fires, and the picture is already assembled
 
-<StageMap current="incident" />
+<StageMap size="lg" />
 
 ---
 
@@ -581,13 +584,14 @@ Being upfront about the constraint reads as confidence, not as a limitation.
 
 ---
 layout: section
+routeAlias: stage-scope
 ---
 
 # Scope
 
 ## what it can reach, and who decided
 
-<StageMap current="scope" />
+<StageMap size="lg" />
 
 ---
 layout: statement
@@ -751,13 +755,14 @@ the objection that stops adoption inside larger orgs.
 
 ---
 layout: section
+routeAlias: stage-beyond
 ---
 
 # Stop initiating
 
 ## the part where you're not in the loop anymore
 
-<StageMap current="beyond" />
+<StageMap size="lg" />
 
 ---
 layout: quote

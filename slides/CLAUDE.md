@@ -46,6 +46,34 @@ pointed `@pulumi` at GitHub Packages, which required a `GITHUB_TOKEN`; that is g
   e.g. absolutely-positioned overlays pile up top-left). In-place content edits
   hot-reload fine; `npm run build` is unaffected.
 
+## Stage navigation (`StageMap` + `global-top.vue`)
+
+The `why · connect · incident · scope · beyond` strip is both a place-marker and a
+jump table. Adapted from `build-your-own-iac`'s `ActNav.vue`.
+
+- **Positions are derived, never hardcoded.** Each section divider carries
+  `routeAlias: stage-<name>`; `StageMap` walks `nav.slides` to find them. Inserting or
+  cutting slides never touches the component — only the dividers carry position.
+- **Two sizes.** `size="lg"` sits on the dividers (names always shown, struck through
+  once passed). `size="sm"` is rendered on every other slide by `global-top.vue`, in the
+  top-right corner.
+- **State is carried by shape, not colour** (Adam is red-green colourblind): `▪` for
+  ground covered, `◦` for still ahead, and only the current stage shows its name.
+  The `lg` strip additionally strikes through completed stages.
+- **Every entry is a button** — `nav.go()` to that section. Works in both sizes.
+- `global-top.vue` hides the strip on the cover, the dividers (they render `lg`
+  themselves) and the end. It detects dividers by `routeAlias`, **not** by layout name —
+  slidev consumes `layout` before frontmatter is readable there.
+
+### Known limitation: static export
+
+During `slidev export` (PNG/PDF) slidev pins both `nav.currentSlideNo` and `$page` to
+**1** for every rendered slide, so position-derived state cannot resolve. `StageMap`
+renders nothing in that case rather than showing a wrong state (`v-if="here"`).
+⚠️ The theme's own footer has the same problem and reads `1 / 32` on every exported
+slide — that is upstream, not ours. **The strip is a live-presentation aid; don't judge
+it from the exported PDF.**
+
 ## Boundaries
 
 ### Always Do
