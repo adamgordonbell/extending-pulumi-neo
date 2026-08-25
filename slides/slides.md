@@ -693,6 +693,28 @@ If someone already asked in chat, credit them by name here.
 -->
 
 ---
+
+# Four of them
+
+<p class="!mt-4 !text-[1.6rem] !leading-relaxed">AWS, Google Cloud, Azure, Kubernetes. Same settings page, a separate <strong>CLI tools</strong> section.</p>
+
+<div class="flex justify-center !mt-6">
+  <img src="/img/cli-integrations.png" class="rounded-xl shadow-2xl max-h-[56vh]" alt="Neo Settings, CLI tools tab: two connected integrations for AWS and Kubernetes, and four available CLI types — AWS, Google Cloud, Azure and Kubernetes" />
+</div>
+
+<!--
+The mirror of "It's a toggle" from the why section — that slide showed the MCP
+catalog, this one shows the CLI half. The talk is titled after both, so both
+get a screenshot.
+
+Worth saying: each one is NAMED. production-aws, staging-aws. The name is how
+a task says which account it means, and you can connect several instances of
+the same CLI.
+
+Each is backed by an ESC environment your org owns — which is the next slide.
+-->
+
+---
 layout: two-cols
 ---
 
@@ -868,37 +890,33 @@ layout: two-cols
 
 ::header::
 
-# You stay in control of the blast radius
+# Off, for this one task
 
 ::left::
 
-<div class="!mt-6 !text-[1.45rem] !leading-relaxed space-y-5">
+<div class="!mt-4 !text-[1.42rem] !leading-relaxed space-y-5">
 
-<p class="!text-[1.75rem] !font-semibold !text-[var(--p-primary)]">Per-task toggles</p>
+<p>An admin enables an integration for the whole org. Any <strong>single task</strong> can switch it back off, right in the composer — no config change, no ticket.</p>
 
-<p class="opacity-85">An admin enables an integration for the org.
-<strong>Any single task can switch it off</strong> from the composer — no org config change,
-no ticket.</p>
+<p class="opacity-85">Investigate staging without granting the task production.</p>
+
+<p class="opacity-85">And the instances are <strong>named</strong> — <code>production-aws</code>, <code>staging-aws</code> — each carrying a note Neo reads when it decides which to reach for: <em>"compliance account, avoid mutations."</em></p>
 
 </div>
 
 ::right::
 
-<div class="!mt-6 !text-[1.45rem] !leading-relaxed space-y-5">
-
-<p class="!text-[1.75rem] !font-semibold !text-[var(--p-primary)]">Named instances</p>
-
-<p class="opacity-85"><code>production-aws</code> and <code>staging-aws</code>, each with its own
-environment and its own scope.</p>
-
-<p class="opacity-85">Each carries a note Neo reads when deciding which to reach for —
-<em>"compliance account, avoid mutations."</em></p>
-
+<div class="!mt-2">
+  <img src="/img/per-task-toggles.png" class="rounded-xl shadow-2xl w-full" alt="Neo task composer showing the Integrations menu with toggles for the Linear MCP server and two connected CLI integrations" />
 </div>
 
 <!--
-This is the "I want this but not everywhere" answer. Worth landing because it's
-the objection that stops adoption inside larger orgs.
+The "I want this, but not everywhere" answer — the objection that stops
+adoption inside larger orgs. Screenshot from the integrations launch post.
+
+Point at the toggles. The claim is small and concrete: org-level default,
+per-task override, and the override is two clicks rather than a permissions
+conversation.
 -->
 
 ---
