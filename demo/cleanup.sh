@@ -18,3 +18,7 @@ echo "and PagerDuty resolves the incident automatically."
 echo
 echo "If an incident is still open afterwards, resolve it in the PagerDuty UI —"
 echo "a stale open incident makes the next rehearsal ambiguous."
+
+# Put the out-of-band security group back the way it was, so the next rehearsal
+# starts from a clean account. Re-arm with ./create-unmanaged.sh.
+"$(dirname "$0")/remove-unmanaged.sh"

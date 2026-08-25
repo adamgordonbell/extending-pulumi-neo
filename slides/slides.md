@@ -628,6 +628,20 @@ layout: statement
   5. Neo edits the program, previews
   6. PR opens. Resolve back to PagerDuty.
 
+⭐ THE BEAT THAT EARNS THE SCOPE SECTION: among the findings is a security
+group attached to payments-db, open to 0.0.0.0/0 on 5432, that NO PULUMI
+PROGRAM DESCRIBES. Reading the code cannot find it. Only `aws` can.
+
+If Neo stays inside the program, nudge once — without naming it:
+  > Is there anything running in the account that this program doesn't describe?
+
+Say the quiet part when it surfaces: "that one isn't in my code. It found it
+by looking at the account."
+
+Be honest about the severity — the instance is publiclyAccessible: false, so
+it's an audit finding, not a live breach. Saying so is what makes the rest
+credible. If Neo notes the mitigation itself, point at that.
+
 Narrate the seams — that's where the content is:
 - "it's reading the incident, I haven't pasted anything"
 - "now it's looking at the live account, not the program"
@@ -651,8 +665,8 @@ from slide 9 already landed.
   <li>A <strong>real incident</strong>, with a real timestamp — not a fixture</li>
   <li>Neo read it through PagerDuty, and read the live account through <code>aws</code></li>
   <li>It connected the alert to a <strong>specific line in the program</strong></li>
-  <li>The fix arrived as a diff, with the evidence sitting next to it</li>
-  <li>Nobody opened three consoles</li>
+  <li>And it found something <strong>the program never mentioned</strong> — only the account did</li>
+  <li>Both fixes arrived as a diff, with the evidence sitting next to them</li>
 </ul>
 
 </div>
@@ -730,7 +744,7 @@ layout: two-cols
 
 <p class="opacity-85">Neo shells out to the CLI to <strong>look</strong>: list the buckets, describe the instance, check the firewall rule.</p>
 
-<p class="opacity-85">That's how it sees the live account — including the parts <strong>Pulumi never managed</strong>.</p>
+<p class="opacity-85">That's how it sees the live account — including the parts <strong>Pulumi never managed</strong>. You just watched that: the security group that was in the account and in no program.</p>
 
 </div>
 

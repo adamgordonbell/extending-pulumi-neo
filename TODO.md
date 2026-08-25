@@ -63,6 +63,15 @@ Two things still follow from this, both small:
       your laptop credentials? Docs don't say. The read-only role makes this
       decidable — if it can't write, ESC won.
 - [ ] **Decide beat 5** — scheduled automations, or the editor integration.
+- [ ] **Arm the unmanaged-resource finding**: `demo/create-unmanaged.sh` after
+      `pulumi up`, then confirm Pulumi can't see it —
+      `pulumi stack --show-urns | grep -i security` should print nothing.
+      Reset between rehearsals with `demo/cleanup.sh` (calls
+      `remove-unmanaged.sh`), re-arm with `create-unmanaged.sh`.
+- [ ] **Decide: does the scope section keep the IAM video, or lean on demo 2?**
+      Demo 2 now surfaces an unmanaged resource, which makes the scope argument
+      live rather than recorded. The `iam-narrow` video may now be redundant.
+      Judge it in the run-through.
 - [ ] Full run-through against the clock. 60 minutes, two live demos.
 
 ## Linkable artifacts
