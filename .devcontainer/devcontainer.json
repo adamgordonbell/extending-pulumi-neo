@@ -1,0 +1,33 @@
+{
+  "name": "Extending Pulumi Neo",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+
+  "hostRequirements": { "cpus": 2, "memory": "8gb", "storage": "32gb" },
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
+    "ghcr.io/dirien/devcontainer-feature-pulumi/pulumi:0": {}
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh ${containerWorkspaceFolder}",
+
+  "forwardPorts": [3030],
+  "portsAttributes": { "3030": { "label": "Slidev deck" } },
+  "otherPortsAttributes": { "onAutoForward": "silent" },
+
+  "remoteEnv": {
+    "PULUMI_ACCESS_TOKEN": "${localEnv:PULUMI_ACCESS_TOKEN}",
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": ["pulumi.pulumi-vscode", "anthropic.claude-code", "redhat.vscode-yaml"],
+      "settings": { "terminal.integrated.defaultProfile.linux": "bash" }
+    }
+  }
+}
