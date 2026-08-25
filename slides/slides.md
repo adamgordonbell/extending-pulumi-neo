@@ -104,7 +104,6 @@ so that slide lands as credit rather than as a detour.
   <li>I'll <strong>present and demo</strong> — nothing to follow along with</li>
   <li>Ask questions <strong>any time</strong>; treat this as a conversation</li>
   <li>Slides and the repo go home with you — QR at the end</li>
-  <li><strong>EMEA repeat Sep 30</strong> with Engin Diri, if a colleague missed this</li>
 </ul>
 
 </div>
@@ -119,51 +118,32 @@ first ten minutes trying to get an org set up instead of listening.
 -->
 
 ---
-layout: two-cols
----
 
-::header::
+# Where we’re going
 
-# Where we're going
+<div class="zoom-content">
 
-::left::
-
-<div class="!mt-6 !text-[1.5rem] !leading-relaxed space-y-8">
-
-<div>
-  <div class="!text-[1.9rem] !font-semibold !text-[var(--p-primary)]">Ask</div>
-  <div class="opacity-80">You hand Neo a job. It reads the ticket, opens a PR.</div>
-</div>
-
-<div>
-  <div class="!text-[1.9rem] !font-semibold !text-[var(--p-primary)]">Delegate</div>
-  <div class="opacity-80">A page fires. Neo assembles the picture before you do.</div>
-</div>
-
-<div>
-  <div class="!text-[1.9rem] !font-semibold !text-[var(--p-primary)]">Stop initiating</div>
-  <div class="opacity-80">It runs on a schedule. You review what shows up.</div>
-</div>
+<ul class="!mt-8 !text-[1.5rem] !leading-relaxed space-y-5">
+  <li><strong class="!text-[var(--p-primary)]">why</strong> — Neo already knew what Pulumi knew</li>
+  <li><strong class="!text-[var(--p-primary)]">ask</strong> — you hand it a ticket, it hands back a PR</li>
+  <li><strong class="!text-[var(--p-primary)]">delegate</strong> — a page fires, and the picture is assembled</li>
+  <li><strong class="!text-[var(--p-primary)]">scope</strong> — what it can reach, and who decided</li>
+  <li><strong class="!text-[var(--p-primary)]">unattended</strong> — it runs without you</li>
+</ul>
 
 </div>
 
-::right::
-
-<div class="!mt-10 !text-[1.5rem] !leading-relaxed opacity-85">
-
-That progression is the whole talk.
-
-Each step needs Neo to reach **one more system it didn't have before** — a ticket
-tracker, an alerting tool, a cloud account.
-
-That reach is what integrations are.
-
-</div>
+<style scoped>
+.zoom-content { zoom: 1.5; }
+</style>
 
 <!--
-This doubles as the agenda. Don't read the three words — say the story:
-teams delegated things they used to keep in their heads, then stopped
-initiating them at all.
+These five words are the deck's navigation: they sit in the top-right corner of
+every slide, cross off as you pass them, and are clickable if someone asks you to
+go back.
+
+Don't read the list. Say the story: teams delegated things they used to keep in
+their heads, then stopped initiating them at all.
 -->
 
 ---
@@ -171,44 +151,51 @@ layout: section
 routeAlias: stage-why
 ---
 
-# Why
+# why
 
-## the gap between writing infrastructure and understanding it
+## what it knew, and what it couldn’t see
 
 <StageMap size="lg" />
 
 ---
 
-# Neo could always write Pulumi
+# Neo already knew what Pulumi knew
 
 <div class="zoom-content">
 
 <p class="!mt-10 !text-[1.7rem] !leading-relaxed">
-What it couldn't do was <strong>look at the systems the change actually lives in.</strong>
+Your programs, your stacks, your state. It could write a change, preview it, and
+deploy it.
 </p>
 
-<p class="!mt-8 !text-[1.7rem] !leading-relaxed opacity-80">
-The alert is in PagerDuty. The ticket is in Linear. The truth about what's running
-is in the cloud account — not in the program.
+<p class="!mt-8 !text-[1.7rem] !leading-relaxed opacity-85">
+What it couldn’t see was everything Pulumi doesn’t record — the alert in PagerDuty,
+the ticket in Linear, the metric in Datadog. And the parts of your cloud account
+<strong>Pulumi doesn’t manage</strong>.
 </p>
 
 <p class="!mt-8 !text-[1.7rem] !leading-relaxed">
-So a human reads three consoles, and <em>then</em> writes the change.
+So a human read three consoles, and <em>then</em> asked for the change.
 </p>
 
 </div>
 
 <style scoped>
-.zoom-content { zoom: 1.45; }
+.zoom-content { zoom: 1.4; }
 </style>
 
 <!--
-Don't oversell. The limit was context, not capability — that distinction is the
-honest version and it's also more interesting.
+⚠️ Be precise here — an earlier draft of this slide said "Neo could always write
+Pulumi", which undersells it and misnames the gap. Neo could always RUN things
+too: pulumi up, previews, live stack state. Someone in the room knows that.
 
-If you want a concrete hook: p95 on /checkout goes from 200ms to 1.2s. The metric
-is in one tool, the cause is in the cloud account, the fix is one line of Pulumi.
-Three places, one person, twenty minutes of tab-switching.
+The real limit was the BOUNDARY OF PULUMI'S OWN KNOWLEDGE. State files record what
+Pulumi manages. They don't record the incident, the ticket, the metric, or the
+security group somebody added in the console.
+
+Concrete hook if you want one: p95 on /checkout goes from 200ms to 1.2s. The
+metric is in one tool, the cause is in the cloud account, the fix is one line of
+Pulumi. Three places, one person, twenty minutes of tab-switching.
 -->
 
 ---
@@ -222,61 +209,66 @@ layout: two-cols
 ::left::
 
 <div class="!mt-6">
-<div class="!text-[2.2rem] !font-semibold !text-[var(--p-primary)]">MCP — Neo <em>reads</em></div>
+<div class="!text-[2.1rem] !font-semibold !text-[var(--p-primary)]">MCP — your SaaS tools</div>
 
-<p class="!mt-4 !text-[1.45rem] !leading-relaxed opacity-85">
+<p class="!mt-5 !text-[1.45rem] !leading-relaxed opacity-85">
 PagerDuty · Linear · Datadog · Honeycomb · Atlassian · Supabase
 </p>
 
 <p class="!mt-6 !text-[1.45rem] !leading-relaxed opacity-85">
-Credentials encrypted per organization, decrypted at task time,
-<strong>never exposed to the model</strong>, never stored in task state.
+<strong>Pulumi Cloud holds the credentials</strong>, encrypted per organization.
 </p>
 </div>
 
 ::right::
 
 <div class="!mt-6">
-<div class="!text-[2.2rem] !font-semibold !text-[var(--p-primary)]">Cloud CLI — Neo <em>runs</em></div>
+<div class="!text-[2.1rem] !font-semibold !text-[var(--p-primary)]">Cloud CLI — your cloud accounts</div>
 
-<p class="!mt-4 !text-[1.45rem] !leading-relaxed opacity-85">
+<p class="!mt-5 !text-[1.45rem] !leading-relaxed opacity-85">
 <code>aws</code> · <code>gcloud</code> · <code>az</code> · <code>kubectl</code>
 </p>
 
 <p class="!mt-6 !text-[1.45rem] !leading-relaxed opacity-85">
-Against credentials <strong>you</strong> scope, in Pulumi ESC.
-<strong>Pulumi Cloud never stores them.</strong>
+<strong>You hold the credentials</strong>, in Pulumi ESC. Pulumi Cloud never stores them.
 </p>
 </div>
 
 <!--
-The one structural slide in the deck. Everything later refers back to this split.
+⚠️ Do NOT frame this as "MCP reads, CLI runs". It isn't true — Neo writes over MCP
+too: it resolves the incident back to PagerDuty and comments on the Linear ticket.
+Someone will call that out.
 
-The distinction that matters: MCP is a read channel into SaaS. CLI integrations
-are execution against your cloud, with credentials you own. Different trust
-stories, and people care about the second one much more.
+The distinction that actually holds is the two on the slide: WHAT it reaches, and
+WHO HOLDS THE KEY. That second half is also the setup for the scope section, so
+you get it for free later rather than repeating yourself.
+
+The cloud CLI is the one that closes the gap from the previous slide: it reaches
+resources Pulumi never managed.
 -->
 
 ---
-layout: image-right
-image: /img/neo-integration-catalog.png
----
 
-# It's a toggle
+# It’s a toggle
 
-<div class="!mt-8 !text-[1.5rem] !leading-relaxed space-y-6">
+<p class="!mt-4 !text-[1.6rem] !leading-relaxed">Settings → Integrations. Six of them, each with an <strong>Authorize</strong> button.</p>
 
-<p>Settings → Integrations. Six of them, each with an <strong>Authorize</strong> button.</p>
-
-<p class="opacity-85">An organization admin turns one on. That's the whole setup step.</p>
-
-<p class="opacity-85">What used to be a webhook service, a deployment, and a pile of glue code is now a row in a list.</p>
-
+<div class="flex justify-center !mt-6">
+  <img src="/img/neo-integration-catalog.png" class="rounded-xl shadow-2xl max-h-[56vh]" alt="Neo settings, Integrations tab: Atlassian, Datadog, Honeycomb, Linear, PagerDuty and Supabase, each with an Authorize button" />
 </div>
 
 <!--
-Set up the December callback here without spending it — you come back to
-"what this used to take" in the Delegate section.
+Let the screenshot do the work. Two things to say over it:
+
+- An org admin turns one on. That is the whole setup step.
+- What used to be a webhook service, a deployment, and a pile of glue code is now
+  a row in a list.
+
+Full width on purpose — in the image-right column two of the six cards were cut
+off, on the slide that claims there are six.
+
+Don't spend the December comparison here; you come back to it properly in
+"December: what this took". This is just planting it.
 -->
 
 ---
@@ -319,12 +311,12 @@ Called back explicitly on the `pulumi env run` slide.
 
 ---
 layout: section
-routeAlias: stage-connect
+routeAlias: stage-ask
 ---
 
-# Ask
+# ask
 
-## a ticket becomes a pull request
+## you hand it a ticket, it hands back a pull request
 
 <StageMap size="lg" />
 
@@ -416,10 +408,10 @@ Keep this tight — 60 seconds. It's a landing, not a recap.
 
 ---
 layout: section
-routeAlias: stage-incident
+routeAlias: stage-delegate
 ---
 
-# Delegate
+# delegate
 
 ## a page fires, and the picture is already assembled
 
@@ -622,7 +614,7 @@ layout: section
 routeAlias: stage-scope
 ---
 
-# Scope
+# scope
 
 ## what it can reach, and who decided
 
@@ -790,12 +782,12 @@ the objection that stops adoption inside larger orgs.
 
 ---
 layout: section
-routeAlias: stage-beyond
+routeAlias: stage-unattended
 ---
 
-# Stop initiating
+# unattended
 
-## the part where you're not in the loop anymore
+## the part where you’re not in the loop anymore
 
 <StageMap size="lg" />
 

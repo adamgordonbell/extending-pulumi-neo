@@ -48,7 +48,7 @@ pointed `@pulumi` at GitHub Packages, which required a `GITHUB_TOKEN`; that is g
 
 ## Stage navigation (`StageMap` + `global-top.vue`)
 
-The `why · connect · incident · scope · beyond` strip is both a place-marker and a
+The `why · ask · delegate · scope · unattended` strip is both a place-marker and a
 jump table. Adapted from `build-your-own-iac`'s `ActNav.vue`.
 
 - **Positions are derived, never hardcoded.** Each section divider carries
@@ -61,6 +61,9 @@ jump table. Adapted from `build-your-own-iac`'s `ActNav.vue`.
   ground covered, `◦` for still ahead, and only the current stage shows its name.
   The `lg` strip additionally strikes through completed stages.
 - **Every entry is a button** — `nav.go()` to that section. Works in both sizes.
+- **The five tokens are also the agenda slide, verbatim.** Strip, section headings and
+  "Where we're going" must stay identical — it is a navigation aid, so a heading that
+  doesn't match the token you clicked is a real cost. Change all three together.
 - `global-top.vue` hides the strip on the cover, the dividers (they render `lg`
   themselves) and the end. It detects dividers by `routeAlias`, **not** by layout name —
   slidev consumes `layout` before frontmatter is readable there.
