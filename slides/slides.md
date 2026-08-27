@@ -267,34 +267,43 @@ routeAlias: stage-map
 
 <div class="map3 !mt-8">
 
-  <div class="mcard">
-    <div class="mnum">1</div>
-    <div class="mname">what it knows</div>
-    <div class="mbody">
-      Your code, your stacks, your state.<br/>
-      And now — as one queryable graph — the resources
-      <strong>nothing in Pulumi manages</strong>.
+  <Link to="stage-knows" class="mcard-link">
+    <div class="mcard">
+      <div class="mnum">1</div>
+      <div class="mname">what it knows</div>
+      <div class="mbody">
+        Your code, your stacks, your state.<br/>
+        And now — as one queryable graph — the resources
+        <strong>nothing in Pulumi manages</strong>.
+      </div>
+      <div class="mgo" aria-hidden="true">&rarr; jump</div>
     </div>
-  </div>
+  </Link>
 
-  <div class="mcard focus">
-    <div class="mnum">2</div>
-    <div class="mtag">today</div>
-    <div class="mname">what it can reach</div>
-    <div class="mbody">
-      <strong>Out</strong> to the systems you operate with: MCP, and the cloud CLIs.<br/>
-      <strong>In</strong> from where you work: GitHub, Slack.
+  <Link to="stage-reaches" class="mcard-link">
+    <div class="mcard focus">
+      <div class="mnum">2</div>
+      <div class="mtag">today</div>
+      <div class="mname">what it can reach</div>
+      <div class="mbody">
+        <strong>Out</strong> to the systems you operate with: MCP, and the cloud CLIs.<br/>
+        <strong>In</strong> from where you work: GitHub, Slack.
+      </div>
+      <div class="mgo" aria-hidden="true">&rarr; jump</div>
     </div>
-  </div>
+  </Link>
 
-  <div class="mcard">
-    <div class="mnum">3</div>
-    <div class="mname">where it runs</div>
-    <div class="mbody">
-      Pulumi Cloud. Your terminal. Your editor.<br/>
-      And <strong>on a schedule</strong>, with nobody there.
+  <Link to="stage-runs" class="mcard-link">
+    <div class="mcard">
+      <div class="mnum">3</div>
+      <div class="mname">where it runs</div>
+      <div class="mbody">
+        Pulumi Cloud. Your terminal. Your editor.<br/>
+        And <strong>on a schedule</strong>, with nobody there.
+      </div>
+      <div class="mgo" aria-hidden="true">&rarr; jump</div>
     </div>
-  </div>
+  </Link>
 
 </div>
 
@@ -308,12 +317,42 @@ Two is the one the title is about. One and three are how far it now goes.
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
+/* Each box jumps to its section. The whole card is the target, so it works
+   from the back of the room with a trackpad and not just on the small
+   corner strip. */
+.mcard-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 14px;
+}
 .mcard {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border: 2px solid color-mix(in oklch, var(--p-primary) 42%, transparent);
   border-radius: 14px;
-  padding: 1.6rem 1.3rem 1.3rem;
+  padding: 1.6rem 1.3rem 1.1rem;
+  transition: border-color .18s, transform .18s, background .18s;
 }
+.mcard-link:hover .mcard {
+  border-color: var(--p-primary);
+  background: color-mix(in oklch, var(--p-primary) 9%, transparent);
+  transform: translateY(-2px);
+}
+/* The affordance is a word plus an arrow — no colour-only cue. */
+.mgo {
+  margin-top: auto;
+  padding-top: 0.9rem;
+  font-family: var(--slidev-font-mono, ui-monospace, monospace);
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  transition: opacity .18s;
+}
+.mcard-link:hover .mgo { opacity: 0.95; color: var(--p-primary); }
 /* Box 2 is what the session is titled after. Weight and fill carry that —
    never hue alone. */
 .mcard.focus {
@@ -373,6 +412,10 @@ So introduce the navigation here: these names sit in the top-right corner of
 every slide from now on, cross off as you pass them, and are clickable if
 someone asks you to go back. `map · knows · reaches · runs · so what` — five
 words, three of them on this slide.
+
+The three boxes here are themselves clickable — each jumps to its section
+divider. Useful if a question in the Q&A wants you back at a specific part;
+click the box rather than arrowing through thirty slides.
 
 Say it as three questions, not three features:
   1. What does it already know?          -> and the answer is bigger than it was
