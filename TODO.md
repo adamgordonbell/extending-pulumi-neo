@@ -5,9 +5,12 @@ Build-only work I can do alone isn't listed; it lives in git.
 
 ## Only you can do these
 
-- [x] ~~Ask Engin for PagerDuty access.~~ Dropped (Adam, Aug 27) — a PagerDuty
-      trial account covers the demo. No ask from him. He still presents the EMEA
-      repeat on Sep 30, so he needs the deck, but nothing is blocked on him.
+- [x] ~~Ask Engin anything.~~ **Dropped (Adam, Aug 27), draft deleted.** Both
+      questions answered without him: a PagerDuty trial covers the demo, and
+      Custom Agents are still unannounced (see `docs/since-launch.md`). He
+      still presents the **Sep 30 EMEA repeat**, so he needs the deck — and he
+      needs telling that the Custom Agents ⛔ may not hold for his date, since
+      his Sep 23 AKS session lands between the two runs.
 - [ ] **Start the PagerDuty trial — on or after Thu Aug 27.** Trial is 14 days.
       Aug 27 + 14 = Sep 10, so Sep 8 lands on day 12. Starting it any earlier
       expires it before or on the workshop. Sign up as the `pulumi-bot` user.
