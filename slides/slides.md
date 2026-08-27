@@ -311,6 +311,8 @@ routeAlias: stage-map
 Two is the one the title is about. One and three are how far it now goes.
 </p>
 
+<StageMap size="lg" />
+
 <style scoped>
 .map3 {
   display: grid;
@@ -414,7 +416,9 @@ someone asks you to go back. `map · knows · reaches · runs · so what` — fi
 words, three of them on this slide.
 
 The three boxes here are themselves clickable — each jumps to its section
-divider. Useful if a question in the Q&A wants you back at a specific part;
+divider. The strip along the bottom is the same navigation in miniature, and it
+carries the fifth name the boxes don't: `so what`, the close. Point at it once
+so the corner marker means something later. Useful if a question in the Q&A wants you back at a specific part;
 click the box rather than arrowing through thirty slides.
 
 Say it as three questions, not three features:
