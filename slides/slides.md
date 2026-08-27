@@ -204,8 +204,12 @@ Pulumi. Three places, one person, twenty minutes of tab-switching.
 
 <p class="!mt-8 !text-[1.6rem] !leading-relaxed">Shipped last week: one queryable graph over state, stack dependencies, and the resources Discovery finds <strong>outside IaC entirely</strong>. Neo uses it out of the box.</p>
 
-<div class="flex justify-center !mt-8">
-  <img src="/img/context-api-blog.png" class="rounded-xl shadow-2xl w-[92%]" alt="Pulumi blog post: Pulumi Context API — One Graph for All Your Infrastructure, by Levi Blackstone, August 26 2026" />
+<div class="flex justify-center !mt-6">
+  <img src="/img/context-api-blog.png" class="rounded-xl shadow-2xl w-[86%]" alt="Pulumi blog post: Pulumi Context API — One Graph for All Your Infrastructure, by Levi Blackstone, August 26 2026" />
+</div>
+
+<div class="demo-foot !mt-5">
+  <DemoCta href="https://www.pulumi.com/blog/pulumi-context-api/" label="Read the launch post" />
 </div>
 
 <!--
@@ -230,7 +234,7 @@ state and dependencies.
 
 ---
 
-# 90% of that account is not Pulumi
+# 90% of that account is not Pulumi <DemoBadge kind="live" />
 
 <div class="flex justify-center gap-20 !mt-6">
   <div class="text-center">
@@ -251,6 +255,10 @@ state and dependencies.
 pulumi api GraphQuery -F orgName=<org> --input coverage-by-tool.json
 ```
 
+</div>
+
+<div class="demo-foot !mt-6">
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/insights" label="Open Insights" />
 </div>
 
 <style scoped>
@@ -358,7 +366,7 @@ Don't spend the December comparison here; you come back to it properly in
 
 ---
 
-# Demo
+# Demo <DemoBadge kind="recorded" />
 
 <p class="demo-sub">Turning one on — Honeycomb, 24 seconds</p>
 
@@ -493,7 +501,7 @@ PIVOT — this is the line that earns the next slide:
 layout: statement
 ---
 
-# 🔴 Live
+# Demo <DemoBadge kind="live" />
 
 <p class="!mt-8 !text-[2.6rem] !text-[var(--p-primary)] !font-semibold">A Linear ticket, start to pull request</p>
 
@@ -692,7 +700,7 @@ Being precise here costs nothing and buys credibility for the whole talk.
 layout: statement
 ---
 
-# 🔴 Live
+# Demo <DemoBadge kind="live" />
 
 <p class="!mt-8 !text-[2.6rem] !text-[var(--p-primary)] !font-semibold">A real page, to a merged fix</p>
 
@@ -952,7 +960,7 @@ The pattern worth naming: the evidence sits next to the diff.
 
 ---
 
-# Demo
+# Demo <DemoBadge kind="recorded" />
 
 <p class="demo-sub">Narrowing IAM policies to what the code actually calls — 60 seconds</p>
 
@@ -1043,12 +1051,16 @@ Everything so far has been you asking. The last move is not asking.
 
 ---
 
-# Demo
+# Demo <DemoBadge kind="recorded" />
 
 <p class="demo-sub">Set it once — the scheduling UI, 18 seconds</p>
 
 <div class="demo-stage demo-stage-xl">
   <video src="/video/neo-schedule-setup.mp4" autoplay loop muted />
+</div>
+
+<div class="demo-foot">
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/neo/automations" label="Open Automations" />
 </div>
 
 <!--
@@ -1069,7 +1081,7 @@ Say it plainly: this is the one thing I cannot demo live. A task that runs at
 
 # The next morning
 
-<p class="demo-sub">Nobody asked for this one — 17 seconds</p>
+<p class="demo-sub"><DemoBadge kind="recorded" /> &nbsp;Nobody asked for this one — 17 seconds</p>
 
 <div class="demo-stage demo-stage-xl">
   <video src="/video/neo-cis-pr.mp4" autoplay loop muted />
