@@ -36,13 +36,19 @@ agent that can see production, not just the program.
 
 ## Repo layout
 
-| Path | What |
+One file owns each question. If two files answer the same one, one of them is wrong.
+
+| Path | Owns |
 |------|------|
-| [`OUTLINE.md`](OUTLINE.md) | The argument and the beat-by-beat content |
-| [`PRESENTER.md`](PRESENTER.md) | Run-of-show, pre-flight checklist, cuts, failure plan |
-| [`docs/credentials.md`](docs/credentials.md) | Demo-org credential setup and open questions |
+| [`OUTLINE.md`](OUTLINE.md) | The argument — beats, claims, what each one owes the room |
+| [`PRESENTER.md`](PRESENTER.md) | The clock and the failure plan — pre-flight, cuts, what to say |
+| [`TODO.md`](TODO.md) | Everything still open. The maintained list. |
+| [`docs/demo-budget.md`](docs/demo-budget.md) | Why each demo is live, video, or cut |
+| [`docs/credentials.md`](docs/credentials.md) | Credential reasoning and the precedence question |
+| [`docs/since-launch.md`](docs/since-launch.md) | What shipped after the launch, and what to avoid saying |
+| [`docs/PLAN.md`](docs/PLAN.md) | Historical planning record — superseded, kept for provenance |
 | `slides/` | Slidev deck (`@pulumi/slidev-theme`) |
-| `demo/` | The Pulumi program and incident-trigger scripts |
+| `demo/` | The Pulumi program, incident trigger, and the Context API queries |
 
 ## Running the deck
 

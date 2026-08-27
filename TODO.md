@@ -34,34 +34,13 @@ Build-only work I can do alone isn't listed; it lives in git.
 
 ## AWS account — settled
 
-**It's the work demo account.** Account `616138583583`, the same one your local
-`work-demo` SSO profile points at (`sso_account_id = 616138583583`,
-`AdministratorAccess`, default region `ca-central-1`). It's a member of the
-Pulumi AWS org, which is just what a corporate demo account looks like.
+**It's the work demo account.** `616138583583` — the same one your local `work-demo`
+SSO profile points at. **ESC → AWS OIDC verified working Aug 25**: `pulumi up` created
+an S3 bucket in 5s, `pulumi destroy` removed it.
 
-**ESC → AWS OIDC verified working Aug 25.** Driven by `shared/cloud-creds`,
-`pulumi up` created an S3 bucket in 5s and `pulumi destroy` removed it. Stack
-config that worked:
-
-```yaml
-environment:
-  - shared/cloud-creds
-config:
-  aws:region: us-west-2
-```
-
-Two things still follow from this, both small:
-
-- **The read-only environment is still worth building** — not for safety, but
-  because slide 24 says out loud that everything ran against a read-only role.
-  If the AWS CLI integration points at `shared/cloud-creds` (admin), that line
-  is false on stage. This is a presentation-honesty requirement now, not a
-  security one.
-- **It makes the precedence test clean.** Your laptop has admin on
-  `616138583583` via `work-demo`; the new ESC environment will have read-only
-  on the *same* account. Same account, different permissions, so whichever one
-  `pulumi neo` picks locally is unambiguous — if a write succeeds, laptop creds
-  won; if it's denied, ESC won.
+The credential reasoning — why not `shared/cloud-creds`, what the read-only environment
+is for, and how the precedence test is designed — lives in
+[`docs/credentials.md`](docs/credentials.md). Don't restate it here.
 
 ## Together, Thursday Aug 27 build block
 

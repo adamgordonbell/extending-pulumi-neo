@@ -74,4 +74,8 @@ watching an alarm is the most avoidable dead air in the session.
 
 - ⛔ Do not say the PagerDuty MCP integration replaces Engin's webhook. It covers the reading half only; auto-*starting* a task from an incident still needs his glue.
 - ⛔ Do not claim credentials are scoped read-only unless the ESC environment in use actually is.
-- ⛔ Do not promise Custom Agents. Not announced; Engin's Sep 23 AKS session is where that lives.
+- ⛔ Do not promise Custom Agents. Still unannounced as of Aug 27 — no `#product-updates`
+  post in 120 days and no docs page (see [`docs/since-launch.md`](docs/since-launch.md)).
+  ⚠️ This guard is correct for **Sep 8** and may be stale for Engin's **Sep 30** repeat,
+  since his Sep 23 AKS session lands between the two. Tell him rather than letting him
+  inherit it.

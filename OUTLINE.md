@@ -80,8 +80,18 @@ already, in Adam's own voice, on assets he owns.
 | 5 | **Stop initiating** — it runs without you | ~8 | Drift / CIS / upgrades on a schedule |
 | 6 | **Q&A** | ~10 | |
 
-**Cut order:** beat 5 first (it's one slide plus a video), then beat 2 degrades to the
-`neo-linear.mp4` clip. **Beat 3 never gets cut** — it is the session.
+**What each beat owes the room:**
+
+| Beat | The one thing they leave with |
+|---|---|
+| Why | Neo's limit was context, not capability |
+| Ask | An integration is a toggle, and the output is reviewable |
+| Delegate | A real page becomes a real PR, without a human reading three consoles |
+| Scope | Nobody got access they didn't have, and Neo never needed write |
+| Stop initiating | The end state isn't asking faster — it's not asking |
+
+**Cut order lives in [`PRESENTER.md`](PRESENTER.md)** — that file owns the clock and the
+failure plan, and its cuts are named by beat, so they survive slide renumbering.
 
 ---
 
@@ -147,15 +157,9 @@ workshop.
 
 ---
 
-## Open before build (Thu Aug 27, 1:00–2:30)
+## Before the build
 
-- [ ] Re-read the post end to end and mark which items get performed vs mentioned
-- [ ] Watch the Dec 9 recording (`nx6oJvX2JNE`) — Engin's beat order, and the only capture of that workshop
-- [ ] Copy the six videos + four screenshots into `slides/public/` and cut them into the deck
-- [ ] Decide beat 5: drift, Lambda, or CIS
-- [ ] PagerDuty trial — dedicated `pulumi-bot` user (MCP tokens are user-scoped); confirm the trial term survives to Sep 8
-- [ ] Seed it with Engin's July *Incident Response as Code* program
-- [ ] Narrow ESC environment for the `aws` integration — see `docs/credentials.md`
-- [ ] Confirm the live event page and Luma copy no longer say 90 minutes
+Everything still open — yours, mine, and the Thursday block — lives in one place:
+[`TODO.md`](TODO.md). It is the maintained list; this file is the argument.
 
-Planning record: `PLAN.md` (moved here from `~/para/projects/neo-mcp-workshop/` on 2026-08-27)
+Historical planning record (superseded, kept for provenance): [`docs/PLAN.md`](docs/PLAN.md)

@@ -43,7 +43,7 @@ the same surface the session is driven from. Backup and live version match.
 This is the session. It is also, by a distance, the most expensive thing to stand up:
 
 - a PagerDuty trial, on a dedicated `pulumi-bot` user (MCP tokens are user-scoped)
-- the trial term confirmed to survive to **Sep 8** — Datadog's is 14 days; if PagerDuty's is too, starting it on Aug 27 is *cutting it fine and must be checked first*
+- the trial term — **settled:** 14 days, so starting on Aug 27 puts Sep 8 on day 12. Do not start it earlier.
 - Engin's July *Incident Response as Code* program deployed to seed team, rotation, escalation policy, service, CloudWatch integration
 - an AWS account, and a **narrow** ESC environment (see `credentials.md`)
 - region agreement across ESC env, program, and alarm
