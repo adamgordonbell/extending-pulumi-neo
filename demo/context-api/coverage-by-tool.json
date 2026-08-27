@@ -1,0 +1,7 @@
+{
+  "anchor": { "nodeType": "resource", "limit": 25 },
+  "aggregate": {
+    "groupBy": ["managed"],
+    "metrics": [{ "op": "count", "alias": "n" }]
+  }
+}

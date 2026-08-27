@@ -1,0 +1,11 @@
+{
+  "anchor": {
+    "nodeType": "resource",
+    "match": { "fields": { "managed": { "op": "eq", "value": "Other" } } },
+    "limit": 15
+  },
+  "aggregate": {
+    "groupBy": ["type"],
+    "metrics": [{ "op": "count", "alias": "n" }]
+  }
+}

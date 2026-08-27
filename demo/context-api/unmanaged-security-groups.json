@@ -1,0 +1,11 @@
+{
+  "anchor": {
+    "nodeType": "resource",
+    "match": {
+      "type": "aws:ec2/securityGroup:SecurityGroup",
+      "fields": { "managed": { "op": "eq", "value": "Other" } }
+    },
+    "limit": 10
+  },
+  "return": { "select": ["anchor"] }
+}
