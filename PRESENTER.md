@@ -74,8 +74,10 @@ watching an alarm is the most avoidable dead air in the session.
 
 - ⛔ Do not say the PagerDuty MCP integration replaces Engin's webhook. It covers the reading half only; auto-*starting* a task from an incident still needs his glue.
 - ⛔ Do not claim credentials are scoped read-only unless the ESC environment in use actually is.
-- ⛔ Do not promise Custom Agents. Still unannounced as of Aug 27 — no `#product-updates`
-  post in 120 days and no docs page (see [`docs/since-launch.md`](docs/since-launch.md)).
-  ⚠️ This guard is correct for **Sep 8** and may be stale for Engin's **Sep 30** repeat,
-  since his Sep 23 AKS session lands between the two. Tell him rather than letting him
-  inherit it.
+- ⛔ **Do not name Custom Agents.** Unannounced as of Aug 27 — no `#product-updates` post
+  in 120 days, no docs page. Two reasons now, not one: it isn't public, *and* what we know
+  about its status is internal pre-release, so even a hint sourced from that is a leak.
+  This holds for **Sep 8** regardless of how close it looks.
+- ✅ **You may point at the Sep 30 EMEA session and say it goes further** — Sep 8 as part
+  one, Engin's repeat as part two. That framing is safe as long as you name no feature.
+  Naming one from stage, on the closing slide, or in event copy needs sign-off first.

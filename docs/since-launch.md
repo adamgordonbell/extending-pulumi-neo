@@ -129,19 +129,23 @@ it, so it cannot carry a load-bearing beat.
 
 ## Custom Agents — ❓ still unannounced
 
-**Status: question mark. Nothing has changed.** No `#product-updates` post in
-120 days, no docs page, no mention anywhere on the docs site. The only "Custom
-Agent" strings in the Neo docs are Zed's and JetBrains' own UI labels on the
-editors page for adding an ACP agent — unrelated to the Pulumi feature.
+**Status: not announced.** No `#product-updates` post in 120 days, no docs page, nothing
+on the docs site. The only "Custom Agent" strings in the Neo docs are Zed's and JetBrains'
+own UI labels on the editors page for adding an ACP agent — unrelated to the Pulumi
+feature.
 
-The ⛔ in `PRESENTER.md` stands as written: **do not promise Custom Agents.**
-Engin's Sep 23 AKS session is where that lives, and it lands *after* your Sep 8
-but *before* his Sep 30 EMEA repeat — so this may be sayable on the second run
-and not the first. Flag it to him rather than leaving the guard rail silently
-wrong for his date.
+⛔ **`PRESENTER.md`'s guard stands for Sep 8: do not name it.**
 
-Re-check before each delivery. If it gets announced between now and Sep 8, it
-changes what the closing slide can promise.
+There is internal signal that it is closer than that silence suggests. That signal is
+**pre-release and not repeatable here** — this repo ships to attendees. It is written up
+in `INTERNAL.md`, which is gitignored. Read that before deciding anything about either
+session's coverage.
+
+**The two-session plan.** Engin's Sep 23 AKS session lands between Sep 8 and his Sep 30
+EMEA repeat. So Sep 8 is part one — the integrations story — and Sep 30 can go further if
+the feature is public by then. On Sep 8 you may point at the later session and say it goes
+deeper; you may not name what it covers. Engin owns that call for his own date, and should
+be told the Sep 8 guard is dated rather than left to inherit it.
 
 ## How to re-run this check
 
