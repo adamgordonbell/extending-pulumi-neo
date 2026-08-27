@@ -64,21 +64,68 @@ approaches the cap. Settings > Billing & usage.
 surface. Pairs naturally with it if you add a "what else you can turn down"
 line. Skip if time is tight.
 
-### 4. Context API — Aug 26 ⚠️ do not mention
+### 4. Context API — Aug 26 ✅ documented, and relevant
 
-A single queryable graph of everything Pulumi knows about an org. Query is a
-JSON document: `anchor` names starting nodes, `traverse` walks relationships.
+One queryable graph spanning IaC state, stack dependencies, and the resources
+Discovery finds in cloud accounts **outside IaC entirely**. Public preview,
+Enterprise and Business Critical editions.
 
-- Announced: [#product-updates, Aug 26](https://pulumi.slack.com/archives/C0AVDRQF71V/p1787784110139139) (Levi Blackstone)
-- **Docs: none.** The announcement says "coming soon."
+- Blog: <https://www.pulumi.com/blog/pulumi-context-api/> (Levi Blackstone, Aug 26)
+- Changelog: <https://www.pulumi.com/releases/changelog/> — "Query Your Infrastructure with the Pulumi Context API"
+- Announced: [#product-updates, Aug 26](https://pulumi.slack.com/archives/C0AVDRQF71V/p1787784110139139)
+- Live agent primer (the full query-language reference), fetched Aug 27:
+  `curl -H "Accept: text/markdown" -H "Authorization: token $PULUMI_ACCESS_TOKEN" \
+   https://api.pulumi.com/api/insights/adamgordonbell-org/graph/schema`
 
-**Why it's excluded.** Thematically it's the closest thing to this workshop's
-subject — what Neo can reach — and that makes it tempting. But it shipped the
-day before this check, has no documentation, and in the announcement thread Josh
-Kodroff asked "how soon is now?" about the docs while Joe Duffy called the query
-syntax opaque and asked for a reference page with examples. Sending a workshop
-audience to a page that doesn't exist is worse than not mentioning it. Re-check
-before Sep 30 in case docs land for Engin's EMEA run.
+**Correction.** An earlier version of this file said the Context API had no
+docs and should not be mentioned. That was wrong — it was based on the Slack
+thread's "Docs: coming soon" (which referred to the docs-site section) plus a
+grep that only covered `content/docs/`. The launch blog post shipped the same
+day and is merged to master.
+
+**Verified Aug 27: `adamgordonbell-org` has access.** The schema endpoint
+returns the primer over HTTP with the stored token.
+
+⚠️ **The local Pulumi CLI is v3.237.0, which is too old for both this and the
+editor path.** `pulumi api` needs v3.243.0+, `pulumi neo acp` needs v3.254.0+.
+Upgrade before trying either.
+
+**Why it matters here — it is the mechanism behind slide 7.** "Neo already knew
+what Pulumi knew" is now a named, queryable thing. From the blog: Neo "uses it
+out of the box… ask Neo what breaks if a stack changes, and it queries the graph
+on your behalf, with the permissions of the user who invoked it." That last
+clause is the same acting-user permission story the CLI-integration section
+tells, so the two halves agree.
+
+**⚠️ It also creates a tension with demo 2 that needs handling.** The graph
+covers scan-discovered resources (`scope.accounts` on a `resource` anchor,
+`includeDiscovered: true`). So an unmanaged security group is, in principle,
+findable *without* the AWS CLI — which is the exact thing demo 2 exists to
+prove only the CLI can do.
+
+**The primer resolves it, in our favour, in its own words.** Under "Traps that
+produce a wrong answer rather than an error":
+
+> Neither flag certifies index freshness. Queries answer from the search index,
+> which trails the source of record by ingestion lag: a resource created,
+> deleted, or rescanned moments ago can be missing or stale here… When an
+> absence answer carries real stakes — deleting "unused" infrastructure, a
+> compliance attestation — confirm against stack state before acting.
+
+So the honest distinction is **index versus live**, not "can't see it at all":
+the graph is a periodically-ingested index that explicitly disclaims freshness;
+the CLI reads the account right now. A security group created minutes ago —
+which is exactly what `create-unmanaged.sh` does — is the case the primer says
+the index may miss.
+
+**Say it that way on stage.** Do not claim the graph cannot see unmanaged
+resources; that is false and someone will know. Claim that a finding with
+stakes gets confirmed against live state, which is what the docs themselves
+instruct.
+
+Caveats before it goes anywhere near the deck: preview, contract may change,
+and **Enterprise/Business Critical only** — a chunk of the audience cannot use
+it, so it cannot carry a load-bearing beat.
 
 ## Custom Agents — ❓ still unannounced
 
