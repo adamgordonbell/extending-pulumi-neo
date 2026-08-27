@@ -158,4 +158,4 @@ workshop.
 - [ ] Narrow ESC environment for the `aws` integration — see `docs/credentials.md`
 - [ ] Confirm the live event page and Luma copy no longer say 90 minutes
 
-Planning record: `~/para/projects/neo-mcp-workshop/PLAN.md`
+Planning record: `PLAN.md` (moved here from `~/para/projects/neo-mcp-workshop/` on 2026-08-27)
