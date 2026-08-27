@@ -119,39 +119,6 @@ first ten minutes trying to get an org set up instead of listening.
 
 ---
 
-# Where we’re going
-
-<div class="zoom-content">
-
-<ul class="!mt-8 !text-[1.5rem] !leading-relaxed space-y-5">
-  <li><strong class="!text-[var(--p-primary)]">map</strong> — the three questions this hour answers</li>
-  <li><strong class="!text-[var(--p-primary)]">knows</strong> — your state, and the 90% that isn’t in it</li>
-  <li><strong class="!text-[var(--p-primary)]">reaches</strong> — out to your tools, in from where you work</li>
-  <li><strong class="!text-[var(--p-primary)]">runs</strong> — console, terminal, editor… and nobody at all</li>
-  <li><strong class="!text-[var(--p-primary)]">so what</strong> — the shape of the whole thing</li>
-</ul>
-
-</div>
-
-<style scoped>
-.zoom-content { zoom: 1.5; }
-</style>
-
-<!--
-These five words are the deck's navigation: they sit in the top-right corner of
-every slide, cross off as you pass them, and are clickable if someone asks you to
-go back.
-
-Don't read the list. Say the story: it knows your infrastructure, it can now
-reach past it, and it runs in more places than you'd expect — ending with one
-where nobody is there at all.
-
-The escalation still exists inside `reaches` — ask, then delegate — as sub-beats.
-The room feels it without you naming it here.
--->
-
----
-
 # What Neo is
 
 <div class="zoom-content">
@@ -395,8 +362,17 @@ Two is the one the title is about. One and three are how far it now goes.
 </style>
 
 <!--
-⏱ SIXTY SECONDS, and it's the map for everything after it. The three names are
-the three stages in the corner strip, so the room can always tell where they are.
+⏱ SIXTY SECONDS, and it's the map for everything after it.
+
+⚠️ THIS IS THE ONLY AGENDA SLIDE. "Where we're going" used to sit before "What
+Neo is" and listed the same anchors as a bullet list; it was cut because two
+roadmaps four slides apart is one too many, and this one lands after Neo has
+been defined — which is the point where a roadmap means anything.
+
+So introduce the navigation here: these names sit in the top-right corner of
+every slide from now on, cross off as you pass them, and are clickable if
+someone asks you to go back. `map · knows · reaches · runs · so what` — five
+words, three of them on this slide.
 
 Say it as three questions, not three features:
   1. What does it already know?          -> and the answer is bigger than it was

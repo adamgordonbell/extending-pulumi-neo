@@ -90,16 +90,16 @@ That's the whole deck. Five anchors in the corner strip — `map · knows · rea
 
 | Anchor | Slides | Time | The claim |
 |---|---|---|---|
-| *(open)* | 1–8 | ~5 | Neo is an infrastructure agent; **day two** is the job it's for; go play with it |
-| **map** | 9 | ~1 | Three questions, and that's the hour |
-| **knows** | 10–13 | ~5 | Pulumi's records were never the whole account — and here's the number |
-| **reaches** | 14–35 | ~30 | Two directions, and both live demos |
-| ├ *(directions)* | 14–18 | ~4 | Out: MCP + cloud CLI. In: GitHub + Slack. Every demo ends in a PR |
-| ├ **ask** | 19–22 | ~7 | 🔴 A ticket becomes a PR. An integration is a toggle |
-| ├ **delegate** | 23–27 | ~13 | 🔴 A real page becomes a merged fix |
-| └ **scope** | 28–35 | ~6 | It never needed write access, and you can switch it off per task |
-| **runs** | 36–41 | ~8 | Same agent, four doorways — ending at one with nobody in it |
-| **so what** | 42–48 | ~6 | The thesis, the PRs it left behind, where it goes next |
+| *(open)* | 1–7 | ~5 | Neo is an infrastructure agent; **day two** is the job it's for; go play with it |
+| **map** | 8 | ~1 | Three questions, and that's the hour — the only agenda slide |
+| **knows** | 9–12 | ~5 | Pulumi's records were never the whole account — and here's the number |
+| **reaches** | 13–34 | ~30 | Two directions, and both live demos |
+| ├ *(directions)* | 13–17 | ~4 | Out: MCP + cloud CLI. In: GitHub + Slack. Every demo ends in a PR |
+| ├ **ask** | 18–21 | ~7 | 🔴 A ticket becomes a PR. An integration is a toggle |
+| ├ **delegate** | 22–26 | ~13 | 🔴 A real page becomes a merged fix |
+| └ **scope** | 27–34 | ~6 | It never needed write access, and you can switch it off per task |
+| **runs** | 35–40 | ~8 | Same agent, four doorways — ending at one with nobody in it |
+| **so what** | 41–46 | ~6 | The thesis, the PRs it left behind, where it goes next |
 | *(Q&A)* | — | ~5 | |
 
 **What each anchor owes the room:**
