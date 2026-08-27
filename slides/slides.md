@@ -303,6 +303,122 @@ Mechanics are on the closing QR slide — don't give a URL from here.
 -->
 
 ---
+
+# Three questions, and that's the hour
+
+<div class="map3 !mt-8">
+
+  <div class="mcard">
+    <div class="mnum">1</div>
+    <div class="mname">what it knows</div>
+    <div class="mbody">
+      Your code, your stacks, your state.<br/>
+      And now — as one queryable graph — the resources
+      <strong>nothing in Pulumi manages</strong>.
+    </div>
+  </div>
+
+  <div class="mcard focus">
+    <div class="mnum">2</div>
+    <div class="mtag">today</div>
+    <div class="mname">what it can reach</div>
+    <div class="mbody">
+      <strong>Out</strong> to the systems you operate with: MCP, and the cloud CLIs.<br/>
+      <strong>In</strong> from where you work: GitHub, Slack.
+    </div>
+  </div>
+
+  <div class="mcard">
+    <div class="mnum">3</div>
+    <div class="mname">where it runs</div>
+    <div class="mbody">
+      Pulumi Cloud. Your terminal. Your editor.<br/>
+      And <strong>on a schedule</strong>, with nobody there.
+    </div>
+  </div>
+
+</div>
+
+<p class="!mt-8 !text-[1.45rem] text-center opacity-85">
+Two is the one the title is about. One and three are how far it now goes.
+</p>
+
+<style scoped>
+.map3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.mcard {
+  position: relative;
+  border: 2px solid color-mix(in oklch, var(--p-primary) 42%, transparent);
+  border-radius: 14px;
+  padding: 1.6rem 1.3rem 1.3rem;
+}
+/* Box 2 is what the session is titled after. Weight and fill carry that —
+   never hue alone. */
+.mcard.focus {
+  border-width: 3px;
+  border-color: var(--p-primary);
+  background: color-mix(in oklch, var(--p-primary) 6%, transparent);
+}
+.mtag {
+  position: absolute;
+  top: -0.92rem;
+  right: 1.1rem;
+  background: var(--p-primary);
+  color: #fff;
+  font-family: var(--slidev-font-mono, ui-monospace, monospace);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.66rem;
+  border-radius: 999px;
+}
+.mnum {
+  position: absolute;
+  top: -1.05rem;
+  left: 1.2rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  background: var(--p-fg, #111);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mname {
+  font-family: var(--slidev-font-mono, ui-monospace, monospace);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--p-primary);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.85rem;
+}
+.mbody { font-size: 1.24rem; line-height: 1.6; opacity: 0.9; }
+</style>
+
+<!--
+⏱ SIXTY SECONDS, and it's the map for everything after it. The three names are
+the three stages in the corner strip, so the room can always tell where they are.
+
+Say it as three questions, not three features:
+  1. What does it already know?          -> and the answer is bigger than it was
+  2. What can it get to that it doesn't?  -> today's subject
+  3. Where does it run?                   -> ending somewhere nobody is present
+
+The last line is the honest scoping: the session is titled after box 2, and
+boxes 1 and 3 are what changed around it. Say that out loud rather than letting
+someone feel bait-and-switched by a talk that opens on the Context API.
+
+⛔ Don't preview the demos here. This is orientation; the demos land inside 2.
+-->
+
+---
 layout: section
 routeAlias: stage-knows
 ---
