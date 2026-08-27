@@ -62,6 +62,15 @@ Two things still follow from this, both small:
 
 ## Together, Thursday Aug 27 build block
 
+- [x] ~~Upgrade the Pulumi CLI.~~ v3.237.0 → **v3.259.0** (Aug 27). Clears both
+      bars: `pulumi api` needs 3.243.0+, `pulumi neo acp` needs 3.254.0+.
+      Homebrew needed `brew trust pulumi/tap` first (official tap, already the
+      install source).
+- [ ] **Time the Context API index lag.** After `create-unmanaged.sh`, run
+      `demo/context-api/query.sh unmanaged-security-groups.json` on a clock and
+      find out how long the scan takes to notice the new group. The demo-2 beat
+      depends on the answer: index-behind-live if slow, "here's when it
+      noticed" if fast. Don't script the punchline until this is measured.
 - [ ] `pulumi up` both programs (into `616138583583`) — `demo/pulumi-ts` and `demo/esc-readonly-role`.
       Neither has been deployed; they only typecheck.
 - [ ] **Credential-precedence test.** The open question: when `pulumi neo` runs

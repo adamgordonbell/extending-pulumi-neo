@@ -199,6 +199,91 @@ Pulumi. Three places, one person, twenty minutes of tab-switching.
 -->
 
 ---
+
+# Now that boundary has a name
+
+<p class="!mt-8 !text-[1.6rem] !leading-relaxed">Shipped last week: one queryable graph over state, stack dependencies, and the resources Discovery finds <strong>outside IaC entirely</strong>. Neo uses it out of the box.</p>
+
+<div class="flex justify-center !mt-8">
+  <img src="/img/context-api-blog.png" class="rounded-xl shadow-2xl w-[92%]" alt="Pulumi blog post: Pulumi Context API — One Graph for All Your Infrastructure, by Levi Blackstone, August 26 2026" />
+</div>
+
+<!--
+Aug 26 2026 — literally days before this session. Worth saying so; it dates the
+talk in a good way.
+
+The line that matters, from the post, close to verbatim: Neo "uses it out of the
+box — ask Neo what breaks if a stack changes, and it queries the graph on your
+behalf, WITH THE PERMISSIONS OF THE USER WHO INVOKED IT."
+
+That last clause is the same acting-user story the CLI integrations tell later.
+Both halves of this talk agree on who the agent is acting as. Plant it here and
+call back to it in the scope section.
+
+⛔ Preview, and Enterprise / Business Critical only. Say that out loud — part of
+the room cannot run it today, so do not let it carry the argument.
+
+⛔ Do not say "Pulumi couldn't see unmanaged resources before." Discovery has
+found them for a while; what is new is querying them in ONE graph alongside
+state and dependencies.
+-->
+
+---
+
+# 90% of that account is not Pulumi
+
+<div class="flex justify-center gap-20 !mt-6">
+  <div class="text-center">
+    <div class="text-[5.5rem] leading-none font-bold" style="color: var(--p-primary)">1305</div>
+    <div class="!mt-3 text-[1.5rem] opacity-80">found by cloud scan,<br/>no IaC tool</div>
+  </div>
+  <div class="text-center">
+    <div class="text-[5.5rem] leading-none font-bold opacity-60">144</div>
+    <div class="!mt-3 text-[1.5rem] opacity-80">managed by<br/>Pulumi</div>
+  </div>
+</div>
+
+<p class="!mt-8 !text-[1.5rem] !leading-relaxed text-center">One query. My own org, this morning.</p>
+
+<div class="ctx-cmd !mt-5">
+
+```bash
+pulumi api GraphQuery -F orgName=<org> --input coverage-by-tool.json
+```
+
+</div>
+
+<style scoped>
+.ctx-cmd pre,
+.ctx-cmd code { font-size: 1.2rem !important; line-height: 1.75 !important; }
+.ctx-cmd pre { padding: 0.9rem 1.2rem !important; }
+</style>
+
+<!--
+🔴 RUN THIS LIVE if the room is warm — it is one command, read-only, and the
+numbers are the whole argument for the rest of the hour. Selector is at
+demo/context-api/coverage-by-tool.json. Falls back to this slide if it fails.
+
+Verified Aug 27 2026: 1305 "Other" vs 144 "Pulumi". Re-run before you present —
+these numbers move, and quoting a stale count is the kind of thing that gets
+noticed.
+
+The selector groups by `managed`, whose value set is ARM, CloudFormation, Other,
+Pulumi, Terraform. "Other" = scanned, attributed to no IaC tool. In an org with
+Terraform the split looks different — good aside if asked.
+
+THIS IS THE SETUP FOR THE WHOLE TALK. Neo can already reason about the 144. The
+1305 is why it needs to reach past Pulumi's own records. Everything after this
+slide is about that reach.
+
+⚠️ Do not say the graph cannot see unmanaged resources — it can, and someone
+will know. The distinction is INDEX vs LIVE: the graph answers from a search
+index that trails reality (the API's own primer says to confirm against the
+source of record before acting on an absence). The CLI reads the account now.
+That is the honest version, and it is the one that sets up demo 2.
+-->
+
+---
 layout: two-cols
 ---
 
