@@ -108,10 +108,21 @@ depends on a model finishing a task while 200 people watch.
 | neo-cis-pr | 1440×864 | 5:3 | 17s |
 | neo-linear (fallback) | 1736×1080 | ~1.6:1 | 76s |
 
-- [ ] **Re-record or re-frame to 1920×1080.** None of these are 16:9, so all of
-      them letterbox or pillarbox inside a 16:9 slide — which is most of why
-      they read as screen-grabs rather than as the demo. Capture at 1080p with
-      the browser filling the frame, or crop/pad to 16:9 in a pass.
+- [ ] **Re-export, don't re-record — the Screen Studio raws are still here.**
+      All six clips came from the "10 more things" blog post (they're in
+      `~/sandbox/docs/content/blog/10-more-things-you-can-do-with-neo/`, shipped
+      May 19 2026), sized for an inline blog figure. That's the whole reason
+      none of them are 16:9.
+      `~/Screen Studio Projects/` holds 8 bundles, 4.7 GB, captured at retina
+      (2560×1600 → 3840×2160) — including `deploy-to-aws.screenstudio` and its
+      `-edited` sibling, near-certainly the source of `deploy-to-aws2.mp4`, plus
+      three Chrome captures from May 11–15 that bracket the blog post's date.
+      ⚠️ **The 1:1 mapping is unconfirmed** — the bundles are named app +
+      timestamp and their fragmented MP4s don't probe for duration. Opening the
+      8 projects in Screen Studio is the quick way to match them to clips.
+      If they match, this stops being a re-record and becomes a re-export at
+      1920×1080 with the framing/zoom set in the editor — hours cheaper.
+      Nothing is in the Beta app's store (9 MB, raws long gone).
 - [ ] **Hide the chrome.** `iam-narrow`'s notes already say Chrome is hidden;
       make that the rule for all of them — no tab bar, no bookmarks, no dock.
 - [ ] **Zoom the app, not the video.** Browser zoom before capture keeps text
