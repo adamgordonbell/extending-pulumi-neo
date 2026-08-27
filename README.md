@@ -62,7 +62,23 @@ npm run build        # static site into dist/
 ## Prior art
 
 The incident walkthrough builds directly on **Engin Diri's "Day-2 Autonomous
-Infrastructure Management"** (Dec 9 2025), which Adam co-presented:
+Infrastructure Management"** (Dec 9 2025), which Adam co-presented — the fourth
+and last part of Pulumi's monthly infrastructure-agents workshop series:
+
+| # | Workshop | Date | Recording |
+|---|---|---|---|
+| 1 | Getting Started with Infrastructure Agents | 2025-10-14 | [_6abaK-dCz0](https://www.youtube.com/watch?v=_6abaK-dCz0) |
+| 2 | Must-Have Enterprise Guardrails for Agent-driven Operations | 2025-10-23 | [-P3aBpE0CYE](https://www.youtube.com/watch?v=-P3aBpE0CYE) |
+| 3 | Self-Service Platforms for Agent-Driven Developer Productivity | 2025-11-06 | [gK1N88I0GQ8](https://www.youtube.com/watch?v=gK1N88I0GQ8) |
+| 4 | **Day-2 Autonomous Infrastructure Management** | 2025-12-09 | [nx6oJvX2JNE](https://www.youtube.com/watch?v=nx6oJvX2JNE) |
+
+All four verified against `youtube_url` in the pulumi/docs event pages. There is
+**no official playlist** bundling them, and no confirmed fifth part — the nearest
+candidate, "AI Agents That Reason Over Your Infrastructure" (2026-01-14), is an
+external co-hosted event with no recording URL and no presenters listed, so
+whether it belongs to the series is unverified.
+
+Day-2 detail:
 
 - Recording: https://www.youtube.com/watch?v=nx6oJvX2JNE
 - Repo: https://github.com/dirien/pulumi-ai-workshop-base
@@ -72,6 +88,24 @@ One distinction that workshop makes clear and this one keeps: Engin's webhook se
 the **inbound** leg — PagerDuty fires, and a task gets created. The MCP integration is the
 **outbound** leg — Neo reads PagerDuty during a task already underway. The reading half is
 now a toggle; the triggering half is still yours to wire.
+
+## Further reading
+
+The eight posts on the closing "More reading" slide. All verified live Aug 27 2026.
+
+**The story this session tells**
+
+- [Neo Integrations: MCP Servers and Cloud CLIs](https://www.pulumi.com/blog/neo-integrations/) — May 20 2026. The launch post this session is built on; it shares the session's title.
+- [Ten More Things You Can Do With Pulumi Neo](https://www.pulumi.com/blog/10-more-things-you-can-do-with-neo/) — May 19 2026. Where today's arc comes from.
+- [10 Things You Can Do With Our Infrastructure Agent](https://www.pulumi.com/blog/10-things-you-can-do-with-neo/) — Oct 6 2025. The first one.
+- [Neo, Now in the Terminal](https://www.pulumi.com/blog/pulumi-neo-cli/) — May 20 2026. The surface every demo is driven from.
+
+**What the session goes deeper on**
+
+- [Pulumi Context API: One Graph for All Your Infrastructure](https://www.pulumi.com/blog/pulumi-context-api/) — Aug 26 2026. The graph behind the coverage numbers.
+- [Neo Automations: Scheduled Tasks Shipped as Pull Requests](https://www.pulumi.com/blog/neo-automations/) — May 21 2026. The `unattended` section.
+- [Incident Response as Code: Managing PagerDuty with Pulumi](https://www.pulumi.com/blog/incident-response-as-code-pagerduty-pulumi/) — Jul 20 2026. Engin's program, used to seed the demo account.
+- [Bringing Neo to GitHub and Slack](https://www.pulumi.com/blog/neo-github-slack/) — May 21 2026. The inbound half — starting a task from a PR thread or a channel.
 
 ## Reference
 

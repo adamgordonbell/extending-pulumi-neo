@@ -1401,6 +1401,52 @@ FIRST THING CUT if running long.
 -->
 
 ---
+
+# More reading
+
+<div class="grid grid-cols-2 gap-x-12 gap-y-3 !mt-8 !text-[1.32rem] leading-relaxed">
+
+<div>
+
+**The story this session tells**
+
+- [Neo Integrations: MCP Servers and Cloud CLIs](https://www.pulumi.com/blog/neo-integrations/) — the launch post this whole hour is built on
+- [Ten More Things You Can Do With Pulumi Neo](https://www.pulumi.com/blog/10-more-things-you-can-do-with-neo/) — where today's arc comes from
+- [10 Things You Can Do With Our Infrastructure Agent](https://www.pulumi.com/blog/10-things-you-can-do-with-neo/) — the first one
+- [Neo, Now in the Terminal](https://www.pulumi.com/blog/pulumi-neo-cli/) — the surface I drove everything from
+
+</div>
+
+<div>
+
+**What we went deeper on**
+
+- [Pulumi Context API](https://www.pulumi.com/blog/pulumi-context-api/) — the graph behind that 1305 / 144
+- [Neo Automations](https://www.pulumi.com/blog/neo-automations/) — scheduled tasks, shipped as pull requests
+- [Incident Response as Code](https://www.pulumi.com/blog/incident-response-as-code-pagerduty-pulumi/) — Engin's PagerDuty program, the one I seeded the demo with
+- [Bringing Neo to GitHub and Slack](https://www.pulumi.com/blog/neo-github-slack/) — the inbound half
+
+</div>
+
+</div>
+
+<p class="!mt-7 !text-[1.35rem] opacity-80 text-center">All eight are in the repo README too — grab the QR on the next slide instead of typing.</p>
+
+<!--
+⏱ THIRTY SECONDS, and it is the FIRST THING TO CUT after the horizon slide.
+Nobody transcribes a link list from a slide. Its real job is to exist in the
+deck they take home.
+
+Every URL verified 200 on Aug 27. Re-check before the EMEA run.
+
+If you only say one thing: the Context API post is nine days old and the
+integrations post is the one that names this session's own title.
+
+Q&A move: this is a good slide to sit on if a question needs a link — flip
+BACK one from Thanks rather than hunting.
+-->
+
+---
 layout: end
 ---
 
