@@ -539,7 +539,7 @@ state and dependencies.
 <div class="ctx-cmd !mt-5">
 
 ```bash
-pulumi api GraphQuery -F orgName=<org> --input coverage-by-tool.json
+pulumi api GraphQuery -F orgName=$ORG --input coverage-by-tool.json
 ```
 
 </div>
@@ -555,9 +555,24 @@ pulumi api GraphQuery -F orgName=<org> --input coverage-by-tool.json
 </style>
 
 <!--
-🔴 RUN THIS LIVE if the room is warm — it is one command, read-only, and the
-numbers are the whole argument for the rest of the hour. Selector is at
-demo/context-api/coverage-by-tool.json. Falls back to this slide if it fails.
+🔴 RUN THIS LIVE if the room is warm — it is one command, read-only, ~2s, and
+the numbers are the whole argument for the rest of the hour. Falls back to this
+slide if it fails.
+
+  cd demo/context-api
+  export ORG=adamgordonbell-org      # do this BEFORE they're watching
+  pulumi api GraphQuery -F orgName=$ORG --input coverage-by-tool.json
+
+Type that, not a wrapper — the slide shows the same line, so the wall and the
+terminal match. (There was a query.sh; it was deleted for exactly this reason.)
+
+SHOW THE SELECTOR FIRST — `cat coverage-by-tool.json`, six lines. It's the
+whole idea: anchor on every resource, group by `managed`, count. If they only
+remember one thing about the Context API, it should be that the query is small
+enough to read out loud.
+
+Output is 32 lines and fits one screen; `nodes` comes back empty because
+aggregate mode suppresses it, so nothing junky scrolls past.
 
 Verified Aug 27 2026: 1305 "Other" vs 144 "Pulumi". Re-run before you present —
 these numbers move, and quoting a stale count is the kind of thing that gets
