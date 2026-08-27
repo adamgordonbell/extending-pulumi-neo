@@ -13,21 +13,37 @@
 
 ## What it covers
 
-Neo could always write Pulumi. What it could not do was look at the systems around the
-code. Integrations close that gap two ways:
+**Neo already knew your infrastructure. Now it can reach past it. And it runs in
+places you aren't.**
 
-- **MCP integrations** — Neo reads PagerDuty, Linear, Datadog, Honeycomb, Atlassian, Supabase. Credentials are encrypted per-organization, decrypted at task time, and never exposed to the model.
-- **CLI integrations** — Neo runs `aws`, `gcloud`, `az`, and `kubectl` against credentials you scope yourself in Pulumi ESC. Pulumi Cloud never stores them.
+The session answers three questions in order:
 
-Every demo ends the same way, and that is the point: **a reviewable pull request.** Neo
-proposes; a human merges.
+**1 · What does it know?** Your code, your stacks, your state — and, since the
+[Context API](https://www.pulumi.com/blog/pulumi-context-api/), all of that as one
+queryable graph that includes the resources *no Pulumi program describes*. On the
+demo org that's about 90% of the account.
+
+**2 · What can it reach?** ← *this is what the session is titled after*
+- **Out**, to the systems you operate with: **MCP integrations** (PagerDuty, Linear,
+  Datadog, Honeycomb, Atlassian, Supabase) and **CLI integrations** (`aws`, `gcloud`,
+  `az`, `kubectl`) against credentials you scope yourself in Pulumi ESC.
+- **In**, from where you already work: **GitHub and Slack** — mention Neo in a PR
+  thread or a channel and a task starts.
+
+**3 · Where does it run?** Pulumi Cloud, your terminal, your editor over the Agent
+Client Protocol (Zed, JetBrains, VS Code, Cursor) — and on a schedule, with nobody
+there at all.
+
+Every demo ends the same way, and that is the point: **a reviewable pull request.**
+Neo proposes; a human merges.
 
 By the end you will have seen:
 
-- An incident go from a real PagerDuty page to a merged fix, without a human reading a console
-- How Neo's access is scoped, per organization and per task
-- What credentials Neo uses, who owns them, and what it cannot reach
-- Where integrations go next — scheduled automations and Neo in your editor
+- A Linear ticket become a pull request, live
+- A real PagerDuty page become a merged fix, live — including a finding that exists
+  in the cloud account and in no Pulumi program
+- How Neo's access is scoped, per organization and per task, and who holds which key
+- The same agent running in four different places, ending with one nobody started
 
 ## Who it's for
 

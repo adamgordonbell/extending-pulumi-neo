@@ -69,28 +69,52 @@ already, in Adam's own voice, on assets he owns.
 
 ---
 
+## The shape, in one breath
+
+> **Neo already knew your infrastructure. Now it can reach past it. And it runs in places you aren't.**
+
+Three questions, in the order the hour answers them:
+
+1. **What does it know?** — your code, stacks and state, and now the ~90% of the account that no Pulumi program describes
+2. **What can it reach?** — *out* to the systems you operate with, *in* from where you already work ← **the session is titled after this one**
+3. **Where does it run?** — the console, your terminal, your editor, and on a schedule with nobody there
+
+Then the payoff: **so what**.
+
+That's the whole deck. Five anchors in the corner strip — `map · knows · reaches
+· runs · so what` — and they are clickable, so you can always jump.
+
+---
+
 ## Run of show (60 min)
 
-| # | Beat | Time | The claim |
-|---|------|------|-----------|
-| 0 | **What** — Neo, and what day two means | ~3 | The work this is for is the work after the first deploy |
-| 1 | **Why** — Neo could always write Pulumi | ~5 | It couldn't see the systems the incident lives in |
-| 2 | **Ask** — a ticket becomes a PR (Linear) | ~7 | An integration is a toggle; the output is reviewable |
-| 3 | **Delegate** — the incident (PagerDuty + `aws`) | ~20 | Page → diagnosis → PR → resolved, live |
-| 4 | **Scope** — what Neo can reach, and who decided | ~10 | It never needed write access |
-| 5 | **Stop initiating** — it runs without you | ~8 | Drift / CIS / upgrades on a schedule |
-| 6 | **Q&A** | ~10 | |
+| Anchor | Slides | Time | The claim |
+|---|---|---|---|
+| *(open)* | 1–8 | ~5 | Neo is an infrastructure agent; **day two** is the job it's for; go play with it |
+| **map** | 9 | ~1 | Three questions, and that's the hour |
+| **knows** | 10–13 | ~5 | Pulumi's records were never the whole account — and here's the number |
+| **reaches** | 14–35 | ~30 | Two directions, and both live demos |
+| ├ *(directions)* | 14–18 | ~4 | Out: MCP + cloud CLI. In: GitHub + Slack. Every demo ends in a PR |
+| ├ **ask** | 19–22 | ~7 | 🔴 A ticket becomes a PR. An integration is a toggle |
+| ├ **delegate** | 23–27 | ~13 | 🔴 A real page becomes a merged fix |
+| └ **scope** | 28–35 | ~6 | It never needed write access, and you can switch it off per task |
+| **runs** | 36–41 | ~8 | Same agent, four doorways — ending at one with nobody in it |
+| **so what** | 42–48 | ~6 | The thesis, the PRs it left behind, where it goes next |
+| *(Q&A)* | — | ~5 | |
 
-**What each beat owes the room:**
+**What each anchor owes the room:**
 
-| Beat | The one thing they leave with |
+| Anchor | The one thing they leave with |
 |---|---|
-| What | Neo reads your live infrastructure and hands work back as a PR — and day two is the job |
-| Why | Neo's limit was context, not capability |
-| Ask | An integration is a toggle, and the output is reviewable |
-| Delegate | A real page becomes a real PR, without a human reading three consoles |
-| Scope | Nobody got access they didn't have, and Neo never needed write |
-| Stop initiating | The end state isn't asking faster — it's not asking |
+| open | Day two is the job, and this is a thing you can go try today |
+| map | There are three questions here, and I know which one is today's |
+| knows | Most of my cloud account isn't in any Pulumi program |
+| reaches | An integration is a toggle, and the output is always reviewable |
+| ask | I hand it a ticket, I get back a diff |
+| delegate | A real page became a real PR without me reading three consoles |
+| scope | Nobody got access they didn't have, and Neo never needed write |
+| runs | It's one agent; only the doorway changes |
+| so what | The end state isn't asking faster — it's not asking |
 
 **Cut order lives in [`PRESENTER.md`](PRESENTER.md)** — that file owns the clock and the
 failure plan, and its cuts are named by beat, so they survive slide renumbering.
