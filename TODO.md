@@ -123,6 +123,19 @@ depends on a model finishing a task while 200 people watch.
       If they match, this stops being a re-record and becomes a re-export at
       1920×1080 with the framing/zoom set in the editor — hours cheaper.
       Nothing is in the Beta app's store (9 MB, raws long gone).
+- [ ] **`neo-linear.mp4` is not Adam's footage — replace it, don't re-export.**
+      Adam, Aug 27: "the linear one wasn't by me, that is for sure." The file
+      metadata agrees. The other five clips were all muxed by `Lavf61.7.100`
+      and carry a stream-level `Lavc61.19.101 libx264` encoder tag; `neo-linear`
+      was muxed by `Lavf59.16.100` and carries no stream encoder tag at all —
+      a different pipeline. It's also 30fps at 1.6 Mbps against a house style of
+      20fps at 0.4–0.7 Mbps, and it's the only clip with no candidate raw in
+      `~/Screen Studio Projects/`.
+      ⚠️ This matters more than the framing: the deck uses it as the **fallback
+      for the live Linear demo** (slide 20 notes — "play /video/neo-linear.mp4
+      (76s), it's the same thing"). A fallback you reach for under time pressure
+      should not be someone else's screen and someone else's org. Re-tape it —
+      which is the same work as pre-baking the Linear demo, already on this list.
 - [ ] **Hide the chrome.** `iam-narrow`'s notes already say Chrome is hidden;
       make that the rule for all of them — no tab bar, no bookmarks, no dock.
 - [ ] **Zoom the app, not the video.** Browser zoom before capture keeps text
