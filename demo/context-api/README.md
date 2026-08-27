@@ -9,8 +9,11 @@ interesting part, so nothing should stand between the room and it. Needs CLI
 so if `pulumi whoami` works, this works.
 
 ```bash
-export ORG=adamgordonbell-org
+export ORG=adamgordonbell-org      # your own org here
 ```
+
+(On stage Adam types the org out in full — see [`DEMO.md`](../../DEMO.md). The
+variable is here so you can paste these against your own.)
 
 ## Why this earns a spot
 

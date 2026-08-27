@@ -56,8 +56,11 @@ Then, **before anyone is watching**:
 
 ```bash
 cd ~/sandbox/extending-pulumi-neo/demo/context-api
-export ORG=adamgordonbell-org
 ```
+
+The org is spelled out in every command below rather than hidden behind a
+variable — you're literally typing these, and a `$ORG` on the projector is one
+more thing the room has to take on faith.
 
 Auth comes from `~/.pulumi/credentials.json`. If `pulumi whoami` works, this works.
 The Context API is public preview and gated to Enterprise / Business Critical —
@@ -92,7 +95,7 @@ Context API, make it that the query is small enough to read out loud.
 **2 — Run it.** Same line the slide shows, character for character.
 
 ```bash
-pulumi api GraphQuery -F orgName=$ORG --input coverage-by-tool.json
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.json
 ```
 
 ~2 seconds. 32 lines out, fits one screen, no scrolling — `nodes` comes back
@@ -142,8 +145,8 @@ None. It's read-only and mutates nothing. Safe to run as many times as you like.
 Not part of demo 1, but one keystroke away if a question earns it:
 
 ```bash
-pulumi api GraphQuery -F orgName=$ORG --input unmanaged-by-type.json          # what kind of thing is unmanaged
-pulumi api GraphQuery -F orgName=$ORG --input unmanaged-security-groups.json  # 3 of them, all in ca-central-1
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-by-type.json          # what kind of thing is unmanaged
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-groups.json  # 3 of them, all in ca-central-1
 ```
 
 Full write-up, including the curl form for CLIs older than v3.243.0:

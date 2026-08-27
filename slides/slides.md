@@ -539,7 +539,7 @@ state and dependencies.
 <div class="ctx-cmd !mt-5">
 
 ```bash
-pulumi api GraphQuery -F orgName=$ORG --input coverage-by-tool.json
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.json
 ```
 
 </div>
@@ -561,7 +561,7 @@ slide if it fails.
 
   cd demo/context-api
   export ORG=adamgordonbell-org      # do this BEFORE they're watching
-  pulumi api GraphQuery -F orgName=$ORG --input coverage-by-tool.json
+  pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.json
 
 Type that, not a wrapper — the slide shows the same line, so the wall and the
 terminal match. (There was a query.sh; it was deleted for exactly this reason.)

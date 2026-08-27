@@ -49,7 +49,7 @@ is for, and how the precedence test is designed — lives in
       Homebrew needed `brew trust pulumi/tap` first (official tap, already the
       install source).
 - [ ] **Time the Context API index lag.** After `create-unmanaged.sh`, run
-      `pulumi api GraphQuery -F orgName=$ORG --input unmanaged-security-groups.json`
+      `pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-groups.json`
       (from `demo/context-api/`) on a clock and
       find out how long the scan takes to notice the new group. The demo-2 beat
       depends on the answer: index-behind-live if slow, "here's when it
