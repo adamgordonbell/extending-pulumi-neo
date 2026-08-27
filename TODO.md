@@ -76,6 +76,57 @@ is for, and how the precedence test is designed — lives in
       already the shortest beat; check it hasn't eaten into `ask`.
 - [ ] Full run-through against the clock. 60 minutes, two live demos.
 
+## Polish pass — de-risk the demos, then make the slides visual
+
+Adam, Aug 27: not today, but this is the shape of the remaining work. Two passes,
+in this order — the demo decisions change what the slides have to say.
+
+**1. Lower the lift at presentation time.** The goal is that nothing on stage
+depends on a model finishing a task while 200 people watch.
+
+- [ ] **Decide live vs recorded per demo, deliberately.** Currently three live
+      (slide 12 Insights, 20 Linear, 25 PagerDuty) and four recorded (16, 33,
+      38, 39). Every live one is a place the clock can run away.
+- [ ] **Pre-bake Neo sessions to walk through** rather than start cold. A
+      finished session with visible task history, opened and read aloud, shows
+      the same thing as a live run and costs seconds instead of minutes. This
+      overlaps with "Neo Cloud sessions to recreate" below — same work, and it
+      now has a second reason.
+- [ ] **Prefer artifacts over runs.** A merged PR is instant, permanent, and
+      can't fail; the deck already links four. Where a beat can end on a PR
+      instead of a completion, it should.
+- [ ] **Tape more in Neo while the demos are being built**, not after. Every
+      real run is a free clip if it's being captured at the time.
+
+**2. Make the recorded clips look legit.** Right now they don't fill the frame:
+
+| clip | size | aspect | duration |
+|---|---|---|---|
+| honey-comb | 1440×1080 | 4:3 | 24s |
+| iam-narrow | 1686×868 | ~1.94:1 | 60s |
+| neo-schedule-setup | 1440×1080 | 4:3 | 18s |
+| neo-cis-pr | 1440×864 | 5:3 | 17s |
+| neo-linear (fallback) | 1736×1080 | ~1.6:1 | 76s |
+
+- [ ] **Re-record or re-frame to 1920×1080.** None of these are 16:9, so all of
+      them letterbox or pillarbox inside a 16:9 slide — which is most of why
+      they read as screen-grabs rather than as the demo. Capture at 1080p with
+      the browser filling the frame, or crop/pad to 16:9 in a pass.
+- [ ] **Hide the chrome.** `iam-narrow`'s notes already say Chrome is hidden;
+      make that the rule for all of them — no tab bar, no bookmarks, no dock.
+- [ ] **Zoom the app, not the video.** Browser zoom before capture keeps text
+      sharp; scaling a small capture up on the slide does not.
+
+**3. Then the visual pass on the slides.** Many are still paragraphs.
+
+- [ ] Go slide by slide and cut prose to the one thing being said out loud,
+      moving the rest into speaker notes. **The notes are the presenter's
+      script — losing them to make a slide pretty is a regression, not a win.**
+      Every fact that tells Adam how to walk the beat stays in the deck, just
+      below the fold rather than on the wall.
+- [ ] Reach for the three-box map on slide 8 as the pattern: it replaced a
+      bullet list and carries more.
+
 ## ⛔ Before this repo goes public
 
 The repo ships to attendees (QR on the closing slide) and **has no remote yet** — which
