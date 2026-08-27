@@ -125,11 +125,9 @@ first ten minutes trying to get an org set up instead of listening.
 
 <ul class="!mt-8 !text-[1.5rem] !leading-relaxed space-y-5">
   <li><strong class="!text-[var(--p-primary)]">what</strong> — Neo, and what day two means</li>
-  <li><strong class="!text-[var(--p-primary)]">why</strong> — what it couldn’t see</li>
-  <li><strong class="!text-[var(--p-primary)]">ask</strong> — you hand it a ticket, it hands back a PR</li>
-  <li><strong class="!text-[var(--p-primary)]">delegate</strong> — a page fires, and the picture is assembled</li>
-  <li><strong class="!text-[var(--p-primary)]">scope</strong> — what it can reach, and who decided</li>
-  <li><strong class="!text-[var(--p-primary)]">unattended</strong> — it runs without you</li>
+  <li><strong class="!text-[var(--p-primary)]">knows</strong> — your state, and the 90% that isn’t in it</li>
+  <li><strong class="!text-[var(--p-primary)]">reaches</strong> — out to your tools, in from where you work</li>
+  <li><strong class="!text-[var(--p-primary)]">runs</strong> — console, terminal, editor… and nobody at all</li>
 </ul>
 
 </div>
@@ -143,8 +141,12 @@ These five words are the deck's navigation: they sit in the top-right corner of
 every slide, cross off as you pass them, and are clickable if someone asks you to
 go back.
 
-Don't read the list. Say the story: teams delegated things they used to keep in
-their heads, then stopped initiating them at all.
+Don't read the list. Say the story: it knows your infrastructure, it can now
+reach past it, and it runs in more places than you'd expect — ending with one
+where nobody is there at all.
+
+The escalation still exists inside `reaches` — ask, then delegate — as sub-beats.
+The room feels it without you naming it here.
 -->
 
 ---
@@ -302,12 +304,12 @@ Mechanics are on the closing QR slide — don't give a URL from here.
 
 ---
 layout: section
-routeAlias: stage-why
+routeAlias: stage-knows
 ---
 
-# why
+# what it knows
 
-## what it couldn’t see
+## your code, your stacks, your state — and what that missed
 
 <StageMap size="lg" />
 
@@ -446,52 +448,80 @@ That is the honest version, and it is the one that sets up demo 2.
 -->
 
 ---
+layout: section
+routeAlias: stage-reaches
+---
+
+# what it can reach
+
+## out to your tools, in from where you work
+
+<StageMap size="lg" />
+
+---
 layout: two-cols
 ---
 
 ::header::
 
-# Two kinds of integration
+# Two directions
 
 ::left::
 
 <div class="!mt-6">
-<div class="!text-[2.1rem] !font-semibold !text-[var(--p-primary)]">MCP — your SaaS tools</div>
+<div class="!text-[1.55rem] !font-semibold opacity-60 !mb-2">OUT — to the systems you operate with</div>
+<div class="!text-[2.1rem] !font-semibold !text-[var(--p-primary)]">MCP &nbsp;·&nbsp; Cloud CLI</div>
 
-<p class="!mt-5 !text-[1.45rem] !leading-relaxed opacity-85">
-PagerDuty · Linear · Datadog · Honeycomb · Atlassian · Supabase
+<p class="!mt-5 !text-[1.4rem] !leading-relaxed opacity-85">
+<strong>MCP</strong> — PagerDuty · Linear · Datadog · Honeycomb · Atlassian · Supabase.
+Pulumi Cloud holds the credentials, encrypted per org.
 </p>
 
-<p class="!mt-6 !text-[1.45rem] !leading-relaxed opacity-85">
-<strong>Pulumi Cloud holds the credentials</strong>, encrypted per organization.
+<p class="!mt-5 !text-[1.4rem] !leading-relaxed opacity-85">
+<strong>Cloud CLI</strong> — <code>aws</code> · <code>gcloud</code> · <code>az</code> ·
+<code>kubectl</code>. You hold the credentials, in Pulumi ESC.
+</p>
+
+<p class="!mt-5 !text-[1.4rem] !leading-relaxed !text-[var(--p-primary)] !font-semibold">
+Both of today's demos live here.
 </p>
 </div>
 
 ::right::
 
 <div class="!mt-6">
-<div class="!text-[2.1rem] !font-semibold !text-[var(--p-primary)]">Cloud CLI — your cloud accounts</div>
+<div class="!text-[1.55rem] !font-semibold opacity-60 !mb-2">IN — from where you already work</div>
+<div class="!text-[2.1rem] !font-semibold !text-[var(--p-primary)]">GitHub &nbsp;·&nbsp; Slack</div>
 
-<p class="!mt-5 !text-[1.45rem] !leading-relaxed opacity-85">
-<code>aws</code> · <code>gcloud</code> · <code>az</code> · <code>kubectl</code>
+<p class="!mt-5 !text-[1.4rem] !leading-relaxed opacity-85">
+Mention Neo in a PR thread or a channel and a task starts — without opening
+Pulumi Cloud at all.
 </p>
 
-<p class="!mt-6 !text-[1.45rem] !leading-relaxed opacity-85">
-<strong>You hold the credentials</strong>, in Pulumi ESC. Pulumi Cloud never stores them.
+<p class="!mt-5 !text-[1.4rem] !leading-relaxed opacity-85">
+Different question from the left-hand side: not <em>what can it see</em>, but
+<em>how does the work get started</em>.
 </p>
 </div>
 
 <!--
-⚠️ Do NOT frame this as "MCP reads, CLI runs". It isn't true — Neo writes over MCP
-too: it resolves the incident back to PagerDuty and comments on the Linear ticket.
-Someone will call that out.
+⚠️ This slide used to say "two kinds of integration: MCP and CLI". That split the
+wrong axis — the docs put MCP and CLI TOGETHER as outbound, with GitHub and Slack
+as the inbound pair. Verbatim from /docs/ai/neo/integrations/: integrations bridge
+the gap "in two ways: by connecting Neo to those external systems, and by letting
+you reach Neo from where you already work."
 
-The distinction that actually holds is the two on the slide: WHAT it reaches, and
-WHO HOLDS THE KEY. That second half is also the setup for the scope section, so
-you get it for free later rather than repeating yourself.
+Getting this right is what makes the rest of the deck fit — it's why the editor
+and the Context API are NOT integrations, and don't belong on this slide.
 
-The cloud CLI is the one that closes the gap from the previous slide: it reaches
-resources Pulumi never managed.
+⚠️ Do NOT say "MCP reads, CLI runs". Neo writes over MCP too — it resolves the
+incident and comments on the ticket. Someone will call that out.
+
+WHO HOLDS THE KEY is the left-hand distinction worth making, and it sets up the
+scope beat for free.
+
+⛔ Don't demo the inbound half — no GitHub or Slack demo today, and saying so
+plainly is better than implying coverage you don't have.
 -->
 
 ---
@@ -1182,14 +1212,102 @@ conversation.
 
 ---
 layout: section
-routeAlias: stage-unattended
+routeAlias: stage-runs
 ---
 
-# unattended
+# where it runs
 
-## the part where you’re not in the loop anymore
+## the console, the terminal, your editor — and nobody at all
 
 <StageMap size="lg" />
+
+---
+
+# Same agent, four places
+
+<div class="grid grid-cols-2 gap-x-10 gap-y-6 !mt-8 !text-[1.4rem] leading-relaxed">
+
+<div>
+<p class="!m-0"><strong class="!text-[var(--p-primary)]">Pulumi Cloud</strong><br/>
+<span class="opacity-85">Where an org admin turns integrations on, and where the task history lives.</span></p>
+</div>
+
+<div>
+<p class="!m-0"><strong class="!text-[var(--p-primary)]"><code>pulumi neo</code></strong><br/>
+<span class="opacity-85">The terminal. Everything you watched today ran here.</span></p>
+</div>
+
+<div>
+<p class="!m-0"><strong class="!text-[var(--p-primary)]">Your editor</strong><br/>
+<span class="opacity-85">Zed, JetBrains, VS Code, Cursor — over the Agent Client Protocol.</span></p>
+</div>
+
+<div>
+<p class="!m-0"><strong class="!text-[var(--p-primary)]">On a schedule</strong><br/>
+<span class="opacity-85">Nobody there at all. That one's next.</span></p>
+</div>
+
+</div>
+
+<p class="!mt-9 !text-[1.5rem] !leading-relaxed">
+Same agent, same integrations, same permissions. Only the doorway changes.
+</p>
+
+<!--
+⏱ SIXTY SECONDS. The point is the last line: this is not four products.
+
+Locally-run surfaces — terminal and editor — INHERIT your setup: your
+`pulumi login`, the CLIs you're already authenticated to, your kubeconfigs.
+Cloud-configured integrations are the org's; local ones are yours. That's the
+one distinction worth making, and it calls back to the scope section.
+
+⚠️ The precedence question is still open (docs/credentials.md): when both exist,
+which wins? Don't assert an answer you haven't tested.
+-->
+
+---
+
+# In your editor
+
+<div class="zoom-content">
+
+<p class="!mt-6 !text-[1.65rem] !leading-relaxed">
+Neo runs in your editor's agent panel over the <strong>Agent Client Protocol</strong> —
+the same open standard those editors use to host Claude Code and Gemini CLI.
+</p>
+
+<p class="!mt-7 !text-[1.65rem] !leading-relaxed">
+No integration to configure. In the editor it <strong>inherits the CLIs you're
+already authenticated to</strong> — the same reach, arrived at from the other end.
+</p>
+
+<p class="!mt-7 !text-[1.5rem] !leading-relaxed opacity-85">
+Zed and JetBrains speak it natively; VS Code and Cursor need one extension.
+</p>
+
+</div>
+
+<div class="demo-foot !mt-7">
+  <DemoCta href="https://www.pulumi.com/docs/ai/neo/editors/" label="Neo in your editor" />
+</div>
+
+<style scoped>
+.zoom-content { zoom: 1.12; }
+</style>
+
+<!--
+🎬 ASSET TBD — decide clip vs live in the run-through. A clip is the safe call:
+it's a fourth live surface otherwise, and live minutes are already spent.
+
+⏱ 90 seconds with a clip.
+
+The line that earns this slot: ACP means Pulumi wrote ONE adapter and got four
+editors. `pulumi neo acp` is the agent command. Needs CLI v3.254.0+.
+
+⚠️ Same open precedence question as the previous slide — in the editor it takes
+your laptop credentials, not the org's ESC environment. Say "inherits your
+setup", not "uses the integration".
+-->
 
 ---
 layout: quote
@@ -1370,11 +1488,12 @@ layout: two-cols
 
 <div class="!mt-6 !text-[1.4rem] !leading-relaxed space-y-6">
 
-<p><strong class="!text-[var(--p-primary)]">Automations</strong><br/>
-<span class="opacity-85">Cloud CLI access inside scheduled tasks, not just ones you start.</span></p>
+<p><strong class="!text-[var(--p-primary)]">The inbound half</strong><br/>
+<span class="opacity-85">GitHub and Slack — the direction we named but didn't demo.</span></p>
 
-<p><strong class="!text-[var(--p-primary)]">Your editor</strong><br/>
-<span class="opacity-85">Neo in Zed, JetBrains, VS Code, Cursor.</span></p>
+<p><strong class="!text-[var(--p-primary)]">More of the graph</strong><br/>
+<span class="opacity-85">The Context API is a first step: ESC environments, teams and
+ownership, cloud accounts are all named as next.</span></p>
 
 </div>
 
@@ -1390,6 +1509,14 @@ and hand infrastructure work over.</span></p>
 
 <!--
 Keep this to 90 seconds. It's a horizon slide, not a roadmap commitment.
+
+⚠️ Rewritten for the knows/reaches/runs cut: editors and Automations used to be
+the content here, and both now have real beats in `runs`. Don't re-announce them
+— point forward instead.
+
+"More of the graph" is sourced: the Context API post names ESC environments,
+teams and roles, cloud accounts, and IDP service-catalog concepts as planned
+additions. Say "they've said next", not "coming soon".
 
 ⛔ Do NOT name Custom Agents. Not announced, and what we know of its status is
 internal pre-release — so even a hint is a leak, not just a risky promise.
