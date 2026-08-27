@@ -42,6 +42,12 @@ scrollback, no unrelated env vars, no other orgs in view, font size up.
 | 5 | **Stop initiating** — it runs without you | 12:44–12:52 | |
 | 6 | Q&A | 12:52–1:00 | |
 
+⚠️ **This beat table is stale** — it predates the Context API demo and the
+map/knows/reaches/runs/so-what restructure. Rewriting it is tracked in TODO.md.
+
+Keystroke-level steps for each demo live in [`DEMO.md`](DEMO.md); this file is
+the clock and the cut list, and shouldn't restate them.
+
 Full beat content lives in [`OUTLINE.md`](OUTLINE.md). This file is the clock and the
 failure plan.
 
