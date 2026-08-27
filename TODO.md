@@ -71,6 +71,27 @@ is for, and how the precedence test is designed — lives in
       Judge it in the run-through.
 - [ ] Full run-through against the clock. 60 minutes, two live demos.
 
+## ⛔ Before this repo goes public
+
+The repo ships to attendees (QR on the closing slide) and **has no remote yet** — which
+makes now the cheap moment to decide, since git history is permanent once pushed.
+Adam's call (Aug 27): keep everything here for working, clean up before release.
+
+Scanned Aug 27, tracked files that need a pass:
+
+- [ ] **`docs/PLAN.md`** — the worst of it. Eight internal Slack permalinks including a
+      **private DM**, a section headed "all internal, pre-launch", and an unannounced
+      **September "agent teams" launch**. It's already marked superseded; the simplest
+      answer is to drop it from the published tree rather than redact it line by line.
+- [ ] **AWS account `616138583583`** appears in `TODO.md`, `docs/PLAN.md`,
+      `docs/credentials.md`. Not a secret, but not for broadcast — swap for a placeholder.
+- [ ] **`docs/since-launch.md`** — four internal Slack permalinks. The *facts* are public
+      (blog posts, changelog, docs); re-cite them to the public sources and drop the links.
+- [ ] **`INTERNAL.md`** — already gitignored, keep it that way. Pre-release Custom Agents
+      detail; nothing in it may reach a slide, the README, or the stage.
+- [ ] Re-run the check before pushing:
+      `git grep -niE "slack.com|616138583583|pre-launch|agent teams"`
+
 ## Linkable artifacts
 
 Demo slides now carry a click-through button, so each one needs a real URL.

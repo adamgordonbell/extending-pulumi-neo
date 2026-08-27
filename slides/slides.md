@@ -1237,8 +1237,11 @@ and hand infrastructure work over.</span></p>
 <!--
 Keep this to 90 seconds. It's a horizon slide, not a roadmap commitment.
 
-⛔ Do NOT promise Custom Agents. Not announced. Engin's Sep 23 AKS session is
-where that lives — point people there if asked.
+⛔ Do NOT name Custom Agents. Not announced, and what we know of its status is
+internal pre-release — so even a hint is a leak, not just a risky promise.
+
+✅ You MAY point at the Sep 30 EMEA session and say it goes further — this is
+part one, Engin's repeat is part two. Safe as long as you name no feature.
 
 FIRST THING CUT if running long.
 -->
