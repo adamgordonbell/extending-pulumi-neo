@@ -1,7 +1,16 @@
 # Context API demo
 
 Everything here was **run against `adamgordonbell-org` on Aug 27 2026** and
-returned the numbers quoted below. `./query.sh <selector.json>` runs any of them.
+returned the numbers quoted below.
+
+Every command here is the real one — no wrapper. The selector file is the
+interesting part, so nothing should stand between the room and it. Needs CLI
+**v3.243.0+** for `pulumi api`; auth comes from `~/.pulumi/credentials.json`,
+so if `pulumi whoami` works, this works.
+
+```bash
+export ORG=adamgordonbell-org
+```
 
 ## Why this earns a spot
 
@@ -15,7 +24,7 @@ in a single number.
 ### 1. How much of this org does Pulumi actually manage?
 
 ```bash
-./query.sh coverage-by-tool.json
+pulumi api GraphQuery -F orgName=$ORG --input coverage-by-tool.json
 ```
 
 Verified result, Aug 27:
@@ -36,7 +45,7 @@ is a good aside if someone asks.
 ### 2. What kind of thing is unmanaged?
 
 ```bash
-./query.sh unmanaged-by-type.json
+pulumi api GraphQuery -F orgName=$ORG --input unmanaged-by-type.json
 ```
 
 Real buckets: 62 CloudFront distributions, 26 cache policies, 19 origin access
@@ -50,7 +59,7 @@ them "the biggest" on stage.
 ### 3. Unmanaged security groups — the tie into demo 2
 
 ```bash
-./query.sh unmanaged-security-groups.json
+pulumi api GraphQuery -F orgName=$ORG --input unmanaged-security-groups.json
 ```
 
 Verified: **3 unmanaged security groups**, all in `aws-ca-central/ca-central-1`.
@@ -115,3 +124,19 @@ The primer is the full grammar reference and is served by the API itself:
 curl -H "Accept: text/markdown" -H "Authorization: token $PULUMI_ACCESS_TOKEN" \
   https://api.pulumi.com/api/insights/adamgordonbell-org/graph/schema
 ```
+
+## If your CLI predates v3.243.0
+
+`pulumi api` won't exist. Same query, over curl:
+
+```bash
+TOKEN=$(python3 -c "import json,os;d=json.load(open(os.path.expanduser('~/.pulumi/credentials.json')));print(d['accessTokens'][d['current']])")
+curl -s -X POST "https://api.pulumi.com/api/insights/$ORG/graph/query" \
+  -H "Authorization: token $TOKEN" -H "Content-Type: application/json" \
+  --data @coverage-by-tool.json | python3 -m json.tool
+```
+
+This used to be a `query.sh` wrapper. It was deleted on Aug 27: it picked
+between these two paths automatically, which is helpful at a desk and wrong on
+stage — the audience sees `./query.sh something.json` and learns nothing about
+the API. Type the real command.
