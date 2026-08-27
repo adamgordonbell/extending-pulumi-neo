@@ -73,6 +73,7 @@ already, in Adam's own voice, on assets he owns.
 
 | # | Beat | Time | The claim |
 |---|------|------|-----------|
+| 0 | **What** — Neo, and what day two means | ~3 | The work this is for is the work after the first deploy |
 | 1 | **Why** — Neo could always write Pulumi | ~5 | It couldn't see the systems the incident lives in |
 | 2 | **Ask** — a ticket becomes a PR (Linear) | ~7 | An integration is a toggle; the output is reviewable |
 | 3 | **Delegate** — the incident (PagerDuty + `aws`) | ~20 | Page → diagnosis → PR → resolved, live |
@@ -84,6 +85,7 @@ already, in Adam's own voice, on assets he owns.
 
 | Beat | The one thing they leave with |
 |---|---|
+| What | Neo reads your live infrastructure and hands work back as a PR — and day two is the job |
 | Why | Neo's limit was context, not capability |
 | Ask | An integration is a toggle, and the output is reviewable |
 | Delegate | A real page becomes a real PR, without a human reading three consoles |

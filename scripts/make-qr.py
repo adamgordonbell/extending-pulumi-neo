@@ -6,13 +6,20 @@ OUT = Path.home()/"sandbox/extending-pulumi-neo/slides/public/img"
 VIOLET = "#7e6bff"
 MUTED  = "#9aa0ad"
 
-# (filename, url, caption) — URLs are the intended real targets where known.
+# (filename, url, caption, provisional)
+#
+# provisional=True renders the hatched PLACEHOLDER treatment so a draft code
+# cannot ship by accident. Set it False once the URL is final AND the code has
+# been scanned with a real phone.
 ITEMS = [
-    ("qr-repo.png",       "https://github.com/PLACEHOLDER/extending-pulumi-neo", "repo"),
-    ("qr-blog.png",       "https://www.pulumi.com/blog/10-more-things-you-can-do-with-neo/", "blog post"),
-    ("qr-docs.png",       "https://www.pulumi.com/docs/ai/neo/integrations/", "docs"),
-    ("qr-linkedin.png",   "https://www.linkedin.com/in/adamgordonbell/", "linkedin"),
-    ("qr-emea.png",       "https://www.pulumi.com/events/extending-pulumi-neo-mcp-cloud-cli/", "emea sep 30"),
+    ("qr-repo.png",       "https://github.com/PLACEHOLDER/extending-pulumi-neo", "repo", True),
+    ("qr-blog.png",       "https://www.pulumi.com/blog/10-more-things-you-can-do-with-neo/", "blog post", True),
+    ("qr-docs.png",       "https://www.pulumi.com/docs/ai/neo/integrations/", "docs", True),
+    ("qr-linkedin.png",   "https://www.linkedin.com/in/adamgordonbell/", "linkedin", True),
+    ("qr-emea.png",       "https://www.pulumi.com/events/extending-pulumi-neo-mcp-cloud-cli/", "emea sep 30", True),
+    # Real: the URL is certain and this one drives the "go try it" slide, where a
+    # hatched placeholder would be worse than no code at all.
+    ("qr-signup.png",     "https://app.pulumi.com/signup", "app.pulumi.com", False),
 ]
 
 def font(size):
@@ -29,12 +36,20 @@ S = 560          # qr box
 BAR = 92         # placeholder bar height
 PAD = 18
 
-for name, url, caption in ITEMS:
+for name, url, caption, provisional in ITEMS:
     qr = segno.make(url, error="h")
     tmp = OUT/("_tmp_"+name)
-    # muted, not brand violet — placeholders should not look finished
-    qr.save(str(tmp), scale=20, dark=MUTED, light="#ffffff", border=2)
+    # placeholders are muted so they never look finished; real ones use the brand violet
+    qr.save(str(tmp), scale=20, dark=(MUTED if provisional else VIOLET),
+            light="#ffffff", border=2)
     img = Image.open(tmp).convert("RGB").resize((S, S), Image.LANCZOS)
+
+    if not provisional:
+        # finished: just the code, no hatch, no bar, no border
+        img.save(OUT/name)
+        tmp.unlink()
+        print(f"{name:18} -> {url}  (real)")
+        continue
 
     canvas = Image.new("RGB", (S, S+BAR), "#ffffff")
     canvas.paste(img, (0, 0))
@@ -60,4 +75,4 @@ for name, url, caption in ITEMS:
     d.rectangle([0, 0, S-1, S+BAR-1], outline=VIOLET, width=5)
     canvas.save(OUT/name)
     tmp.unlink()
-    print(f"{name:18} -> {url}")
+    print(f"{name:18} -> {url}  (placeholder)")

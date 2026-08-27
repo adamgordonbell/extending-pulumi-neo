@@ -34,7 +34,8 @@ scrollback, no unrelated env vars, no other orgs in view, font size up.
 
 | # | Beat | Target | Slide |
 |---|------|--------|-------|
-| 1 | Why — Neo could always write Pulumi | 12:02–12:07 | |
+| 0 | What — Neo, day two, and "go try it" | 12:02–12:05 | 3 slides, ~3 min. Don't overrun it |
+| 1 | Why — Neo could always write Pulumi | 12:05–12:07 | |
 | 2 | **Ask** — a ticket becomes a PR (Linear) | 12:07–12:14 | |
 | 3 | **Delegate** — the incident (PagerDuty + `aws`) | 12:14–12:34 | ⏱ trigger it during beat 2 |
 | 4 | **Scope** — what Neo can reach, and who decided | 12:34–12:44 | |

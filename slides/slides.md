@@ -124,7 +124,8 @@ first ten minutes trying to get an org set up instead of listening.
 <div class="zoom-content">
 
 <ul class="!mt-8 !text-[1.5rem] !leading-relaxed space-y-5">
-  <li><strong class="!text-[var(--p-primary)]">why</strong> — what Neo is, and what it couldn’t see</li>
+  <li><strong class="!text-[var(--p-primary)]">what</strong> — Neo, and what day two means</li>
+  <li><strong class="!text-[var(--p-primary)]">why</strong> — what it couldn’t see</li>
   <li><strong class="!text-[var(--p-primary)]">ask</strong> — you hand it a ticket, it hands back a PR</li>
   <li><strong class="!text-[var(--p-primary)]">delegate</strong> — a page fires, and the picture is assembled</li>
   <li><strong class="!text-[var(--p-primary)]">scope</strong> — what it can reach, and who decided</li>
@@ -148,18 +149,18 @@ their heads, then stopped initiating them at all.
 
 ---
 layout: section
-routeAlias: stage-why
+routeAlias: stage-what
 ---
 
-# why
+# what
 
-## what it knew, and what it couldn’t see
+## Neo, and the work it's for
 
 <StageMap size="lg" />
 
 ---
 
-# First — what Neo is
+# What Neo is
 
 <div class="zoom-content">
 
@@ -185,7 +186,7 @@ Not a console click. A diff, with a preview, that your reviewers still gate.
 </style>
 
 <!--
-⏱ NINETY SECONDS. This is a stage-setter, not a Neo talk — the room registered
+⏱ NINETY SECONDS. This opens `what`. It's a stage-setter, not a Neo talk — the room registered
 for integrations. Resist listing features.
 
 Say the shape, not the catalog: it can see your infrastructure, and the way it
@@ -203,6 +204,56 @@ Docs, if pressed: pulumi.com/docs/ai/neo/ — Claude models via Amazon Bedrock.
 
 ---
 
+# Day two
+
+<div class="zoom-content">
+
+<p class="!mt-6 !text-[1.7rem] !leading-relaxed">
+<strong>Day one</strong> is standing it up. The tutorial, the first <code>pulumi up</code>,
+the green check.
+</p>
+
+<p class="!mt-7 !text-[1.7rem] !leading-relaxed">
+<strong>Day two</strong> is every day after that. The alert at 2am. The provider that
+went out of date. The security group somebody added by hand and never told you about.
+The upgrade nobody has time for.
+</p>
+
+<p class="!mt-7 !text-[1.7rem] !leading-relaxed !text-[var(--p-primary)] !font-semibold">
+Day one is a demo. Day two is a job — and it's the whole rest of this hour.
+</p>
+
+</div>
+
+<style scoped>
+.zoom-content { zoom: 1.22; }
+</style>
+
+<!--
+⏱ SIXTY SECONDS, and it earns its place: it names the subject so nothing later
+has to be justified. Every demo today is day-two work.
+
+The term is borrowed and the room may already have it — "day-2 operations" is
+common in platform circles, and Engin's December workshop was literally titled
+"Day-2 Autonomous Infrastructure Management". Say it's a known idea rather than
+presenting it as yours.
+
+The list is deliberate: each item maps to something they're about to see.
+- alert at 2am        -> the PagerDuty demo (delegate)
+- provider out of date -> the scheduled automation (unattended)
+- security group added by hand -> the unmanaged resource in demo 2 (this is the
+  one that pays off hardest, and it's the reason the Context API slide lands)
+- upgrade nobody has time for -> the Linear ticket (ask)
+
+Don't announce the mapping. Just make sure the words match what shows up later,
+so it feels inevitable rather than coincidental.
+
+⛔ Don't oversell "2am". Adam has not been paged at 2am for this system; keep it
+as the generic shape of on-call, not a war story you'd have to back up.
+-->
+
+---
+
 # You can go and play with this
 
 <div class="zoom-content">
@@ -216,10 +267,15 @@ If you have an org, you already have it.
 Point it at a stack you already have and ask it something you actually want to know.
 </p>
 
-<p class="!mt-8 !text-[1.6rem] !leading-relaxed opacity-85">
+<p class="!mt-7 !text-[1.6rem] !leading-relaxed opacity-85">
 Genuinely — this part is fun. Everything I show today started as me poking at it.
 </p>
 
+</div>
+
+<div class="flex justify-center items-center gap-8 !mt-6">
+  <img src="/img/qr-signup.png" class="w-40" alt="app.pulumi.com/signup" />
+  <p class="!text-[1.5rem] !font-semibold !m-0">app.pulumi.com</p>
 </div>
 
 <style scoped>
@@ -243,6 +299,17 @@ claim that's true; leave money out of it.
 
 Mechanics are on the closing QR slide — don't give a URL from here.
 -->
+
+---
+layout: section
+routeAlias: stage-why
+---
+
+# why
+
+## what it couldn’t see
+
+<StageMap size="lg" />
 
 ---
 

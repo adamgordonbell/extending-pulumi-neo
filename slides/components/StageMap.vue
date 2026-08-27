@@ -18,7 +18,7 @@ const props = defineProps({
   page: { type: Number, default: 0 },
 })
 
-const ORDER = ['why', 'ask', 'delegate', 'scope', 'unattended']
+const ORDER = ['what', 'why', 'ask', 'delegate', 'scope', 'unattended']
 
 const nav = useNav()
 const { $page } = useSlideContext()
