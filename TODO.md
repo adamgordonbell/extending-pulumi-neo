@@ -5,6 +5,9 @@ Build-only work I can do alone isn't listed; it lives in git.
 
 ## Only you can do these
 
+- [x] ~~Ask Engin for PagerDuty access.~~ Dropped (Adam, Aug 27) — a PagerDuty
+      trial account covers the demo. No ask from him. He still presents the EMEA
+      repeat on Sep 30, so he needs the deck, but nothing is blocked on him.
 - [ ] **Start the PagerDuty trial — on or after Thu Aug 27.** Trial is 14 days.
       Aug 27 + 14 = Sep 10, so Sep 8 lands on day 12. Starting it any earlier
       expires it before or on the workshop. Sign up as the `pulumi-bot` user.
@@ -18,10 +21,13 @@ Build-only work I can do alone isn't listed; it lives in git.
       make slide 24's read-only claim false and the precedence test undecidable.
 - [x] ~~Confirm the org login slug.~~ It's `adamgordonbell-org` (confirmed via
       `pulumi whoami -v`). Slides and `pulumi env run` examples updated.
-- [ ] **Send the questions to Engin** — draft is at `docs/engin-ask.md`, not sent.
 - [ ] **Pick the repo remote** — `adamgordonbell/*` or under `dirien/*`.
       Blocks the repo QR code on the closing slide.
-- [ ] **Check the live event page + Luma copy** still say 90 minutes. It's 60.
+- [x] ~~Check the live event page duration.~~ pulumi.com said **90 min** on the
+      Americas tab (EMEA already said 60). Fixed in
+      [pulumi/docs#21175](https://github.com/pulumi/docs/pull/21175) — merge it and
+      the page is right. There is no Luma; registration is a gated HubSpot form on
+      pulumi.com, delivery is BigMarker `f4d6709a7b01`.
 
 ## AWS account — settled
 
