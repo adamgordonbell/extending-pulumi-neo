@@ -18,7 +18,11 @@ const props = defineProps({
   page: { type: Number, default: 0 },
 })
 
-const ORDER = ['what', 'knows', 'reaches', 'runs']
+const ORDER = ['map', 'knows', 'reaches', 'runs', 'sowhat']
+
+// Display names. Aliases must stay URL-safe, so multi-word stages get a label here.
+const LABEL = { sowhat: 'so what' }
+const nameOf = (stage) => LABEL[stage] ?? stage
 
 const nav = useNav()
 const { $page } = useSlideContext()
@@ -59,7 +63,7 @@ const stateOf = (stage) => {
         :class="stateOf(s.stage)"
         :aria-current="stateOf(s.stage) === 'now' ? 'true' : undefined"
         @click="nav.go(s.start)"
-      >{{ s.stage }}</button>
+      >{{ nameOf(s.stage) }}</button>
     </template>
   </nav>
 </template>

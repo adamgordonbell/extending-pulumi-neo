@@ -124,10 +124,11 @@ first ten minutes trying to get an org set up instead of listening.
 <div class="zoom-content">
 
 <ul class="!mt-8 !text-[1.5rem] !leading-relaxed space-y-5">
-  <li><strong class="!text-[var(--p-primary)]">what</strong> — Neo, and what day two means</li>
+  <li><strong class="!text-[var(--p-primary)]">map</strong> — the three questions this hour answers</li>
   <li><strong class="!text-[var(--p-primary)]">knows</strong> — your state, and the 90% that isn’t in it</li>
   <li><strong class="!text-[var(--p-primary)]">reaches</strong> — out to your tools, in from where you work</li>
   <li><strong class="!text-[var(--p-primary)]">runs</strong> — console, terminal, editor… and nobody at all</li>
+  <li><strong class="!text-[var(--p-primary)]">so what</strong> — the shape of the whole thing</li>
 </ul>
 
 </div>
@@ -148,17 +149,6 @@ where nobody is there at all.
 The escalation still exists inside `reaches` — ask, then delegate — as sub-beats.
 The room feels it without you naming it here.
 -->
-
----
-layout: section
-routeAlias: stage-what
----
-
-# what
-
-## Neo, and the work it's for
-
-<StageMap size="lg" />
 
 ---
 
@@ -302,6 +292,8 @@ claim that's true; leave money out of it.
 Mechanics are on the closing QR slide — don't give a URL from here.
 -->
 
+---
+routeAlias: stage-map
 ---
 
 # Three questions, and that's the hour
@@ -1426,18 +1418,6 @@ setup", not "uses the integration".
 -->
 
 ---
-layout: quote
----
-
-> Platform engineers used to keep these things in their heads. Then they delegated them to Neo. Then those tasks started running on a schedule, without anyone initiating them.
-
-<!--
-This is the thesis of the whole hour, and it's worth reading slowly.
-
-Everything so far has been you asking. The last move is not asking.
--->
-
----
 
 # Demo <DemoBadge kind="recorded" />
 
@@ -1519,6 +1499,38 @@ unsupervised." The judgment stays in a file your team wrote.
 
 The PR body names the resource, the change, when it happened, and the runbook
 section. That citation is the trust mechanism.
+-->
+
+---
+layout: section
+routeAlias: stage-sowhat
+---
+
+# so what
+
+## the shape of the whole thing
+
+<StageMap size="lg" />
+
+---
+layout: quote
+---
+
+> Platform engineers used to keep these things in their heads. Then they delegated them to Neo. Then those tasks started running on a schedule, without anyone initiating them.
+
+<!--
+⭐ THE THESIS. Read it slowly; it is the one thing to land.
+
+It moved here deliberately. It used to sit before the schedule demo, where it
+PREDICTED what you were about to show. Now it lands after — so it describes what
+the room just watched, which is a much stronger position for a claim.
+
+The three-step shape maps onto the hour they just had:
+  kept in their heads  -> day two, the work that never reaches the top
+  delegated to Neo     -> the Linear ticket and the incident
+  running on a schedule -> the PR that was waiting this morning
+
+⛔ Don't add to it. Say it, pause, then go to the PRs.
 -->
 
 ---
