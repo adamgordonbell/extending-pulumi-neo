@@ -124,7 +124,7 @@ first ten minutes trying to get an org set up instead of listening.
 <div class="zoom-content">
 
 <ul class="!mt-8 !text-[1.5rem] !leading-relaxed space-y-5">
-  <li><strong class="!text-[var(--p-primary)]">why</strong> — Neo already knew what Pulumi knew</li>
+  <li><strong class="!text-[var(--p-primary)]">why</strong> — what Neo is, and what it couldn’t see</li>
   <li><strong class="!text-[var(--p-primary)]">ask</strong> — you hand it a ticket, it hands back a PR</li>
   <li><strong class="!text-[var(--p-primary)]">delegate</strong> — a page fires, and the picture is assembled</li>
   <li><strong class="!text-[var(--p-primary)]">scope</strong> — what it can reach, and who decided</li>
@@ -156,6 +156,93 @@ routeAlias: stage-why
 ## what it knew, and what it couldn’t see
 
 <StageMap size="lg" />
+
+---
+
+# First — what Neo is
+
+<div class="zoom-content">
+
+<p class="!mt-6 !text-[1.7rem] !leading-relaxed">
+Pulumi's own <strong>infrastructure agent</strong>. It reads your organization's
+live state in Pulumi Cloud — your programs, your stacks, what's actually running.
+</p>
+
+<p class="!mt-7 !text-[1.7rem] !leading-relaxed">
+Ask it something, and depending on what you asked it will
+<strong>answer</strong>, <strong>investigate</strong>, <strong>review a change</strong>,
+or <strong>open a pull request</strong> against your IaC.
+</p>
+
+<p class="!mt-7 !text-[1.7rem] !leading-relaxed opacity-85">
+Not a console click. A diff, with a preview, that your reviewers still gate.
+</p>
+
+</div>
+
+<style scoped>
+.zoom-content { zoom: 1.25; }
+</style>
+
+<!--
+⏱ NINETY SECONDS. This is a stage-setter, not a Neo talk — the room registered
+for integrations. Resist listing features.
+
+Say the shape, not the catalog: it can see your infrastructure, and the way it
+hands work back is a pull request. Those two facts are all the rest of the hour
+needs.
+
+If you want one concrete line: "which of my resources are on an outdated
+provider" is a question it answers by searching real state, not by guessing.
+
+⛔ Don't enumerate PR review, previews, automations, skills. Automations show up
+later in `unattended` and earn their place there.
+
+Docs, if pressed: pulumi.com/docs/ai/neo/ — Claude models via Amazon Bedrock.
+-->
+
+---
+
+# You can go and play with this
+
+<div class="zoom-content">
+
+<p class="!mt-6 !text-[1.7rem] !leading-relaxed">
+Neo is <strong>on by default</strong> in Pulumi Cloud. Settings &rarr; Neo Settings.
+If you have an org, you already have it.
+</p>
+
+<p class="!mt-7 !text-[1.7rem] !leading-relaxed">
+Point it at a stack you already have and ask it something you actually want to know.
+</p>
+
+<p class="!mt-8 !text-[1.6rem] !leading-relaxed opacity-85">
+Genuinely — this part is fun. Everything I show today started as me poking at it.
+</p>
+
+</div>
+
+<style scoped>
+.zoom-content { zoom: 1.25; }
+</style>
+
+<!--
+⏱ THIRTY SECONDS. Warmth, not a pitch.
+
+⚠️ Housekeeping just told them there's nothing to follow along with, and that
+was deliberate — you don't want the room setting up orgs instead of listening.
+So the invitation is for AFTERWARDS. Say "later today", not "right now".
+
+The honest hook is the last line. This is the one moment to be personal about
+it: you built the whole session by poking at it, and the interesting findings
+were ones you didn't plan.
+
+⛔ Do not say Neo is free. Neo tokens meter at $3/M (pulumi.com/pricing) and the
+14-day trial is Business Critical. "On by default if you have an org" is the
+claim that's true; leave money out of it.
+
+Mechanics are on the closing QR slide — don't give a URL from here.
+-->
 
 ---
 

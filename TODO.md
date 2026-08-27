@@ -69,6 +69,11 @@ is for, and how the precedence test is designed — lives in
       Demo 2 now surfaces an unmanaged resource, which makes the scope argument
       live rather than recorded. The `iam-narrow` video may now be redundant.
       Judge it in the run-through.
+- [ ] **A 5th QR: sign up / try Neo.** Slides 7–8 now tell the room to go play with
+      it, and the closing slide has no way to act on that. Add one to
+      `scripts/make-qr.py` alongside repo / blog / docs / EMEA.
+- [ ] **Time the opening.** The stage-setter is budgeted at 90s + 30s. `why` was
+      already the shortest beat; check it hasn't eaten into `ask`.
 - [ ] Full run-through against the clock. 60 minutes, two live demos.
 
 ## ⛔ Before this repo goes public
