@@ -17,25 +17,48 @@ Conventions used below:
 | # | Slide | Demo | Kind | Budget |
 |---|------:|------|------|--------|
 | **1** | **12** | **Context API — how much does Pulumi actually manage?** | 🔴 live | **~90s** |
-| 2 | 16 | Connecting an MCP integration | 🎬 24s | 1 min |
-| 3 | 20 | Linear ticket → PR | 🔴 live | 5 min, hard stop 7 |
-| 4 | 25 | PagerDuty page → merged fix | 🔴 live | 15 min — never cut |
-| 5 | 33 | IAM narrowed to least privilege | 🎬 60s | 2 min |
-| 6 | 38 | Scheduling an automation | 🎬 18s | 1 min |
-| 7 | 39 | The PR that appeared overnight | 🎬 17s | 1 min |
+| | | **— the `ask` movement, slides 19–22, one continuous block ~9 min —** | | |
+| 2a | 19 | Connecting one — the clip | 🎬 24s | 1 min |
+| 2b | 20 | The integrations page in my org, per-task toggles | 🔴 live | 2 min |
+| 2c | 21 | `pulumi neo` — Linear ticket → PR | 🔴 live | 5 min, hard stop 7 |
+| 2d | 22 | The receipt — task record → PR | 🔴 live | 90s |
+| 3 | 27 | PagerDuty page → merged fix | 🔴 live | 15 min — never cut |
+| 4 | 35 | IAM narrowed to least privilege | 🎬 60s | 2 min |
+| 5 | 40 | Scheduling an automation | 🎬 18s | 1 min |
+| 6 | 41 | The PR that appeared overnight | 🎬 17s | 1 min |
 
-> Demos 2–7 are not written up yet. Demo 1 is below; the rest get the same
-> treatment as each one is rehearsed.
+**Why 2a–2d are one thing.** Connecting and using used to sit four slides apart
+in different sections — two half-demos. They're now one movement: *what a
+connection is* → *how you make one* (clip, can't fail) → *here's mine, really
+connected* (live) → *watch it work* (live) → *here's the receipt* (live, and
+can't fail either). The slow, fallible part is in the middle, bracketed on both
+sides by things that cannot go wrong.
+
+> Demos 2–6 are not written up in full yet. Demo 1 is below; the rest get the
+> same treatment as each one is rehearsed.
 
 ---
 
-## Terminal hygiene (once, before you walk on)
+## Hygiene (once, before you walk on)
 
-This demo puts your shell on the projector.
+**Terminal** — this puts your shell on the projector.
 
 - Fresh window, scrollback cleared, font size up.
 - No unrelated env vars, no other orgs, no half-finished commands in history.
 - `cd` to the demo directory **now**, so no `cd` happens on stage.
+
+**Browser — ⛔ this one will bite you.** `adamgordonbell-org` is the
+**corecursive** account (`adam@corecursive.com`), which is Chrome's *Default*
+profile. Chrome also has `v-adam@pulumi.com` (Profile 1) and `agbell@gmail.com`
+(Profile 6), and macOS opens a link in the **most recently used** Chrome window.
+Every `DemoCta` button in the deck is such a link.
+
+- Open the corecursive profile.
+- **Close every other Chrome window** — not just switch away from them.
+- Load `app.pulumi.com/adamgordonbell-org` once and confirm the org name on screen.
+
+Get this wrong and slide 20 opens the integrations page of the wrong account,
+live.
 
 ---
 
