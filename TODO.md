@@ -77,6 +77,22 @@ is for, and how the precedence test is designed — lives in
       already the shortest beat; check it hasn't eaten into `ask`.
 - [ ] Full run-through against the clock. 60 minutes, two live demos.
 
+## The `ask` movement — what it still needs
+
+Restructured Aug 27 (slides 19–22). Three loose ends:
+
+- [ ] **Tape your own Linear run.** `neo-linear.mp4` isn't your footage and is
+      no longer wired in as the fallback. You'll run this repeatedly in
+      rehearsal, so the clip is free — capture one good complete run and make it
+      the safety net for slide 21.
+- [ ] **Consider re-taping the connect clip with Linear.** Slide 19 currently
+      shows Honeycomb being connected and slide 21 uses Linear. Nobody may
+      notice, but same-integration would make the movement seamless — and you'll
+      be in that UI anyway.
+- [ ] **Slide 22's PR link is a placeholder** (`neo-examples#5`). Swap it for
+      whatever the rehearsal run actually opens, so the receipt is a receipt for
+      the thing they just watched.
+
 ## Polish pass — de-risk the demos, then make the slides visual
 
 Adam, Aug 27: not today, but this is the shape of the remaining work. Two passes,
