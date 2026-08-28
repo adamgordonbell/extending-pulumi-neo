@@ -45,13 +45,15 @@ for — Honeycomb is the cheaper substitute but shows traces, not metrics.
 
 ## 🎬 The assets already exist
 
-Six videos and four screenshots, shot by Adam in May, live in
-`~/sandbox/docs/content/blog/10-more-things-you-can-do-with-neo/`:
+Six videos and four screenshots from the May blog post live in
+`~/sandbox/docs/content/blog/10-more-things-you-can-do-with-neo/`. They were
+made for an inline blog figure, which is why none of them are 16:9 — re-framing
+is tracked in TODO.md.
 
 | File | Shows | Use |
 |------|-------|-----|
-| `neo-linear.mp4` | **Neo in the Pulumi CLI**, Linear issue → PR | Opener — and it's already the right surface |
-| `honey-comb.mp4` | Toggling an integration on | The "it's just a toggle" beat |
+| `neo-linear.mp4` | **Neo in the Pulumi CLI**, Linear issue → PR | ⛔ **Not Adam's footage** (Aug 27) — different org, different screen. Re-tape during rehearsal; don't use as the live fallback |
+| `honey-comb.mp4` | Toggling an integration on | Slide 19, "Connecting one" — opens the `ask` movement. Consider re-taping with **Linear** so the clip and the live demo are the same integration |
 | `iam-narrow.mp4` | IAM audit → scoped policy, with evidence | Scope beat |
 | `neo-schedule-setup.mp4` | Scheduled Tasks UI | Closer |
 | `neo-cis-pr.mp4` | Morning CIS Benchmark PR | Closer |
@@ -93,13 +95,13 @@ That's the whole deck. Five anchors in the corner strip — `map · knows · rea
 | *(open)* | 1–7 | ~5 | Neo is an infrastructure agent; **day two** is the job it's for; go play with it |
 | **map** | 8 | ~1 | Three questions, and that's the hour — the only agenda slide |
 | **knows** | 9–12 | ~5 | Pulumi's records were never the whole account — and here's the number |
-| **reaches** | 13–34 | ~30 | Two directions, and both live demos |
-| ├ *(directions)* | 13–17 | ~4 | Out: MCP + cloud CLI. In: GitHub + Slack. Every demo ends in a PR |
-| ├ **ask** | 18–21 | ~7 | 🔴 A ticket becomes a PR. An integration is a toggle |
-| ├ **delegate** | 22–26 | ~13 | 🔴 A real page becomes a merged fix |
-| └ **scope** | 27–34 | ~6 | It never needed write access, and you can switch it off per task |
-| **runs** | 35–40 | ~8 | Same agent, four doorways — ending at one with nobody in it |
-| **so what** | 41–46 | ~6 | The thesis, the PRs it left behind, where it goes next |
+| **reaches** | 13–36 | ~30 | Two directions, and both live demos |
+| ├ *(directions)* | 13–16 | ~3 | Out: MCP + cloud CLI. In: GitHub + Slack. Every demo ends in a PR |
+| ├ **ask** | 17–23 | ~9 | 🎬 Connect one · 🔴 the org's integrations · 🔴 a ticket becomes a PR · 🔴 the receipt |
+| ├ **delegate** | 24–28 | ~13 | 🔴 A real page becomes a merged fix |
+| └ **scope** | 29–36 | ~6 | It never needed write access, and you can switch it off per task |
+| **runs** | 37–42 | ~8 | Same agent, four doorways — ending at one with nobody in it |
+| **so what** | 43–48 | ~6 | The thesis, the PRs it left behind, where it goes next |
 | *(Q&A)* | — | ~5 | |
 
 **What each anchor owes the room:**

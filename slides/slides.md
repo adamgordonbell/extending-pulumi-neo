@@ -695,32 +695,6 @@ Don't spend the December comparison here; you come back to it properly in
 -->
 
 ---
-
-# Demo <DemoBadge kind="recorded" />
-
-<p class="demo-sub">Turning one on — Honeycomb, 24 seconds</p>
-
-<div class="demo-stage">
-  <video src="/video/honey-comb.mp4" autoplay loop muted />
-</div>
-
-<div class="demo-foot">
-  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/integrations" label="Open the integrations page" />
-</div>
-
-<!--
-🎬 honey-comb.mp4 — 24 seconds, silent, loops.
-
-The button goes to the real settings page. Click it if the room looks
-skeptical that it's this small; otherwise let the video carry it.
-
-TALK OVER IT. It loops, so there's no rush and no dead air.
-
-"That's Honeycomb. Same flow for PagerDuty, Linear, Datadog. Authorize, and Neo
-can read from it inside a task."
--->
-
----
 layout: statement
 ---
 
@@ -831,6 +805,66 @@ PIVOT — this is the line that earns the next slide:
 layout: statement
 ---
 
+# Connecting one <DemoBadge kind="recorded" />
+
+<p class="demo-sub">Authorize once, at the org level — 24 seconds</p>
+
+<div class="demo-stage">
+  <video src="/video/honey-comb.mp4" autoplay loop muted />
+</div>
+
+<!--
+🎬 honey-comb.mp4 — 24 seconds, silent, loops. TALK OVER IT; there's no rush
+and no dead air.
+
+"Authorize, and Neo can read from it inside a task. Same flow for PagerDuty,
+Linear, Datadog."
+
+⚠️ THE VIDEO OWNS THE CONNECT FLOW — deliberately. Doing this live would mean
+an OAuth popup on stage: third-party redirect, possible re-auth, possible MFA,
+and the wrong-Chrome-profile trap all firing at once. The clip cannot fail. The
+live part starts on the NEXT slide, with everything already connected.
+
+⛔ Don't click through to the settings page from here — that's the next slide's
+job, and doing it twice kills the reveal.
+-->
+
+---
+
+# Here's mine <DemoBadge kind="live" />
+
+<p class="!mt-8 !text-[2.6rem] !text-[var(--p-primary)] !font-semibold">The integrations page, in my org</p>
+
+<p class="!mt-8 !text-[1.7rem] text-[var(--p-fg-muted)]">connected once, chosen per task</p>
+
+<div class="demo-foot !mt-10">
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/integrations" label="Open the integrations page" />
+</div>
+
+<!--
+🔴 LIVE, but only navigation — nothing is authorized on stage, nothing runs.
+Target 2 minutes. This is the Neo UI tour, and it's the payoff for the clip.
+
+⛔ BEFORE YOU WALK ON: close every Chrome window that isn't the corecursive
+profile. adamgordonbell-org is the corecursive account (adam@corecursive.com,
+Chrome's *Default* profile), and macOS opens links in the most recently used
+window. Land in the pulumi.com profile on stage and you're in the wrong org in
+front of everyone. See DEMO.md pre-flight.
+
+The walk:
+1. The integrations page — these are real, and they were authorized once, by an
+   admin, not per task.
+2. Open a task composer and show the per-task toggles. "Connected at the org
+   level; chosen per task." This is the slide-15 claim, in the product.
+3. Leave Linear ON. That's the next demo, and the transition should be
+   seamless — you're already looking at the thing that's about to be used.
+
+Fallback: a screenshot of this page (per-task-toggles.png is close). If the app
+is slow, describe it and move — the demo after this is the one that matters.
+-->
+
+---
+
 # Demo <DemoBadge kind="live" />
 
 <p class="!mt-8 !text-[2.6rem] !text-[var(--p-primary)] !font-semibold">A Linear ticket, start to pull request</p>
@@ -856,6 +890,33 @@ FALLBACK: play /video/neo-linear.mp4 (76s) — it's the same thing, in the same
 CLI. Switch without apologizing for it.
 
 DO NOT debug live past one retry. Go to the video and keep the clock.
+-->
+
+---
+
+# The receipt <DemoBadge kind="live" />
+
+<p class="!mt-8 !text-[2.6rem] !text-[var(--p-primary)] !font-semibold">The task record, and what it opened</p>
+
+<p class="!mt-8 !text-[1.7rem] text-[var(--p-fg-muted)]">Neo proposed. I merge.</p>
+
+<div class="demo-foot !mt-10">
+  <DemoCta href="https://github.com/adamgordonbell/neo-examples/pull/5" label="The PR it opened" />
+</div>
+
+<!--
+🔴 LIVE, and it cannot fail — this is a record of something that already
+happened. Target 90 seconds.
+
+Deliberately the LAST thing in this block: the live run before it is allowed to
+be slow because the movement doesn't end on a completion, it ends on an
+artifact. Open the task in the Neo UI, scroll what it did, click into the PR.
+
+"Every one of these leaves a record. The task, what it read, what it changed,
+and a pull request with a human's name on the merge button."
+
+⚠️ The linked PR is a placeholder until the rehearsal run produces a real one —
+swap it for whatever the taped session opens. Tracked in TODO.md.
 -->
 
 ---
