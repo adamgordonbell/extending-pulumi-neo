@@ -61,8 +61,8 @@ is tracked in TODO.md.
 | `neo-integration-catalog.png` | The six integrations, Authorize buttons | Anchor slide |
 | `neo-drift-pr.png` · `neo-migration-prs.png` | PR bodies citing the runbook | Scope beat |
 
-⭐ **This closes the fallback gap that was live risk on the Aug 12 workshop** — `PRESENTER.md`
-wanted a recording per beat, none existed, and R2 ran without them. Here every beat has one
+⭐ **This closes the fallback gap that was live risk on the Aug 12 workshop** — the failure
+plan (now in `INTERNAL.md`) wants a recording per beat; on R2 none existed and it ran without them. Here every beat has one
 already, in Adam's own voice, on assets he owns.
 
 **Backing repos, both local:** `~/sandbox/iam-narrow-demo` (item 5) ·
@@ -118,7 +118,7 @@ That's the whole deck. Five anchors in the corner strip — `map · knows · rea
 | runs | It's one agent; only the doorway changes |
 | so what | The end state isn't asking faster — it's not asking |
 
-**Cut order lives in [`PRESENTER.md`](PRESENTER.md)** — that file owns the clock and the
+**Cut order lives in `INTERNAL.md`** (gitignored — stage-only) — it owns the clock and the
 failure plan, and its cuts are named by beat, so they survive slide renumbering.
 
 ---

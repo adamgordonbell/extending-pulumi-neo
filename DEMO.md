@@ -1,87 +1,73 @@
-# DEMO.md — the keystrokes
+# Extending Pulumi Neo — walkthrough
 
-Every demo in the deck, in presentation order, at the level of "what do I type
-and what should appear." Written to be readable on a second screen while
-presenting.
+Give Neo access to the systems your incidents actually live in: SaaS tools over
+MCP integrations, cloud accounts over CLI integrations backed by Pulumi ESC.
+This is the tutorial the live session follows — every command below gets typed
+on stage, and you can run the same flow against your own org.
 
-**This file owns the steps.** [`PRESENTER.md`](PRESENTER.md) owns the clock and
-the cut list; [`OUTLINE.md`](OUTLINE.md) owns the argument. If two of them answer
-the same question, one of them is wrong.
+**Estimated time**: 60 minutes (plus one-time setup)
 
-Conventions used below:
+Commands are written for the demo org, `adamgordonbell-org` — swap in your own
+org name throughout.
 
-- 🔴 **live** — run in the room · 🎬 **recorded** — a clip plays, nothing to type
-- **Fallback:** what to do when it fails. Decided in advance, never improvised.
-- What to say — and not say — lives in [`PRESENTER.md`](PRESENTER.md), not here.
+## Prerequisites
 
-| # | Slide | Demo | Kind | Budget |
-|---|------:|------|------|--------|
-| **1** | **12** | **Context API — how much does Pulumi actually manage?** | 🔴 live | **~90s** |
-| | | **— the `ask` movement, slides 19–22, one continuous block ~9 min —** | | |
-| 2a | 19 | Connecting one — the clip | 🎬 24s | 1 min |
-| 2b | 20 | The integrations page in my org, per-task toggles | 🔴 live | 2 min |
-| 2c | 21 | `pulumi neo` — Linear ticket → PR | 🔴 live | 5 min, hard stop 7 |
-| 2d | 22 | The receipt — task record → PR | 🔴 live | 90s |
-| 3 | 27 | PagerDuty page → merged fix | 🔴 live | 15 min — never cut |
-| 4 | 35 | IAM narrowed to least privilege | 🎬 60s | 2 min |
-| 5 | 40 | Scheduling an automation | 🎬 18s | 1 min |
-| 6 | 41 | The PR that appeared overnight | 🎬 17s | 1 min |
-
-**Why 2a–2d are one thing.** Connecting and using used to sit four slides apart
-in different sections — two half-demos. They're now one movement: *what a
-connection is* → *how you make one* (clip, can't fail) → *here's mine, really
-connected* (live) → *watch it work* (live) → *here's the receipt* (live, and
-can't fail either). The slow, fallible part is in the middle, bracketed on both
-sides by things that cannot go wrong.
-
-> Demos 2, 4–6 are not written up in full yet. Demos 1 and 3 are below; the rest
-> get the same treatment as each one is rehearsed.
-
----
-
-## Hygiene (once, before you walk on)
-
-**Terminal** — this puts your shell on the projector.
-
-- Fresh window, scrollback cleared, font size up.
-- No unrelated env vars, no other orgs, no half-finished commands in history.
-- `cd` to the demo directory **now**, so no `cd` happens on stage.
-
-**Browser — ⛔ this one will bite you.** `adamgordonbell-org` is the
-**corecursive** account (`adam@corecursive.com`), which is Chrome's *Default*
-profile. Chrome also has `v-adam@pulumi.com` (Profile 1) and `agbell@gmail.com`
-(Profile 6), and macOS opens a link in the **most recently used** Chrome window.
-Every `DemoCta` button in the deck is such a link.
-
-- Open the corecursive profile.
-- **Close every other Chrome window** — not just switch away from them.
-- Load `app.pulumi.com/adamgordonbell-org` once and confirm the org name on screen.
-
-Get this wrong and slide 20 opens the integrations page of the wrong account,
-live.
-
----
-
-## Demo 1 [slide 12] — 🔴 live — "90% of that account is not Pulumi"
-
-**~90 seconds.** One read-only HTTP query, ~2s, no model, no cloud creds.
-
-### Pre-flight
-
-```bash
-pulumi version                 # need v3.243.0+ for `pulumi api` — currently v3.259.0
-pulumi whoami -v               # expect adamgordonbell-org in Organizations
-cd ~/sandbox/extending-pulumi-neo/demo/context-api
+```
+- Pulumi CLI v3.254.0+          (`pulumi api` needs 3.243+, `pulumi neo acp` needs 3.254+)
+- A Pulumi organization with Neo (the Context API in part 1 needs Enterprise / Business Critical)
+- An AWS account you can deploy into, plus a CLI profile that reaches it
+- GitHub: the Pulumi GitHub App installed, with access to your fork of the demo repo
+- PagerDuty: a free 14-day trial — sign up as a dedicated bot user; mint an API token
+- Linear: a free workspace with one open ticket (e.g. "Add versioning to the staging bucket")
+  and a personal API key
 ```
 
-⚠️ **Re-run the query the morning of** — the counts move, and the slide has
-them printed on it.
+Connect the integrations in the Pulumi console — **Settings → Neo → Integrations**:
 
-### The steps
+```
+MCP tools:   PagerDuty (your bot user's token), Linear (your API key)
+CLI tools:   aws → an ESC environment scoped READ-ONLY
+             (why read-only, and how to build one: docs/credentials.md and demo/esc-readonly-role/)
+```
 
-**1 — show the query:**
+## Setup
+
+Fork and clone the incident program — a fork, because Neo opens its fix PR
+against this repo:
 
 ```bash
+git clone https://github.com/adamgordonbell/neo-workshop-incident   # fork first, clone your fork
+cd neo-workshop-incident
+npm install
+pulumi stack init adamgordonbell-org/dev
+pulumi config set aws:region ca-central-1
+pulumi config set --secret pagerduty:token   # paste your PagerDuty API token
+pulumi config set pagerdutyEmail you@example.com   # where the page lands — a real inbox, not your PagerDuty signup address
+```
+
+Deploy it — the payment pipeline Neo will diagnose, plus the entire PagerDuty
+side (team, rotation, escalation policy, service, CloudWatch integration):
+
+```bash
+pulumi up          # ~5 min; the RDS instance is the slow part
+```
+
+The program carries three deliberate faults — see the `FAULT` comments in
+[`index.ts`](https://github.com/adamgordonbell/neo-workshop-incident/blob/main/index.ts).
+
+Then, from this workshop repo, verify everything is wired:
+
+```bash
+cd extending-pulumi-neo/demo
+./prewarm.sh       # 9 checks, all must be ok; it prints the UI-only ones to eyeball
+```
+
+## Part 1 — What does Neo know? The Context API
+
+One read-only query against the resource graph. From this repo:
+
+```bash
+cd demo/context-api
 cat coverage-by-tool.json
 ```
 
@@ -95,13 +81,9 @@ cat coverage-by-tool.json
 }
 ```
 
-**2 — run it** (same line the slide shows, character for character):
-
 ```bash
 pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.json
 ```
-
-~2s, 32 lines, one screen; `nodes` empty because aggregate mode suppresses it:
 
 ```json
 "aggregations": { "buckets": [
@@ -109,56 +91,41 @@ pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.jso
   { "key": { "managed": "Pulumi" }, "metrics": { "n":  144 } } ] }
 ```
 
-**3 — advance to the slide** (1305 / 144 at full height).
-
-### Fallback
-
-The numbers are already on the slide — keep talking, advance. Never debug a
-read-only query on stage.
-
-### Reset
-
-None; read-only, re-run freely.
-
-### Also in this directory
-
-One keystroke away if a question earns it:
+About 90% of the account isn't managed by Pulumi — everything after this is
+about reaching that other 90%. Two more queries, same shape:
 
 ```bash
 pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-by-type.json          # what kind of thing is unmanaged
-pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-groups.json  # 3 of them, all in ca-central-1
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-groups.json  # found 3, all in ca-central-1
 ```
 
-Full write-up + curl form for old CLIs:
-[`demo/context-api/README.md`](demo/context-api/README.md).
+Full write-up + a curl form for older CLIs: [`demo/context-api/README.md`](demo/context-api/README.md).
 
----
+## Part 2 — Ask: a Linear ticket becomes a PR
 
-## Demo 3 [slide 27] — 🔴 live — PagerDuty page → merged fix
-
-**15 min, never cut.** Times measured 2026-09-02. The program at
-`demo/pulumi-ts/` is its own repo,
-[`adamgordonbell/neo-workshop-incident`](https://github.com/adamgordonbell/neo-workshop-incident)
-— that remote is where Neo's PR lands.
-
-### Pre-flight (morning of)
+With the Linear MCP connected and a ticket waiting, hand Neo the ticket. From
+your `neo-workshop-incident` clone:
 
 ```bash
-export AWS_PROFILE=work-demo         # every script below needs it
-aws sso login --profile work-demo    # expires daily
-cd ~/sandbox/extending-pulumi-neo/demo
-./prewarm.sh                         # 9 checks, all must be ok; it prints the 4 UI-only ones
+cd neo-workshop-incident     # Pulumi.yaml + the git remote live here — Neo needs both
+pulumi neo
 ```
 
-Plus: GitHub App repo access includes `neo-workshop-incident`.
+> Pick up the open Linear ticket about the staging bucket, make the change in
+> this program, and open a PR. Comment back on the ticket with the PR link.
 
-### The steps
+Watch the task read the ticket over MCP, write the change, and open the PR —
+Neo reads your tools, not your paste buffer.
 
-**1 — top of beat 2, second pane:**
+## Part 3 — Delegate: a PagerDuty incident, end to end
+
+Cause a real page. The script sends a poison payment message, then plays the
+failing consumer (there is no worker in the stack — without its
+receive-without-delete loop, nothing ever dead-letters):
 
 ```bash
-cd ~/sandbox/extending-pulumi-neo/demo
-./trigger-incident.sh              # page lands 2m53s later — fire BEFORE the Linear demo
+cd extending-pulumi-neo/demo
+./trigger-incident.sh        # incident opens ~3 min later — SQS ships CloudWatch metrics at ~1-min granularity
 ```
 
 ```
@@ -166,13 +133,11 @@ Poison payment sent to the payment queue.
 Message dead-lettered after 2 receive attempt(s).      # ~13s in
 ```
 
-**2 — beat 3 opens on the incident:** `pulumi-bot-test.pagerduty.com` →
-service *Payments*; page email in v-adam@'s inbox.
-
-**3 — main pane:**
+When the page arrives (check your PagerDuty service and your inbox), hand the
+incident to Neo:
 
 ```bash
-cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts       # NOT demo/ — Pulumi.yaml + git remote live here
+cd neo-workshop-incident
 pulumi neo
 ```
 
@@ -180,20 +145,44 @@ pulumi neo
 > payment messages are dead-lettering, and fix the cause in this program.
 > Open a PR.
 
-⚠️ Prompt not locked — anchor it to the incident. Open-ended "figure out
-what's wrong" sent Neo chasing a nonexistent security group (2026-09-02).
-Expected reads: `pagerduty__browse_incidents`, then `aws` → **FAULT 1**
-(`maxReceiveCount: 1`) → redrive-policy PR on `neo-workshop-incident`.
+Neo reads the incident over the PagerDuty MCP, reads live queue state through
+the `aws` CLI integration, and lands on FAULT 1 — `maxReceiveCount: 1`, no
+retry, every transient failure dead-letters. The fix arrives as a PR on your
+fork; the incident resolves back in PagerDuty.
 
-**4 — receipts:** the PR, and the incident auto-resolving in PagerDuty.
-
-### Fallback
-
-A second incident triggered in the morning and left open. Everything down →
-the beat's clip, like every beat.
-
-### Reset
+Reset between runs:
 
 ```bash
-cd ~/sandbox/extending-pulumi-neo/demo && ./cleanup.sh   # purge → alarm OK → auto-resolve; re-arm with trigger
+cd extending-pulumi-neo/demo
+./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves; re-arm with ./trigger-incident.sh
 ```
+
+## Part 4 — Scope: whose credentials is Neo holding?
+
+The `aws` integration hands Neo whatever the ESC environment resolves — which
+is why it should resolve a read-only role. Prove what it can and can't do:
+
+```bash
+pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sts get-caller-identity   # the read-only role
+pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sqs purge-queue --queue-url <url>   # AccessDenied — the point
+```
+
+Building that environment: [`demo/esc-readonly-role/`](demo/esc-readonly-role/)
+and [`docs/credentials.md`](docs/credentials.md).
+
+## Part 5 — Stop initiating: scheduled tasks
+
+In the console: **Neo → Scheduled Tasks → New**. Give it a task ("run the CIS
+benchmark against this stack, open a PR for anything it finds") and a schedule.
+Tomorrow morning the PR is just *there* — you set it once and stop initiating.
+
+## Teardown
+
+```bash
+cd neo-workshop-incident
+pulumi destroy       # removes the AWS chain and the PagerDuty config
+pulumi stack rm dev
+```
+
+Your PagerDuty trial expires on its own; delete the Linear workspace if you
+made one just for this.

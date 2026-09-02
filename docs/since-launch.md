@@ -134,7 +134,7 @@ on the docs site. The only "Custom Agent" strings in the Neo docs are Zed's and 
 own UI labels on the editors page for adding an ACP agent — unrelated to the Pulumi
 feature.
 
-⛔ **`PRESENTER.md`'s guard stands for Sep 8: do not name it.**
+⛔ **The guard in `INTERNAL.md`'s presenter notes stands for Sep 8: do not name it.**
 
 There is internal signal that it is closer than that silence suggests. That signal is
 **pre-release and not repeatable here** — this repo ships to attendees. It is written up
