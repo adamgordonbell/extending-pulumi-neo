@@ -34,8 +34,8 @@ connected* (live) → *watch it work* (live) → *here's the receipt* (live, and
 can't fail either). The slow, fallible part is in the middle, bracketed on both
 sides by things that cannot go wrong.
 
-> Demos 2–6 are not written up in full yet. Demo 1 is below; the rest get the
-> same treatment as each one is rehearsed.
+> Demos 2, 4–6 are not written up in full yet. Demos 1 and 3 are below; the rest
+> get the same treatment as each one is rehearsed.
 
 ---
 
@@ -174,3 +174,98 @@ pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-g
 
 Full write-up, including the curl form for CLIs older than v3.243.0:
 [`demo/context-api/README.md`](demo/context-api/README.md).
+
+---
+
+## Demo 3 [slide 27] — 🔴 live — PagerDuty page → merged fix
+
+**15 min, never cut.** First full trigger-to-page run: 2026-09-02.
+
+**Two directories, and it matters.** The trigger scripts live in this repo
+(`demo/`); the program Neo fixes is **its own repo and its own directory** —
+`demo/pulumi-ts/`, pushed as
+[`adamgordonbell/neo-workshop-incident`](https://github.com/adamgordonbell/neo-workshop-incident).
+`pulumi neo` must run **from `demo/pulumi-ts`**: that's where `Pulumi.yaml`
+selects the deployed stack and where the git remote tells Neo which repo the
+PR lands on. Run it from `demo/` and Neo has no project and no remote.
+
+### Pre-flight (morning of)
+
+```bash
+export AWS_PROFILE=work-demo          # every script below needs AWS creds
+aws sso login --profile work-demo     # SSO tokens expire daily
+cd ~/sandbox/extending-pulumi-neo/demo
+./prewarm.sh                          # 9 checks; all must be ok
+```
+
+Plus the four things prewarm can't see (it prints them): trial not expired,
+integrations connected in the org, aws integration on the read-only env,
+GitHub connected — and the new one: the GitHub App's repo access includes
+`neo-workshop-incident`.
+
+### The steps
+
+**1 — Trigger at the TOP of beat 2, second pane.** Measured: dead-letters in
+~13s, but the page takes **2m53s** (SQS ships CloudWatch metrics at ~1-min
+granularity). Three minutes of lead, so trigger before the Linear demo starts,
+not midway.
+
+```bash
+cd ~/sandbox/extending-pulumi-neo/demo && ./trigger-incident.sh
+```
+
+The script also plays the failing consumer (receive-without-delete) — there is
+no worker in the stack, so without those receives nothing ever dead-letters.
+
+**2 — Open beat 3 on the incident.** `pulumi-bot-test.pagerduty.com` shows it
+triggered on the *Payments* service; the page email is in v-adam@'s inbox.
+
+**Say:** "This page is real — a poison message went into the payment queue
+three minutes ago and nobody could process it."
+
+**3 — Hand it to Neo.** In the main pane:
+
+```bash
+cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts
+pulumi neo
+```
+
+> We're getting paged. Check PagerDuty for the open incident, find out why
+> payment messages are dead-lettering, and fix the cause in this program.
+> Open a PR.
+
+⚠️ Wording not yet locked — refine after the first clean end-to-end run.
+**Anchor the prompt to the incident.** An open-ended "figure out what's wrong"
+sent Neo chasing a security group that does not exist (first rehearsal,
+2026-09-02, confirmed fabricated). If it wanders, redirect once: "verify that
+before chasing it — the incident is about the DLQ."
+
+**4 — Narrate the reads.** Watch for `pagerduty__browse_incidents` (the MCP
+doing the reading half) and the `aws` calls (the CLI integration). The answer
+it should land on is **FAULT 1**: `maxReceiveCount: 1` — no retry, every
+transient failure dead-letters. The fix is a redrive policy change in
+`index.ts`, landing as a PR on `neo-workshop-incident`.
+
+**5 — The receipts.** The PR, and the incident resolved back in PagerDuty.
+
+### Don't say
+
+- ⛔ That the MCP integration replaces Engin's webhook — it's the reading
+  half; auto-triggering a task from an incident still needs his glue.
+- ⛔ That credentials are read-only, until the precedence test says which
+  credentials a local `pulumi neo` actually uses. **Still open.**
+
+### Fallback
+
+An incident you triggered before the session and left open — trigger twice in
+the morning, resolve one as the rehearsal, keep one. If everything is down,
+the beat switches to its clip like every other beat.
+
+### Reset
+
+```bash
+cd ~/sandbox/extending-pulumi-neo/demo && ./cleanup.sh
+```
+
+Resolves the incident, drains the queues, alarm back to OK. Re-arm with
+`trigger-incident.sh`. Re-runnable all day.

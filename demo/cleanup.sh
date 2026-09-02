@@ -5,7 +5,8 @@
 # SQS allows one purge per queue per 60 seconds. If you are re-running quickly,
 # wait it out rather than retrying in a loop.
 set -euo pipefail
-cd "$(dirname "$0")/pulumi-ts"
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+cd "$SCRIPT_DIR/pulumi-ts"
 
 DLQ_URL=$(pulumi stack output dlqUrl)
 QUEUE_URL=$(pulumi stack output paymentQueueUrl)
@@ -21,4 +22,4 @@ echo "a stale open incident makes the next rehearsal ambiguous."
 
 # Put the out-of-band security group back the way it was, so the next rehearsal
 # starts from a clean account. Re-arm with ./create-unmanaged.sh.
-"$(dirname "$0")/remove-unmanaged.sh"
+"$SCRIPT_DIR/remove-unmanaged.sh"
