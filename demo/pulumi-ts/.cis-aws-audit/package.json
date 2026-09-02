@@ -1,0 +1,15 @@
+{
+  "name": "cis-aws-benchmark-check",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "@pulumi/policy": "1.18.1",
+    "@pulumi/compliance-policy-manager": "^0.1.6",
+    "@pulumi/aws-compliance-policies": "^0.0.23"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "typescript": "^5.6"
+  }
+}
