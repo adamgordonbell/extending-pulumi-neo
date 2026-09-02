@@ -136,10 +136,10 @@ Full write-up + curl form for old CLIs:
 
 ## Demo 3 [slide 27] — 🔴 live — PagerDuty page → merged fix
 
-**15 min, never cut.** First trigger-to-page run 2026-09-02; times below are
-measured, not guessed. The program is its own repo —
+**15 min, never cut.** Times measured 2026-09-02. The program at
+`demo/pulumi-ts/` is its own repo,
 [`adamgordonbell/neo-workshop-incident`](https://github.com/adamgordonbell/neo-workshop-incident)
-at `demo/pulumi-ts/` — because that remote is where Neo's PR lands.
+— that remote is where Neo's PR lands.
 
 ### Pre-flight (morning of)
 
@@ -154,11 +154,11 @@ Plus: GitHub App repo access includes `neo-workshop-incident`.
 
 ### The steps
 
-**1 — top of beat 2, second pane** (page takes **2m53s** — SQS metrics reach
-CloudWatch at ~1-min granularity — so trigger before the Linear demo, not mid):
+**1 — top of beat 2, second pane:**
 
 ```bash
-cd ~/sandbox/extending-pulumi-neo/demo && ./trigger-incident.sh
+cd ~/sandbox/extending-pulumi-neo/demo
+./trigger-incident.sh              # page lands 2m53s later — fire BEFORE the Linear demo
 ```
 
 ```
@@ -166,8 +166,8 @@ Poison payment sent to the payment queue.
 Message dead-lettered after 2 receive attempt(s).      # ~13s in
 ```
 
-**2 — beat 3 opens on the incident:** `pulumi-bot-test.pagerduty.com`,
-service *Payments*, plus the page email in v-adam@'s inbox.
+**2 — beat 3 opens on the incident:** `pulumi-bot-test.pagerduty.com` →
+service *Payments*; page email in v-adam@'s inbox.
 
 **3 — main pane:**
 
