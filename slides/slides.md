@@ -901,7 +901,7 @@ DO NOT debug live past one retry. Go to the video and keep the clock.
 <p class="!mt-8 !text-[1.7rem] text-[var(--p-fg-muted)]">Neo proposed. I merge.</p>
 
 <div class="demo-foot !mt-10">
-  <DemoCta href="https://github.com/adamgordonbell/neo-examples/pull/5" label="The PR it opened" />
+  <DemoCta href="https://github.com/adamgordonbell/neo-workshop-incident/pull/2" label="The PR it opened" />
 </div>
 
 <!--
