@@ -286,7 +286,6 @@ routeAlias: stage-map
   <Link to="stage-reaches" class="mcard-link">
     <div class="mcard focus">
       <div class="mnum">2</div>
-      <div class="mtag">today</div>
       <div class="mname">what it can reach</div>
       <div class="mbody">
         <strong>Out</strong> to the systems you operate with: MCP, and the cloud CLIs.<br/>
