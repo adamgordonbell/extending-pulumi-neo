@@ -364,20 +364,6 @@ Two is the one the title is about. One and three are how far it now goes.
   border-color: var(--p-primary);
   background: color-mix(in oklch, var(--p-primary) 6%, transparent);
 }
-.mtag {
-  position: absolute;
-  top: -0.92rem;
-  right: 1.1rem;
-  background: var(--p-primary);
-  color: #fff;
-  font-family: var(--slidev-font-mono, ui-monospace, monospace);
-  font-size: 0.86rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 0.22rem 0.66rem;
-  border-radius: 999px;
-}
 .mnum {
   position: absolute;
   top: -1.05rem;
