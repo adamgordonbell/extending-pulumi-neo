@@ -27,15 +27,17 @@ Connect the integrations in the Pulumi console — **Settings → Neo → Integr
 ```
 MCP tools:   PagerDuty (your bot user's token), Linear (your API key)
 CLI tools:   aws → an ESC environment scoped READ-ONLY
-             (why read-only, and how to build one: docs/credentials.md and demo/esc-readonly-role/)
+             (why read-only, and how to build one: docs/credentials.md; esc-readonly-role/ in the incident repo)
 ```
 
 ## Setup
 
-Fork and clone the incident program — a fork, because Neo opens its fix PR
-against this repo:
+Two checkouts. This repo holds the walkthrough, the slides, and the part 1
+queries; everything runnable lives in the incident repo — **fork that one**,
+because Neo opens its fix PRs against it:
 
 ```bash
+git clone https://github.com/adamgordonbell/extending-pulumi-neo
 git clone https://github.com/adamgordonbell/neo-workshop-incident   # fork first, clone your fork
 cd neo-workshop-incident
 npm install
@@ -53,21 +55,21 @@ pulumi up          # ~5 min; the RDS instance is the slow part
 ```
 
 The program carries three deliberate faults — see the `FAULT` comments in
-[`index.ts`](https://github.com/adamgordonbell/neo-workshop-incident/blob/main/index.ts).
+[`index.ts`](https://github.com/adamgordonbell/neo-workshop-incident/blob/main/index.ts)
+and the write-up in `FINDINGS.md` beside it.
 
-Then, from this workshop repo, verify everything is wired:
+Verify everything is wired:
 
 ```bash
-cd extending-pulumi-neo/demo
 ./prewarm.sh       # 9 checks, all must be ok; it prints the UI-only ones to eyeball
 ```
 
 ## Part 1 — What does Neo know? The Context API
 
-One read-only query against the resource graph. From this repo:
+One read-only query against the resource graph. From the workshop repo:
 
 ```bash
-cd demo/context-api
+cd extending-pulumi-neo/demo/context-api
 cat coverage-by-tool.json
 ```
 
@@ -124,7 +126,7 @@ failing consumer (there is no worker in the stack — without its
 receive-without-delete loop, nothing ever dead-letters):
 
 ```bash
-cd extending-pulumi-neo/demo
+cd neo-workshop-incident
 ./trigger-incident.sh        # incident opens ~3 min later — SQS ships CloudWatch metrics at ~1-min granularity
 ```
 
@@ -137,7 +139,6 @@ When the page arrives (check your PagerDuty service and your inbox), hand the
 incident to Neo:
 
 ```bash
-cd neo-workshop-incident
 pulumi neo
 ```
 
@@ -153,7 +154,6 @@ fork; the incident resolves back in PagerDuty.
 Reset between runs:
 
 ```bash
-cd extending-pulumi-neo/demo
 ./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves; re-arm with ./trigger-incident.sh
 ```
 
@@ -167,8 +167,8 @@ pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sts get-caller-iden
 pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sqs purge-queue --queue-url <url>   # AccessDenied — the point
 ```
 
-Building that environment: [`demo/esc-readonly-role/`](demo/esc-readonly-role/)
-and [`docs/credentials.md`](docs/credentials.md).
+Building that environment: `esc-readonly-role/` in the incident repo, and
+[`docs/credentials.md`](docs/credentials.md).
 
 ## Part 5 — Stop initiating: scheduled tasks
 
