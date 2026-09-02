@@ -47,6 +47,10 @@ pulumi config set --secret pagerduty:token   # paste your PagerDuty API token
 pulumi config set pagerdutyEmail you@example.com   # where the page lands — a real inbox, not your PagerDuty signup address
 ```
 
+The token here is for the **Pulumi provider** — `pulumi up` uses it to create the
+team, schedule, and service. It's separate from the Integrations page, which
+hands the (same) token to **Neo** for reading incidents mid-task. Both are needed.
+
 Deploy it — the payment pipeline Neo will diagnose, plus the entire PagerDuty
 side (team, rotation, escalation policy, service, CloudWatch integration):
 
