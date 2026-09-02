@@ -55,9 +55,10 @@ failure plan.
 
 **Run `demo/trigger-incident.sh` during beat 2, not at the top of beat 3.**
 
-The page is not instant. Even with `maxReceiveCount: 1` and a 5-second visibility
-timeout, the CloudWatch alarm evaluates on a 60-second period, so budget **1–2 minutes**
-from running the script to the incident opening. Engin's original chain, at
+The page is not instant. **Measured on the deployed stack (2026-09-02): 2m53s** from
+running the script to the incident opening — the message dead-letters in seconds, but
+SQS publishes its CloudWatch metrics at ~1-minute granularity, so the 60-second alarm
+period doesn't shorten the wait. Budget **a full 3 minutes**. Engin's original chain, at
 `maxReceiveCount: 3`, took **3m45s** — longer than the entire Linear beat.
 
 So: start the Linear demo, run the trigger in a second pane while Neo is working, and by
