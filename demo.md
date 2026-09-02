@@ -161,26 +161,36 @@ Reset between runs:
 ./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves; re-arm with ./trigger-incident.sh
 ```
 
-## Part 4 — Scope: whose credentials is Neo holding?
+## Part 4 — Connect a CLI tool: an ESC environment that emits credentials
 
-This part is about **ESC**. The `aws` CLI integration is just a pointer: "when
-a task needs `aws`, resolve credentials from this ESC environment." So the
-question *what can Neo do to my cloud?* has a precise answer — whatever that
-environment's role allows — and you can audit it from your own terminal,
-because `pulumi env run` consumes the same environment directly:
+MCP tools take an API token; CLI tools work differently. You connect Neo to a
+CLI like `aws` (or `gcloud`, `az`, `kubectl`) by linking it to a **Pulumi ESC
+environment** that emits the credentials the CLI needs — and Neo can then run
+that CLI inside tasks, which is exactly how Part 3's live queue reads worked.
+
+Build an environment. `esc-readonly-role/` in the incident repo deploys an
+OIDC-assumable role and the environment that emits its credentials:
 
 ```bash
-pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sts get-caller-identity   # the role Neo gets
-pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sqs purge-queue --queue-url <url>   # AccessDenied — the point
+cd neo-workshop-incident/esc-readonly-role
+pulumi up
 ```
 
-Then close the loop through Neo itself — in a task, ask it to purge the queue.
-The same AccessDenied comes back through the integration. (If it *succeeds*,
-Neo wasn't using the environment — your ambient credentials won, and that's
-worth knowing before you trust the scoping.)
+Check what the environment emits — `pulumi env run` consumes it the same way
+Neo does:
 
-Building the read-only environment: `esc-readonly-role/` in the incident repo,
-and [`docs/credentials.md`](docs/credentials.md).
+```bash
+pulumi env run adamgordonbell-org/<the-env> -- aws sts get-caller-identity
+```
+
+Attach it: **Settings → Neo → Integrations → CLI tools → aws** → pick the
+environment. Done — the next task that reaches for `aws` runs with those
+credentials.
+
+The environment decides everything Neo can do with the CLI — so attach only
+environments you're comfortable exposing. This one emits a *read-only* role
+on purpose; the reasoning (and why not to attach your admin-credentials env)
+is in [`docs/credentials.md`](docs/credentials.md).
 
 ## Part 5 — Stop initiating: scheduled tasks
 
