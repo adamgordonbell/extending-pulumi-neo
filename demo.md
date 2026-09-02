@@ -161,7 +161,12 @@ Reset between runs:
 ./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves; re-arm with ./trigger-incident.sh
 ```
 
-## Part 4 — Connect a CLI tool: an ESC environment that emits credentials
+## Part 4 — ⏭ SKIPPED — Connect a CLI tool: an ESC environment that emits credentials
+
+> Not part of the session. Whether a *local* `pulumi neo` run actually uses the
+> attached environment (vs. your ambient credentials) is unresolved — today's
+> rehearsal ran on ambient creds with no aws integration connected at all.
+> Kept for reference until that's settled.
 
 MCP tools take an API token; CLI tools work differently. You connect Neo to a
 CLI like `aws` (or `gcloud`, `az`, `kubectl`) by linking it to a **Pulumi ESC
