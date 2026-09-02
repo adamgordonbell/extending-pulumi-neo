@@ -1,0 +1,2 @@
+description: Ad hoc local Policy Pack running CIS AWS Foundations Benchmark checks against neo-workshop-incident/dev.
+runtime: nodejs
