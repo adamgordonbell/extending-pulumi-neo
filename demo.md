@@ -163,16 +163,24 @@ Reset between runs:
 
 ## Part 4 — Scope: whose credentials is Neo holding?
 
-The `aws` integration hands Neo whatever the ESC environment resolves — which
-is why it should resolve a read-only role. Prove what it can and can't do:
+This part is about **ESC**. The `aws` CLI integration is just a pointer: "when
+a task needs `aws`, resolve credentials from this ESC environment." So the
+question *what can Neo do to my cloud?* has a precise answer — whatever that
+environment's role allows — and you can audit it from your own terminal,
+because `pulumi env run` consumes the same environment directly:
 
 ```bash
-pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sts get-caller-identity   # the read-only role
+pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sts get-caller-identity   # the role Neo gets
 pulumi env run adamgordonbell-org/<your-readonly-env> -- aws sqs purge-queue --queue-url <url>   # AccessDenied — the point
 ```
 
-Building that environment: `esc-readonly-role/` in the incident repo, and
-[`docs/credentials.md`](docs/credentials.md).
+Then close the loop through Neo itself — in a task, ask it to purge the queue.
+The same AccessDenied comes back through the integration. (If it *succeeds*,
+Neo wasn't using the environment — your ambient credentials won, and that's
+worth knowing before you trust the scoping.)
+
+Building the read-only environment: `esc-readonly-role/` in the incident repo,
+and [`docs/credentials.md`](docs/credentials.md).
 
 ## Part 5 — Stop initiating: scheduled tasks
 
