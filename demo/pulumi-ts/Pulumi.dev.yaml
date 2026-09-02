@@ -1,0 +1,2 @@
+config:
+  neo-workshop-incident:pagerdutyEmail: v-adam@pulumi.com
