@@ -80,6 +80,13 @@ watching an alarm is the most avoidable dead air in the session.
 
 ## Things not to say
 
+- ⛔ Do not say the Context API graph can't see unmanaged resources — it can
+  (`unmanaged-security-groups.json` found three). The honest distinction is
+  **index vs live**: the graph answers from an index that trails reality;
+  confirm an absence against the source of record. This sets up demo 4.
+- ⛔ Do not say "the biggest" about anything from `unmanaged-by-type.json` —
+  its `limit` bounds the *buckets*, not the resources in them; at `limit: 15`
+  you get 15 buckets alphabetically.
 - ⛔ Do not say the PagerDuty MCP integration replaces Engin's webhook. It covers the reading half only; auto-*starting* a task from an incident still needs his glue.
 - ⛔ Do not claim credentials are scoped read-only unless the ESC environment in use actually is.
 - ⛔ **Do not name Custom Agents.** Unannounced as of Aug 27 — no `#product-updates` post
