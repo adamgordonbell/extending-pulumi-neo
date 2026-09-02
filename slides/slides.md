@@ -24,6 +24,9 @@ defaults:
   <p class="!mt-2 !text-[2.1rem] text-[var(--p-fg-muted)] !m-0 !leading-relaxed">
     MCP servers and cloud CLIs — giving Neo the systems your incidents live in
   </p>
+  <p class="!mt-4 !text-[1.6rem] text-[var(--p-fg-muted)] !m-0 !leading-relaxed">
+    Part 1 of 2 · part 2 with Engin Diri, Sep 30
+  </p>
   <p class="!mt-6 !text-[1.8rem] text-[var(--p-fg-muted)] !m-0 !leading-relaxed">
     Adam Gordon Bell · Engin Diri · Pulumi
   </p>
