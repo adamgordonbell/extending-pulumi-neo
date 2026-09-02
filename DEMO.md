@@ -179,54 +179,43 @@ Full write-up, including the curl form for CLIs older than v3.243.0:
 
 ## Demo 3 [slide 27] — 🔴 live — PagerDuty page → merged fix
 
-**15 min, never cut.** First full trigger-to-page run: 2026-09-02.
-
-**Two directories, and it matters.** The trigger scripts live in this repo
-(`demo/`); the program Neo fixes is **its own repo and its own directory** —
-`demo/pulumi-ts/`, pushed as
-[`adamgordonbell/neo-workshop-incident`](https://github.com/adamgordonbell/neo-workshop-incident).
-`pulumi neo` must run **from `demo/pulumi-ts`**: that's where `Pulumi.yaml`
-selects the deployed stack and where the git remote tells Neo which repo the
-PR lands on. Run it from `demo/` and Neo has no project and no remote.
+**15 min, never cut.** First trigger-to-page run 2026-09-02; times below are
+measured, not guessed. The program is its own repo —
+[`adamgordonbell/neo-workshop-incident`](https://github.com/adamgordonbell/neo-workshop-incident)
+at `demo/pulumi-ts/` — because that remote is where Neo's PR lands.
 
 ### Pre-flight (morning of)
 
 ```bash
-export AWS_PROFILE=work-demo          # every script below needs AWS creds
-aws sso login --profile work-demo     # SSO tokens expire daily
+export AWS_PROFILE=work-demo         # every script below needs it
+aws sso login --profile work-demo    # expires daily
 cd ~/sandbox/extending-pulumi-neo/demo
-./prewarm.sh                          # 9 checks; all must be ok
+./prewarm.sh                         # 9 checks, all must be ok; it prints the 4 UI-only ones
 ```
 
-Plus the four things prewarm can't see (it prints them): trial not expired,
-integrations connected in the org, aws integration on the read-only env,
-GitHub connected — and the new one: the GitHub App's repo access includes
-`neo-workshop-incident`.
+Plus: GitHub App repo access includes `neo-workshop-incident`.
 
 ### The steps
 
-**1 — Trigger at the TOP of beat 2, second pane.** Measured: dead-letters in
-~13s, but the page takes **2m53s** (SQS ships CloudWatch metrics at ~1-min
-granularity). Three minutes of lead, so trigger before the Linear demo starts,
-not midway.
+**1 — top of beat 2, second pane** (page takes **2m53s** — SQS metrics reach
+CloudWatch at ~1-min granularity — so trigger before the Linear demo, not mid):
 
 ```bash
 cd ~/sandbox/extending-pulumi-neo/demo && ./trigger-incident.sh
 ```
 
-The script also plays the failing consumer (receive-without-delete) — there is
-no worker in the stack, so without those receives nothing ever dead-letters.
+```
+Poison payment sent to the payment queue.
+Message dead-lettered after 2 receive attempt(s).      # ~13s in
+```
 
-**2 — Open beat 3 on the incident.** `pulumi-bot-test.pagerduty.com` shows it
-triggered on the *Payments* service; the page email is in v-adam@'s inbox.
+**2 — beat 3 opens on the incident:** `pulumi-bot-test.pagerduty.com`,
+service *Payments*, plus the page email in v-adam@'s inbox.
 
-**Say:** "This page is real — a poison message went into the payment queue
-three minutes ago and nobody could process it."
-
-**3 — Hand it to Neo.** In the main pane:
+**3 — main pane:**
 
 ```bash
-cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts
+cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts       # NOT demo/ — Pulumi.yaml + git remote live here
 pulumi neo
 ```
 
@@ -234,38 +223,20 @@ pulumi neo
 > payment messages are dead-lettering, and fix the cause in this program.
 > Open a PR.
 
-⚠️ Wording not yet locked — refine after the first clean end-to-end run.
-**Anchor the prompt to the incident.** An open-ended "figure out what's wrong"
-sent Neo chasing a security group that does not exist (first rehearsal,
-2026-09-02, confirmed fabricated). If it wanders, redirect once: "verify that
-before chasing it — the incident is about the DLQ."
+⚠️ Prompt not locked — anchor it to the incident. Open-ended "figure out
+what's wrong" sent Neo chasing a nonexistent security group (2026-09-02).
+Expected reads: `pagerduty__browse_incidents`, then `aws` → **FAULT 1**
+(`maxReceiveCount: 1`) → redrive-policy PR on `neo-workshop-incident`.
 
-**4 — Narrate the reads.** Watch for `pagerduty__browse_incidents` (the MCP
-doing the reading half) and the `aws` calls (the CLI integration). The answer
-it should land on is **FAULT 1**: `maxReceiveCount: 1` — no retry, every
-transient failure dead-letters. The fix is a redrive policy change in
-`index.ts`, landing as a PR on `neo-workshop-incident`.
-
-**5 — The receipts.** The PR, and the incident resolved back in PagerDuty.
-
-### Don't say
-
-- ⛔ That the MCP integration replaces Engin's webhook — it's the reading
-  half; auto-triggering a task from an incident still needs his glue.
-- ⛔ That credentials are read-only, until the precedence test says which
-  credentials a local `pulumi neo` actually uses. **Still open.**
+**4 — receipts:** the PR, and the incident auto-resolving in PagerDuty.
 
 ### Fallback
 
-An incident you triggered before the session and left open — trigger twice in
-the morning, resolve one as the rehearsal, keep one. If everything is down,
-the beat switches to its clip like every other beat.
+A second incident triggered in the morning and left open. Everything down →
+the beat's clip, like every beat.
 
 ### Reset
 
 ```bash
-cd ~/sandbox/extending-pulumi-neo/demo && ./cleanup.sh
+cd ~/sandbox/extending-pulumi-neo/demo && ./cleanup.sh   # purge → alarm OK → auto-resolve; re-arm with trigger
 ```
-
-Resolves the incident, drains the queues, alarm back to OK. Re-arm with
-`trigger-incident.sh`. Re-runnable all day.
