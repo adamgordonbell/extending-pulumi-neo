@@ -11,21 +11,24 @@ Build-only work I can do alone isn't listed; it lives in git.
       still presents the **Sep 30 EMEA repeat**, so he needs the deck — and he
       needs telling that the Custom Agents ⛔ may not hold for his date, since
       his Sep 23 AKS session lands between the two runs.
-- [ ] **Start the PagerDuty trial — on or after Thu Aug 27.** Trial is 14 days.
-      Aug 27 + 14 = Sep 10, so Sep 8 lands on day 12. Starting it any earlier
-      expires it before or on the workshop. Sign up as the `pulumi-bot` user.
-- [ ] **Connect the integrations** in `adamgordonbell-org` (Neo Settings →
-      Integrations). Org-admin only. Two sections, connected separately:
-      - **MCP tools:** PagerDuty, Linear, and one of Datadog/Honeycomb.
-      - **CLI tools:** AWS → point it at the **new read-only** environment.
-      ⛔ **Point the AWS CLI integration at the new read-only environment, not
-      `shared/cloud-creds`.** The latter assumes `pulumi-environments-oidc`,
-      which carries **AdministratorAccess** (verified) — connecting it would
-      make slide 24's read-only claim false and the precedence test undecidable.
+- [x] ~~Start the PagerDuty trial.~~ **Started Sep 2** → expires **Sep 16**; Sep 8
+      is day 6. Account `pulumi-bot-test.pagerduty.com`, one user ("Adam Bell",
+      `v-adam+pulumi-trail@`, owner) — the account-level API key is the stack
+      secret. If Neo's MCP connect wants a *user* token, mint one from that
+      user's profile (and optionally rename the user to pulumi-bot for stage
+      attribution).
+- [x] ~~Connect the integrations~~ **Connected Sep 2** (Adam): PagerDuty MCP
+      verified working (Neo read incident #1 via `pagerduty__browse_incidents`).
+      Still to verify: **which env the AWS CLI integration points at** — ⛔ must
+      be the read-only environment, not `shared/cloud-creds` (AdministratorAccess,
+      verified) — and `esc-readonly-role` **has not been deployed yet**, so if
+      nothing else was picked, the integration may be on admin creds. Settle
+      this with the precedence test below.
 - [x] ~~Confirm the org login slug.~~ It's `adamgordonbell-org` (confirmed via
       `pulumi whoami -v`). Slides and `pulumi env run` examples updated.
-- [ ] **Pick the repo remote** — `adamgordonbell/*` or under `dirien/*`.
-      Blocks the repo QR code on the closing slide.
+- [x] ~~Pick the repo remote~~ — **`adamgordonbell/*`**, settled Sep 2 by
+      `demo.md`'s clone lines and the `neo-workshop-incident` push. QR can be
+      generated once THIS repo passes the pre-public leak pass and pushes.
 - [x] ~~Check the live event page duration.~~ pulumi.com said **90 min** on the
       Americas tab (EMEA already said 60). Fixed in
       [pulumi/docs#21175](https://github.com/pulumi/docs/pull/21175) — merge it and
@@ -54,8 +57,16 @@ is for, and how the precedence test is designed — lives in
       find out how long the scan takes to notice the new group. The demo-2 beat
       depends on the answer: index-behind-live if slow, "here's when it
       noticed" if fast. Don't script the punchline until this is measured.
-- [ ] `pulumi up` both programs (into `616138583583`) — `demo/pulumi-ts` and `demo/esc-readonly-role`.
-      Neither has been deployed; they only typecheck.
+- [x] ~~`pulumi up` `demo/pulumi-ts`~~ **Deployed, rehearsed end-to-end, and torn
+      down again — all Sep 2.** Full chain worked: trigger → page (2m53s) → Neo
+      read the incident over MCP → fix PR. PR #1 **closed unmerged** (⛔ never
+      merge a fault-fix PR before the Sep 30 EMEA repeat — merging un-plants
+      FAULT 1). Stack config survives teardown; re-setup is `pulumi up` (~5 min)
+      + two triggers, morning of Sep 8. The code now lives in its own repo:
+      `adamgordonbell/neo-workshop-incident` (checkout at `demo/pulumi-ts`,
+      gitignored — keep it on `main`, the branch with the bug).
+- [ ] `pulumi up` **`esc-readonly-role`** (now in the incident repo). Still only
+      typechecks — and the AWS CLI integration needs its env (see above).
 - [ ] **Credential-precedence test.** The open question: when `pulumi neo` runs
       locally and asks for `aws`, does it resolve the org's ESC integration or
       your laptop credentials? Docs don't say. The read-only role makes this
