@@ -922,7 +922,7 @@ layout: two-cols
 
 <p class="opacity-85">Neo changes the program, previews it, and opens a pull request. You merge it, and <strong>Pulumi</strong> makes the change.</p>
 
-<p class="opacity-85">The CLI can only do what its credentials allow. Give it a <strong>read-only</strong> role, as I did, and the only way to change anything is the pull request.</p>
+<p class="opacity-85">The CLI can only do what its credentials allow. You choose the role. Give it a <strong>read-only</strong> one and the only way to change anything is the pull request.</p>
 
 </div>
 

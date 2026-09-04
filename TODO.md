@@ -64,19 +64,12 @@ The PagerDuty and aws reads are real, but the diagnosis is not earned.
       of `create-unmanaged.sh` / `remove-unmanaged.sh` into this repo under `docs/`.
       Adam's call; it changes what the room and the PR body say.
 
-### 3. Credentials: make the read-only story true, or say less
+### 3. Credentials — settled Sep 4: say less
 
-Slide 23 says "give it a read-only role, as I did." Sep 4 finding: Neo's local run
-chose on its own to read AWS via `pulumi env run adamgordonbell-org/payments/dev -- aws …`,
-and that environment emits `pulumi-environments-oidc`, which is AdministratorAccess. So
-the reads went through ESC, but through an admin role, and no aws CLI integration was
-involved. Reasoning in `docs/credentials.md`.
-
-- [ ] `pulumi up` **`esc-readonly-role`** (in `demo/pulumi-ts/esc-readonly-role`).
-- [ ] **Connect the aws CLI integration to that environment** (⛔ not `shared/cloud-creds`,
-      that one is AdministratorAccess).
-- [ ] **Precedence test:** with the integration on, does a local `pulumi neo` use the ESC
-      role or the laptop creds? Until settled, say "you choose the role" and not "as I did."
+Slide 23 now says "you choose the role" rather than "as I did." The read-only ESC role,
+the aws CLI integration and the precedence test are not being built for Sep 8. Reasoning
+in `docs/credentials.md` if it ever comes back. The Sep 4 run read AWS via
+`pulumi env run adamgordonbell-org/payments/dev`, an admin role Neo picked itself.
 
 ### 4. Assets
 
@@ -152,7 +145,7 @@ schedule beat down to one slide plus its clip. **The incident never gets cut.**
 - The MCP integration does not replace Engin's webhook: reading half only; auto-starting
   a task on a page still needs his glue. (Slide "What's a toggle now" is hidden; if asked,
   this is the answer.)
-- Don't claim the credentials were read-only until item 3 is done.
+- Don't claim the credentials were read-only. "You choose the role" is the line.
 - Don't say the Context API can't see unmanaged resources; it can. The honest distinction
   is index vs live.
 - Don't say Neo is free. "On by default if you have an org" is the true claim.
