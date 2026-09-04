@@ -6,9 +6,8 @@ description: >-
   PagerDuty service that pages off it. Carries deliberate configuration faults —
   see FINDINGS.md.
 config:
-  pagerduty:token:
-    secret: true
   neo-workshop-incident:pagerdutyEmail:
     description: Email for the PagerDuty users this program creates. Must be on a domain your account accepts.
+    default: workshop@example.com
   aws:region:
-    default: ca-central-1
+    value: ca-central-1
