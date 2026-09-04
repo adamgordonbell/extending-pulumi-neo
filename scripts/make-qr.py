@@ -12,11 +12,11 @@ MUTED  = "#9aa0ad"
 # cannot ship by accident. Set it False once the URL is final AND the code has
 # been scanned with a real phone.
 ITEMS = [
-    ("qr-repo.png",       "https://github.com/PLACEHOLDER/extending-pulumi-neo", "repo", True),
-    ("qr-blog.png",       "https://www.pulumi.com/blog/10-more-things-you-can-do-with-neo/", "blog post", True),
-    ("qr-docs.png",       "https://www.pulumi.com/docs/ai/neo/integrations/", "docs", True),
-    ("qr-linkedin.png",   "https://www.linkedin.com/in/adamgordonbell/", "linkedin", True),
-    ("qr-emea.png",       "https://www.pulumi.com/events/extending-pulumi-neo-mcp-cloud-cli/", "emea sep 30", True),
+    ("qr-blog.png",       "https://www.pulumi.com/blog/10-more-things-you-can-do-with-neo/", "blog post", False),
+    ("qr-docs.png",       "https://www.pulumi.com/docs/ai/neo/integrations/", "docs", False),
+    ("qr-linkedin.png",   "https://www.linkedin.com/in/adamgordonbell/", "linkedin", False),
+    ("qr-engin.png",      "https://www.linkedin.com/in/engin-diri/", "engin linkedin", False),
+    ("qr-emea.png",       "https://www.pulumi.com/events/extending-pulumi-neo-mcp-cloud-cli/", "emea sep 30", False),
     # Real: the URL is certain and this one drives the "go try it" slide, where a
     # hatched placeholder would be worse than no code at all.
     ("qr-signup.png",     "https://app.pulumi.com/signup", "app.pulumi.com", False),

@@ -20,8 +20,5 @@ dist/
 .vscode/
 extracted-skills/
 
-# --- Internal, never published ---
-# This repo ships to attendees (QR on the closing slide). Pre-release and
-# internal-Slack detail goes here and stays out of git.
-INTERNAL.md
+# --- Local checkout of the incident repo (its own git) ---
 demo/pulumi-ts/

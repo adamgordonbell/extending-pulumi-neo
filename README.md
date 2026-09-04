@@ -56,9 +56,9 @@ One file owns each question. If two files answer the same one, one of them is wr
 
 | Path | Owns |
 |------|------|
-| [`OUTLINE.md`](OUTLINE.md) | The argument — beats, claims, what each one owes the room |
+| [`docs/OUTLINE.md`](docs/OUTLINE.md) | The Aug 27 argument, superseded by the spine; kept for history |
 | [`demo.md`](demo.md) | The walkthrough — the tutorial the session follows live, and yours to run in your own org |
-| [`TODO.md`](TODO.md) | Everything still open. The maintained list. |
+| [`TODO.md`](TODO.md) | Everything still open, plus the stage material: pre-flight, clock, when it breaks, things not to say |
 | [`docs/demo-budget.md`](docs/demo-budget.md) | Why each demo is live, video, or cut |
 | [`docs/credentials.md`](docs/credentials.md) | Credential reasoning and the precedence question |
 | [`docs/since-launch.md`](docs/since-launch.md) | What shipped after the launch, and what to avoid saying |

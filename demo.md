@@ -2,10 +2,11 @@
 
 Give Neo access to the systems your incidents actually live in: SaaS tools over
 MCP integrations, cloud accounts over CLI integrations backed by Pulumi ESC.
-This is the tutorial the live session follows — every command below gets typed
-on stage, and you can run the same flow against your own org.
+These are the three things typed on stage, and you can run the same flow against
+your own org. Everything else in the session is a recorded clip or a click into a
+real pull request; those are listed at the end.
 
-**Estimated time**: 60 minutes (plus one-time setup)
+**Estimated time**: 30 minutes (plus one-time setup)
 
 Commands are written for the demo org, `adamgordonbell-org` — swap in your own
 org name throughout.
@@ -13,10 +14,10 @@ org name throughout.
 ## Prerequisites
 
 ```
-- Pulumi CLI v3.254.0+          (`pulumi api` needs 3.243+, `pulumi neo acp` needs 3.254+)
-- A Pulumi organization with Neo (the Context API in part 1 needs Enterprise / Business Critical)
+- Pulumi CLI v3.254.0+
+- A Pulumi organization with Neo (the Context API query needs Enterprise / Business Critical)
 - An AWS account you can deploy into, plus a CLI profile that reaches it
-- GitHub: the Pulumi GitHub App installed, with access to your fork of the demo repo
+- GitHub: the Pulumi GitHub App installed, with access to your fork of the incident repo
 - PagerDuty: a free 14-day trial — sign up as a dedicated bot user; mint an API token
 - Linear: a free workspace with one open ticket (e.g. "Add versioning to the staging bucket")
   and a personal API key
@@ -26,13 +27,14 @@ Connect the integrations in the Pulumi console — **Settings → Neo → Integr
 
 ```
 MCP tools:   PagerDuty (your bot user's token), Linear (your API key)
-CLI tools:   aws → an ESC environment scoped READ-ONLY
-             (why read-only, and how to build one: docs/credentials.md; esc-readonly-role/ in the incident repo)
+CLI tools:   aws → an ESC environment. Scope it as narrowly as you are comfortable with;
+             a read-only role means the pull request is the only write path.
+             (reasoning: docs/credentials.md; esc-readonly-role/ in the incident repo)
 ```
 
 ## Setup
 
-Two checkouts. This repo holds the walkthrough, the slides, and the part 1
+Two checkouts. This repo holds the walkthrough, the slides, and the Context API
 queries; everything runnable lives in the incident repo — **fork that one**,
 because Neo opens its fix PRs against it:
 
@@ -44,31 +46,26 @@ npm install
 pulumi stack init adamgordonbell-org/dev
 pulumi config set aws:region ca-central-1
 pulumi config set --secret pagerduty:token   # paste your PagerDuty API token
-pulumi config set pagerdutyEmail you@example.com   # where the page lands — a real inbox, not your PagerDuty signup address
+pulumi config set pagerdutyEmail you@example.com   # where the page lands — a real inbox
 ```
 
 The token here is for the **Pulumi provider** — `pulumi up` uses it to create the
-team, schedule, and service. It's separate from the Integrations page, which
+team, schedule, and service. It is separate from the Integrations page, which
 hands the (same) token to **Neo** for reading incidents mid-task. Both are needed.
 
-Deploy it — the payment pipeline Neo will diagnose, plus the entire PagerDuty
-side (team, rotation, escalation policy, service, CloudWatch integration):
+Deploy the payment pipeline Neo will diagnose, plus the entire PagerDuty side
+(team, rotation, escalation policy, service, CloudWatch integration):
 
 ```bash
 pulumi up          # ~5 min; the RDS instance is the slow part
+./prewarm.sh       # 9 checks, all must be ok
 ```
 
-The program carries three deliberate faults — see the `FAULT` comments in
+The program carries deliberate faults — see the `FAULT` comments in
 [`index.ts`](https://github.com/adamgordonbell/neo-workshop-incident/blob/main/index.ts)
 and the write-up in `FINDINGS.md` beside it.
 
-Verify everything is wired:
-
-```bash
-./prewarm.sh       # 9 checks, all must be ok; it prints the UI-only ones to eyeball
-```
-
-## Part 1 — What does Neo know? The Context API
+## 1. What it knows — one query against the Context API
 
 One read-only query against the resource graph. From the workshop repo:
 
@@ -97,17 +94,17 @@ pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.jso
   { "key": { "managed": "Pulumi" }, "metrics": { "n":  144 } } ] }
 ```
 
-About 90% of the account isn't managed by Pulumi — everything after this is
-about reaching that other 90%. Two more queries, same shape:
+About 90% of this account is not managed by Pulumi, and Neo can now reason about
+all of it. Two more queries, same shape:
 
 ```bash
-pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-by-type.json          # what kind of thing is unmanaged
-pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-groups.json  # found 3, all in ca-central-1
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-by-type.json
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-groups.json
 ```
 
 Full write-up + a curl form for older CLIs: [`demo/context-api/README.md`](demo/context-api/README.md).
 
-## Part 2 — Ask: a Linear ticket becomes a PR
+## 2. What it can reach — a Linear ticket becomes a PR
 
 With the Linear MCP connected and a ticket waiting, hand Neo the ticket. From
 your `neo-workshop-incident` clone:
@@ -120,23 +117,17 @@ pulumi neo
 > Pick up the open Linear ticket about the staging bucket, make the change in
 > this program, and open a PR. Comment back on the ticket with the PR link.
 
-Watch the task read the ticket over MCP, write the change, and open the PR —
-Neo reads your tools, not your paste buffer.
+Neo reads the ticket over MCP, plans against the real stack, opens the PR, and
+comments back on the ticket. Nothing was pasted.
 
-## Part 3 — Delegate: a PagerDuty incident, end to end
+## 3. What it can reach — a PagerDuty incident, end to end
 
 Cause a real page. The script sends a poison payment message, then plays the
-failing consumer (there is no worker in the stack — without its
-receive-without-delete loop, nothing ever dead-letters):
+failing consumer:
 
 ```bash
 cd neo-workshop-incident
-./trigger-incident.sh        # incident opens ~3 min later — SQS ships CloudWatch metrics at ~1-min granularity
-```
-
-```
-Poison payment sent to the payment queue.
-Message dead-lettered after 2 receive attempt(s).      # ~13s in
+./trigger-incident.sh        # incident opens ~3 min later
 ```
 
 When the page arrives (check your PagerDuty service and your inbox), hand the
@@ -158,50 +149,24 @@ fork; the incident resolves back in PagerDuty.
 Reset between runs:
 
 ```bash
-./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves; re-arm with ./trigger-incident.sh
+./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves
 ```
 
-## Part 4 — ⏭ SKIPPED — Connect a CLI tool: an ESC environment that emits credentials
+## The rest of the session: clips and real pull requests
 
-> Not part of the session. Whether a *local* `pulumi neo` run actually uses the
-> attached environment (vs. your ambient credentials) is unresolved — today's
-> rehearsal ran on ambient creds with no aws integration connected at all.
-> Kept for reference until that's settled.
+Nothing below is typed on stage. Each is a recording or a link into a PR Neo
+opened in an earlier session, so you can read the same thing the room saw.
 
-MCP tools take an API token; CLI tools work differently. You connect Neo to a
-CLI like `aws` (or `gcloud`, `az`, `kubectl`) by linking it to a **Pulumi ESC
-environment** that emits the credentials the CLI needs — and Neo can then run
-that CLI inside tasks, which is exactly how Part 3's live queue reads worked.
+| Beat | What it is |
+|---|---|
+| Narrowing IAM policies from the terminal | clip · [iam-narrow-demo#1](https://github.com/adamgordonbell/iam-narrow-demo/pull/1) |
+| Scheduling a task, and the next morning's PR | clip · [neo-examples#9](https://github.com/adamgordonbell/neo-examples/pull/9) |
+| The runbook decides | [neo-drift-demo#1](https://github.com/adamgordonbell/neo-drift-demo/pull/1), a drift check that cites `infra/runbooks/drift.md` |
+| What it left behind | [neo-examples#7](https://github.com/adamgordonbell/neo-examples/pull/7) · [#5](https://github.com/adamgordonbell/neo-examples/pull/5) |
 
-Build an environment. `esc-readonly-role/` in the incident repo deploys an
-OIDC-assumable role and the environment that emits its credentials:
-
-```bash
-cd neo-workshop-incident/esc-readonly-role
-pulumi up
-```
-
-Check what the environment emits — `pulumi env run` consumes it the same way
-Neo does:
-
-```bash
-pulumi env run adamgordonbell-org/<the-env> -- aws sts get-caller-identity
-```
-
-Attach it: **Settings → Neo → Integrations → CLI tools → aws** → pick the
-environment. Done — the next task that reaches for `aws` runs with those
-credentials.
-
-The environment decides everything Neo can do with the CLI — so attach only
-environments you're comfortable exposing. This one emits a *read-only* role
-on purpose; the reasoning (and why not to attach your admin-credentials env)
-is in [`docs/credentials.md`](docs/credentials.md).
-
-## Part 5 — Stop initiating: scheduled tasks
-
-In the console: **Neo → Scheduled Tasks → New**. Give it a task ("run the CIS
-benchmark against this stack, open a PR for anything it finds") and a schedule.
-Tomorrow morning the PR is just *there* — you set it once and stop initiating.
+To reproduce the runbook one: deploy `neo-drift-demo`, add an inline policy to the
+`audit-reader` role out of band, and ask Neo to run the drift check against the
+runbook. The exact prompt is in `TODO.md`.
 
 ## Teardown
 

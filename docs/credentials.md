@@ -8,7 +8,7 @@ profile), and ESC → AWS OIDC is verified end to end. What follows is why the A
 integration still needs its own narrow environment, and the one question left open.
 
 Notes for setting up the demo org. Nothing here is presented as-is; the on-stage version
-is beat 3 in [`../OUTLINE.md`](../OUTLINE.md).
+is beat 3 in [`OUTLINE.md`](OUTLINE.md).
 
 ## Org
 

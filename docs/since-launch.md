@@ -134,11 +134,11 @@ on the docs site. The only "Custom Agent" strings in the Neo docs are Zed's and 
 own UI labels on the editors page for adding an ACP agent — unrelated to the Pulumi
 feature.
 
-⛔ **The guard in `INTERNAL.md`'s presenter notes stands for Sep 8: do not name it.**
+⛔ **The guard in `TODO.md` (Things not to say) stands for Sep 8: do not name it.**
 
 There is internal signal that it is closer than that silence suggests. That signal is
 **pre-release and not repeatable here** — this repo ships to attendees. It is written up
-in `INTERNAL.md`, which is gitignored. Read that before deciding anything about either
+in `docs/PLAN.md` and the Things-not-to-say list in `TODO.md`. Read those before deciding anything about either
 session's coverage.
 
 **The two-session plan.** Engin's Sep 23 AKS session lands between Sep 8 and his Sep 30

@@ -32,10 +32,6 @@ defaults:
   </p>
 </div>
 
-<!--
-- Neo could always write Pulumi. Today is about giving it everything around the Pulumi.
-- Two live demos this hour; everything else is slides.
--->
 
 ---
 
@@ -60,9 +56,6 @@ defaults:
   </div>
 </div>
 
-<!--
-- Community Engineer at Pulumi, and host of the CoRecursive podcast. One sentence is enough.
--->
 
 ---
 
@@ -87,10 +80,6 @@ defaults:
   </div>
 </div>
 
-<!--
-- Engin built the December "Day-2 Autonomous Infrastructure Management" workshop, and the incident demo today comes from it.
-- He runs the EMEA session on Sep 30, which is part two of this one.
--->
 
 ---
 
@@ -101,7 +90,7 @@ defaults:
 <ul class="!mt-8 !text-[1.6rem] !leading-relaxed space-y-5">
   <li>I'll <strong>present and demo</strong> — nothing to follow along with</li>
   <li>Ask questions <strong>any time</strong>; treat this as a conversation</li>
-  <li>Slides and the repo go home with you — QR at the end</li>
+  <li>Links go home with you — QR codes at the end</li>
 </ul>
 
 </div>
@@ -110,10 +99,6 @@ defaults:
 .zoom-content { zoom: 1.7; }
 </style>
 
-<!--
-- There is nothing to follow along with. Watch now; the slides and the repo go home with you, so you can run everything later.
-- Ask questions any time, and treat this as a conversation.
--->
 
 ---
 
@@ -143,10 +128,7 @@ The result is not a console click but a diff, with a preview, that your reviewer
 </style>
 
 <!--
-- Neo is Pulumi's infrastructure agent. It reads your organization's live state in Pulumi Cloud: your programs, your stacks, and what is actually running.
-- It can see your infrastructure, and it hands work back as a pull request. Those two facts are all the rest of the hour needs.
-- One concrete example: "which of my resources are on an outdated provider" is a question it answers by searching real state rather than guessing.
-- The docs are at pulumi.com/docs/ai/neo/, and it runs Claude models through Amazon Bedrock.
+Neo is an infrastructure agent. Announced Sep 2025, heavily used since. It reads your Pulumi and hands back a PR a human merges.
 -->
 
 ---
@@ -177,9 +159,7 @@ Day one makes a good demo. Day two is a job, and it is what the rest of this hou
 </style>
 
 <!--
-- Day one is standing it up. Day two is every day after that. "Day-2 operations" is a common term in platform circles, and Engin's December workshop was titled after it.
-- The alert at 2am, the provider that went out of date, the security group somebody added by hand, the upgrade nobody has time for. Every demo today is one of these.
-- Day one makes a good demo. Day two is a job, and it is what the rest of the hour is about.
+And that makes it great at day two, where the hard work is and where state, preview, and a reviewable diff already earn their keep.
 -->
 
 ---
@@ -213,9 +193,7 @@ This part is fun. Everything I show today started as me poking at it.
 </style>
 
 <!--
-- Neo is on by default in Pulumi Cloud. If you have an org, you already have it, under Settings and then Neo Settings.
-- Later today, point it at a stack you already have and ask it something you actually want to know.
-- Everything I show today started as me poking at it, and the interesting findings were the ones I didn't plan.
+Therefore try it out now. It is on in your org already.
 -->
 
 ---
@@ -339,9 +317,7 @@ The title is about the second question. The first and third show how far it now 
 </style>
 
 <!--
-- Three questions cover the hour. What does Neo already know? What can it reach that it doesn't know? Where does it run?
-- The session is titled after the second question. The first and third are what changed around it.
-- These names sit in the top-right corner of every slide from here on. The boxes and the strip are clickable, so we can jump back to any part during Q&A.
+And it keeps getting new features. Today covers some of them in three categories: what it knows, what it can reach, where it runs.
 -->
 
 ---
@@ -354,6 +330,10 @@ routeAlias: stage-knows
 ## your code, your stacks, your state — and what that missed
 
 <StageMap size="lg" />
+
+<!--
+First category: what it knows.
+-->
 
 ---
 
@@ -383,9 +363,7 @@ So a human read three consoles, and <em>then</em> asked for the change.
 </style>
 
 <!--
-- Neo could always read your programs, your stacks, and your state, and it could write a change, preview it, and deploy it.
-- The limit was what Pulumi itself recorded. State files don't record the incident, the ticket, the metric, or the security group somebody added in the console.
-- Concretely: p95 on /checkout goes from 200ms to 1.2s. The metric is in one tool, the cause is in the cloud account, and the fix is one line of Pulumi. One person spends twenty minutes moving between three places before asking for the change.
+Neo already knew what Pulumi knew: your programs, your stacks, your state. But most of your cloud is not in there. Pulumi's records stop at what Pulumi manages, and the security group somebody added by hand is not in any program.
 -->
 
 ---
@@ -403,10 +381,7 @@ So a human read three consoles, and <em>then</em> asked for the change.
 </div>
 
 <!--
-- The Context API shipped on Aug 26, days before this session. It is one queryable graph over state, stack dependencies, and the resources Discovery finds outside IaC entirely.
-- From the post: Neo uses it out of the box. Ask what breaks if a stack changes, and it queries the graph on your behalf, with the permissions of the user who invoked it. Remember that clause, because the CLI integrations work the same way.
-- It is in preview and needs Enterprise or Business Critical, so part of the room cannot run it today.
-- Discovery has found unmanaged resources for a while. What is new is querying them in one graph alongside state and dependencies.
+So Neo now has one graph over the whole account, including what nothing manages. The Context API, shipped last week.
 -->
 
 ---
@@ -421,11 +396,7 @@ class: demo
 </div>
 
 <!--
-- From the terminal: cat coverage-by-tool.json, then pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.json.
-- The selector is six lines: anchor on every resource, group by the managed field, and count. The query is small enough to read out loud.
-- The managed field takes the values ARM, CloudFormation, Other, Pulumi, and Terraform. Other means scanned and attributed to no IaC tool.
-- The finding to highlight when the output lands: Other is about 1300 and Pulumi is about 150, so roughly 90% of this account is not managed by Pulumi.
-- The graph answers from a search index that trails reality, while the CLI reads the account now. Confirm an absence against the source of record before acting on it.
+Here is one query against my own org.
 -->
 
 ---
@@ -446,9 +417,7 @@ class: demo
 <p class="!mt-10 !text-[1.6rem] !leading-relaxed text-center">One query against my own org, this morning.</p>
 
 <!--
-- That was one query against my own org this morning. 1305 resources were found by cloud scan with no IaC tool, and 144 are managed by Pulumi.
-- An org with Terraform would show a different split; here Other means nobody's IaC tool claims it.
-- Neo can already reason about the 144. The 1305 is why it needs to reach past Pulumi's own records, and everything after this slide is about that reach.
+Ninety percent of that account is not Pulumi. 1305 resources no IaC tool claims, against 144 in Pulumi. Neo can now reason about all of it. That is the first category.
 -->
 
 ---
@@ -461,6 +430,10 @@ routeAlias: stage-reaches
 ## out to your tools, in from where you work
 
 <StageMap size="lg" />
+
+<!--
+Second category: what it can reach.
+-->
 
 ---
 layout: two-cols
@@ -509,10 +482,7 @@ This is a different question from the left-hand side. It is not about
 </div>
 
 <!--
-- Integrations work in two directions. Outbound connects Neo to the systems you operate with: MCP servers such as PagerDuty, Linear, and Datadog, and the cloud CLIs. Inbound lets you reach Neo from GitHub and Slack.
-- Who holds the key differs. For MCP, Pulumi Cloud holds the credentials, encrypted per org. For the CLIs, you hold them, in Pulumi ESC.
-- Neo writes over MCP too. It resolves the incident and comments on the ticket, so this is not a read-only channel.
-- Both demos today are outbound. There is no GitHub or Slack demo today.
+Neo could already reach out through Pulumi itself: preview, deploy, open a PR. Now it can touch the other surfaces too. Out, to the MCP servers and the cloud CLIs. In, from GitHub and Slack.
 -->
 
 ---
@@ -615,8 +585,7 @@ hide: true
 </style>
 
 <!--
-- The left column wins the morning. The right column is the work that matters and is never urgent, so it never gets done: bump a provider version, centralize a secret, close a small policy violation, narrow a role. Everyone here has this list.
-- Explaining each one to an agent is its own overhead, and that is the part integrations remove. The fix isn't a better prompt. It is letting Neo read the ticket itself, with the title, description, and acceptance criteria, the way an engineer would.
+Here is what that buys you. You have backlog tickets nobody gets to. You discover problems in Slack. With Linear connected, those get dealt with.
 -->
 
 ---
@@ -672,11 +641,7 @@ class: demo
 </div>
 
 <!--
-- Start in the Pulumi console: these are the integrations in my org, authorized once by an admin. In the task composer each one is a per-task toggle, and Linear stays on.
-- Then the ticket: it asks for versioning on the staging bucket. I hand it to Neo from the terminal and ask it to make the change, open a PR, and comment back on the ticket.
-- Neo is reading the ticket itself; I have not pasted anything.
-- Plan mode comes first, so I see the resources before anything happens.
-- The PR gets linked back on the ticket.
+So the demo: hand Neo the ticket itself.
 -->
 
 ---
@@ -728,10 +693,7 @@ The ticket and the PR end up linked, and the backlog gets one item shorter.
 </style>
 
 <!--
-- One integration, authorized once by an admin.
-- Neo read the ticket itself: title, description, acceptance criteria.
-- It planned against the real stack rather than a guess about the stack.
-- The output was a pull request and a comment back on the ticket, so the two are linked and the backlog is one item shorter.
+It read the ticket, planned against the real stack, opened a PR, and commented back on the ticket.
 -->
 
 ---
@@ -800,9 +762,7 @@ hide: true
 </style>
 
 <!--
-- You get paged because something is red, and you don't know why yet.
-- So the first twenty minutes aren't fixing; they are assembling. What deployed recently, what changed in the stack, what the metrics did, when it started. That is four tools and one person, and you haven't touched the problem yet.
-- That assembly is reading, which is what an integration is for. Neo doesn't fix incidents. It shortens the assembly step.
+Second, the incident. When a page fires, the first twenty minutes are not fixing. They are reading four systems to assemble the picture.
 -->
 
 ---
@@ -867,14 +827,7 @@ class: demo
 </div>
 
 <!--
-- A poison payment message went into the queue a few minutes ago. It dead-lettered, the alarm fired, and PagerDuty paged. This is a real incident with a real timestamp.
-- I hand it to Neo: check PagerDuty for the open incident, find out why payment messages are dead-lettering, fix the cause in this program, and open a PR.
-- It is reading the incident over PagerDuty; I haven't pasted anything.
-- Now it is looking at the live account through the aws CLI, not at the program.
-- The cause is a maxReceiveCount of 1 on the redrive policy. A single failed receive dead-letters the message, with no retry.
-- The fix is a diff, not an API call. The PR opens, and the incident resolves back in PagerDuty.
-- If it surfaces the security group open on port 5432 that no program describes: that one isn't in my code, and it found it by looking at the account. The instance is not publicly accessible, so it is an audit finding rather than a live breach.
-- If asked why the fault is configuration rather than a trend: a fresh account has no history, and configuration bugs are visible in one look and just as real.
+So with PagerDuty connected, Neo reads the incident, reads the live account through the aws CLI, and finds the cause.
 -->
 
 ---
@@ -898,10 +851,7 @@ class: demo
 </style>
 
 <!--
-- A real incident with a real timestamp, not a fixture.
-- Neo read it through PagerDuty, and read the live account through aws.
-- It connected the alert to a specific line in the program, and the fix arrived as a diff with the evidence beside it.
-- If it surfaced: it also found something the program never mentioned, and only the account did.
+It found the thing no program mentioned, and both fixes arrived as a diff with the evidence beside them. But if Neo is off running aws and kubectl against my accounts, don't I risk things going wrong?
 -->
 
 ---
@@ -941,9 +891,7 @@ hide: true
 </div>
 
 <!--
-- There are four CLI integrations: AWS, Google Cloud, Azure, and Kubernetes. They live on the same settings page, in a separate CLI tools section.
-- Each one is named, for example production-aws and staging-aws. The name is how a task says which account it means, and you can connect several instances of the same CLI.
-- Each is backed by an ESC environment your org owns.
+No. The CLIs are four named integrations, each backed by an ESC environment your org owns.
 -->
 
 ---
@@ -979,11 +927,7 @@ layout: two-cols
 </div>
 
 <!--
-- Yes, Neo runs the AWS CLI against your account. It lists the buckets, describes the instance, checks the firewall rule. That is how it sees the parts Pulumi never managed.
-- Writing goes through Pulumi: a change to the program, a preview, a pull request. You merge, and Pulumi makes the change.
-- The CLI can only do what its credentials allow, and those come from an ESC environment your org owns. The one I attached emits a read-only role, so for my account the pull request is the only write path. That is my setup, not a product promise.
-- If an agent mutated your cloud through the CLI, it would create drift that no program describes. Reading is a lookup, and writing is a diff.
-- Over MCP Neo does write, by resolving the incident and commenting on the ticket. That is a different thing from mutating the cloud account.
+And it reads with the CLI and writes only through Pulumi. You choose the role, and with a read-only role the pull request is the only write path.
 -->
 
 ---
@@ -1092,10 +1036,7 @@ layout: two-cols
 </div>
 
 <!--
-- An admin enables an integration for the whole org, and any single task can switch it off in the composer, with no config change and no ticket.
-- Investigate staging without granting the task production.
-- Instances are named, and each carries a note Neo reads when it decides which to reach for: "compliance account, avoid mutations."
-- Org-level default, per-task override, and the override is two clicks rather than a permissions conversation.
+And you can turn any integration off for a single task, and each instance carries a note Neo reads. Org-level default, per-task override. That is the second category.
 -->
 
 ---
@@ -1108,6 +1049,10 @@ routeAlias: stage-runs
 ## the console, the terminal, your editor — and nobody at all
 
 <StageMap size="lg" />
+
+<!--
+Third category: where it runs.
+-->
 
 ---
 
@@ -1142,10 +1087,7 @@ It is the same agent, with the same integrations and permissions. Only the doorw
 </p>
 
 <!--
-- It is the same agent in four places: Pulumi Cloud, the terminal, your editor, and on a schedule.
-- Everything you watched today ran from the terminal.
-- Locally run surfaces, the terminal and the editor, inherit your setup: your pulumi login, the CLIs you're authenticated to, your kubeconfigs. Cloud-configured integrations belong to the org, and local ones are yours.
-- This is not four products. It is the same agent, with the same integrations and permissions, and only the doorway changes.
+Neo already ran in Pulumi Cloud. Now it is the same agent in four places: the console, the terminal, your editor, and on a schedule. Same integrations, same permissions. Only the doorway changes.
 -->
 
 ---
@@ -1169,10 +1111,7 @@ class: demo
 </style>
 
 <!--
-- One more from the terminal, the doorway everything today ran through. Forty roles in production, and half of them start with s3:* because nobody had time to scope them. You ask Neo to audit the policies against what the stack code actually calls and narrow them.
-- Neo cross-references each role's policy against what the stack code calls, then opens a PR per role, with the API calls it found listed in the body as the justification. The evidence sits next to the diff.
-- The PR body has the before-and-after table. s3:* becomes s3:ListBucket and s3:GetObject, scoped to the two audit-logs buckets.
-- That PR is closed, not merged.
+The terminal is where everything today ran. One more from it: forty roles, half starting with s3:*, and Neo narrows each one with the API calls it found as the justification in the PR body.
 -->
 
 ---
@@ -1230,9 +1169,7 @@ class: demo
 </div>
 
 <!--
-- Read the instruction as it is typed: every morning, read CIS Benchmark failures from Security Hub, and for every failure on an IaC-managed resource, open a PR with the fix.
-- That is the whole setup, with no schedule config, no runner, and no glue.
-- This is the one thing I cannot demo live, because a task that runs at 6 AM does not run at 12:45 PM. The next slide shows what showed up.
+And the schedule is the one where nobody is there. Set it once: every morning, read the benchmark failures, open a PR per fix.
 -->
 
 ---
@@ -1252,9 +1189,7 @@ class: demo
 </div>
 
 <!--
-- This is a pull request that exists because of a schedule, not because someone opened a session.
-- The body has the CIS rule number, the resource id, the diff, and a clean preview against live infra.
-- The real PR is neo-examples #9. It restricts bastion SSH from 0.0.0.0/0 to the VPC CIDR, and it was merged.
+So the next morning there is a PR that exists because of a schedule, not a session.
 -->
 
 ---
@@ -1283,11 +1218,7 @@ section it followed.</p>
 </div>
 
 <!--
-- Not every drift should be reverted. The security team's IAM rotation gets encoded, a console-added security group rule gets reverted, and autoscaler-managed concurrency gets ignored.
-- You write that down once. Neo reads it every morning and cites the section it followed, so the judgment stays in a file your team wrote.
-- The button opens a real one: a drift check on the prod-audit stack found an inline policy on the audit-reader role that the program never declared. Pulumi preview showed nothing, because inline policies are outside the role's declared schema, so Neo checked live IAM with the CLI.
-- It matched the "Security team rotations" section, quoted it in the PR body, and encoded the policy with an import rather than reverting it. Preview on the branch: one import, no infrastructure change.
-- It also went looking in CloudTrail for the PutRolePolicy event and said plainly that it could not find one, so the console-origin test was inferred from the policy's shape. That is the honesty you want from an unattended run.
+But not every drift should be reverted. So you write the runbook once, and Neo cites the section it followed. That is the third category.
 -->
 
 ---
@@ -1301,6 +1232,10 @@ routeAlias: stage-sowhat
 
 <StageMap size="lg" />
 
+<!--
+So what.
+-->
+
 ---
 layout: quote
 ---
@@ -1308,8 +1243,7 @@ layout: quote
 > Platform engineers used to keep these things in their heads. Then they delegated them to Neo. Then those tasks started running on a schedule, without anyone initiating them.
 
 <!--
-- Read it slowly. Platform engineers used to keep these things in their heads. Then they delegated them to Neo. Then those tasks started running on a schedule, without anyone initiating them.
-- Kept in their heads is the day-two list. Delegated is the ticket and the incident. On a schedule is the PR that was waiting this morning.
+Platform engineers used to keep these things in their heads. Then they handed them to Neo. Then the tasks started running on a schedule with nobody initiating them.
 -->
 
 ---
@@ -1375,9 +1309,7 @@ layout: quote
 </style>
 
 <!--
-- The output is a paper trail you can read, and every row is a live PR.
-- #9 restricts bastion SSH to the VPC. #7 removes unused infrastructure. #5 adds a burst node group. #1 narrows IAM policies, and it was closed rather than merged.
-- #9 is the best one to open: the policy rule name, the security group id, and the preview results are all in the body.
+And what it left behind is real PRs from real sessions, which you can click.
 -->
 
 ---
@@ -1412,10 +1344,7 @@ and hand infrastructure work over.</span></p>
 </div>
 
 <!--
-- The inbound half, GitHub and Slack, is the direction we named but didn't demo.
-- The Context API is a first step. Pulumi has said ESC environments, teams and ownership, and cloud accounts are next for the graph.
-- Claude Code and other agents can start a pulumi neo task and hand infrastructure work over.
-- The Sep 30 EMEA session with Engin is part two, and it goes further.
+Where this goes next: the inbound half we named but did not demo, more of the graph, handoff from other agents. Part two with Engin on Sep 30.
 -->
 
 ---
@@ -1448,12 +1377,7 @@ and hand infrastructure work over.</span></p>
 
 </div>
 
-<p class="!mt-7 !text-[1.35rem] opacity-80 text-center">All eight are in the repo README too — grab the QR on the next slide instead of typing.</p>
 
-<!--
-- The integrations post is the one this hour is built on, and the Context API post is less than two weeks old.
-- All eight links are in the repo README, so grab the QR on the next slide rather than typing.
--->
 
 ---
 layout: end
@@ -1461,33 +1385,69 @@ layout: end
 
 # Thanks
 
-<div class="flex justify-center gap-10 !mt-8">
-
-  <div class="text-center">
-    <img src="/img/qr-repo.png" class="w-52" alt="Workshop repo" />
-    <p class="!mt-3 !text-[1.15rem] opacity-80 !m-0">Slides &amp; repo</p>
+<div class="thanks">
+  <div class="people">
+    <div class="person">
+      <img class="face" src="/img/adam-gordon-bell.png" alt="Adam Gordon Bell" />
+      <div class="who">
+        <div class="name">Adam Gordon Bell</div>
+        <div class="handles">
+          <span><carbon-logo-linkedin /> adamgordonbell</span>
+          <span><carbon-logo-github /> adamgordonbell</span>
+          <span><carbon-logo-x /> @adamgordonbell</span>
+        </div>
+      </div>
+      <img class="qr" src="/img/qr-linkedin.png" alt="QR: linkedin.com/in/adamgordonbell" />
+    </div>
+    <div class="person">
+      <img class="face" src="/img/engin-diri.jpg" alt="Engin Diri" />
+      <div class="who">
+        <div class="name">Engin Diri</div>
+        <div class="handles">
+          <span><carbon-logo-linkedin /> engin-diri</span>
+          <span><carbon-logo-github /> dirien</span>
+          <span><carbon-logo-x /> @_ediri</span>
+        </div>
+      </div>
+      <img class="qr" src="/img/qr-engin.png" alt="QR: linkedin.com/in/engin-diri" />
+    </div>
   </div>
 
-  <div class="text-center">
-    <img src="/img/qr-blog.png" class="w-52" alt="Ten More Things blog post" />
-    <p class="!mt-3 !text-[1.15rem] opacity-80 !m-0">Ten More Things</p>
+  <div class="links">
+    <div class="link">
+      <img src="/img/qr-blog.png" alt="Ten More Things blog post" />
+      <p>Ten More Things</p>
+    </div>
+    <div class="link">
+      <img src="/img/qr-docs.png" alt="Neo integrations docs" />
+      <p>Integrations docs</p>
+    </div>
+    <div class="link">
+      <img src="/img/qr-emea.png" alt="EMEA session Sep 30" />
+      <p>Part 2 · EMEA · Sep 30</p>
+    </div>
   </div>
-
-  <div class="text-center">
-    <img src="/img/qr-docs.png" class="w-52" alt="Neo integrations docs" />
-    <p class="!mt-3 !text-[1.15rem] opacity-80 !m-0">Integrations docs</p>
-  </div>
-
-  <div class="text-center">
-    <img src="/img/qr-emea.png" class="w-52" alt="EMEA session Sep 30" />
-    <p class="!mt-3 !text-[1.15rem] opacity-80 !m-0">EMEA — Sep 30</p>
-  </div>
-
 </div>
 
-<p class="!mt-10 !text-[1.9rem] !font-semibold text-center">Questions?</p>
+<style scoped>
+.thanks { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 2rem; position: relative; z-index: 2; }
+.people { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.person {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.4rem;
+  padding: 1.1rem 1.4rem; border: 2px solid var(--p-border); border-radius: 1.2rem;
+  background: var(--p-bg);
+}
+.face { width: 8.5rem; height: 8.5rem; object-fit: cover; border-radius: 1rem; }
+.name { font-size: 1.8rem; font-weight: 600; color: var(--p-primary); line-height: 1.1; }
+.handles { margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.25rem; font-size: 1.05rem; opacity: 0.75; }
+.handles span { display: flex; align-items: center; gap: 0.45rem; }
+.person .qr, .link img { background: #fff; border-radius: 0.6rem; padding: 0.35rem; box-sizing: border-box; }
+.person .qr { width: 8.5rem; height: 8.5rem; }
+.links { display: flex; justify-content: center; gap: 4rem; }
+.link { text-align: center; background: var(--p-bg); padding: 0.6rem 0.9rem; border-radius: 0.8rem; }
+.link img { width: 8rem; height: 8rem; margin: 0 auto; }
+.link p { margin: 0.5rem 0 0; font-size: 1.05rem; opacity: 0.8; }
+</style>
 
-<!--
-- Slides and the repo, the Ten More Things post, the integrations docs, and the EMEA session on Sep 30.
-- Questions.
--->
+<p class="!mt-4 !text-[1.7rem] !font-semibold text-center">Questions?</p>
+
