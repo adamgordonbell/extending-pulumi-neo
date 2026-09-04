@@ -78,12 +78,11 @@ in `docs/credentials.md` if it ever comes back. The Sep 4 run read AWS via
 - [ ] **Clip re-exports to 16:9**, optional. Raws probably in `~/Screen Studio Projects/`.
 - [ ] **Scan the thanks slide once with a phone.** Six codes, all decode-verified Sep 4.
 
-### 5. People and pages
+### 5. People and pages — done
 
-- [ ] **Engin needs the deck and a heads-up** for Sep 30: part two, and the Custom Agents
-      guard may not hold for his date (see Things not to say). Adam sends.
-- [ ] **Merge [pulumi/docs#21175](https://github.com/pulumi/docs/pull/21175)** so the
-      Americas event page says 60 min, not 90.
+- [x] Engin: nothing to send. He is on vacation; the deck lives in this repo and the Custom
+      Agents note is under Things not to say. He picks it up for Sep 30 on his own.
+- [x] [pulumi/docs#21175](https://github.com/pulumi/docs/pull/21175) merged; event page says 60 min.
 
 ### 6. Repo
 
