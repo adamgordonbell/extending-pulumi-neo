@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useNav } from '@slidev/client'
 
 // Corner stage strip. Hidden on the slides that own the whole canvas — the cover,
@@ -14,6 +14,17 @@ const fm = computed(() => nav.currentSlideRoute?.value?.meta?.slide?.frontmatter
 const hidden = computed(() => {
   const f = fm.value
   return /^stage-/.test(f.routeAlias ?? '') || ['cover', 'end'].includes(f.layout)
+})
+
+// Any demo clip goes full screen on click, and Esc brings it back. One
+// listener on the document so it covers every slide without per-slide code.
+onMounted(() => {
+  document.addEventListener('click', (e) => {
+    const v = e.target?.closest?.('.demo-stage video')
+    if (!v) return
+    if (document.fullscreenElement) document.exitFullscreen()
+    else v.requestFullscreen?.()
+  })
 })
 </script>
 

@@ -1,226 +1,129 @@
 # TODO — Extending Pulumi Neo (Sep 8, 2026)
 
-Short list. Everything here needs a human — either only you can do it, or we do it together.
-Build-only work I can do alone isn't listed; it lives in git.
+The plan of record for what is left. Reconciled **Sep 2, late** after the build day.
+Everything here needs a human; build-only work lives in git. Presenter-only staging
+(clock, cuts, per-slide don'ts, rerun prompts) is in the gitignored `INTERNAL.md`.
 
-## Only you can do these
+## What's left, in the order it should happen
 
-- [x] ~~Ask Engin anything.~~ **Dropped (Adam, Aug 27), draft deleted.** Both
-      questions answered without him: a PagerDuty trial covers the demo, and
-      Custom Agents are still unannounced (see `docs/since-launch.md`). He
-      still presents the **Sep 30 EMEA repeat**, so he needs the deck — and he
-      needs telling that the Custom Agents ⛔ may not hold for his date, since
-      his Sep 23 AKS session lands between the two runs.
-- [x] ~~Start the PagerDuty trial.~~ **Started Sep 2** → expires **Sep 16**; Sep 8
-      is day 6. Account `pulumi-bot-test.pagerduty.com`, one user ("Adam Bell",
-      `v-adam+pulumi-trail@`, owner) — the account-level API key is the stack
-      secret. If Neo's MCP connect wants a *user* token, mint one from that
-      user's profile (and optionally rename the user to pulumi-bot for stage
-      attribution).
-- [x] ~~Connect the integrations~~ **Connected Sep 2** (Adam): PagerDuty MCP
-      verified working (Neo read incident #1 via `pagerduty__browse_incidents`).
-      Still to verify: **which env the AWS CLI integration points at** — ⛔ must
-      be the read-only environment, not `shared/cloud-creds` (AdministratorAccess,
-      verified) — and `esc-readonly-role` **has not been deployed yet**, so if
-      nothing else was picked, the integration may be on admin creds. Settle
-      this with the precedence test below.
-- [x] ~~Confirm the org login slug.~~ It's `adamgordonbell-org` (confirmed via
-      `pulumi whoami -v`). Slides and `pulumi env run` examples updated.
-- [x] ~~Pick the repo remote~~ — **`adamgordonbell/*`**, settled Sep 2 by
-      `demo.md`'s clone lines and the `neo-workshop-incident` push. QR can be
-      generated once THIS repo passes the pre-public leak pass and pushes.
-- [x] ~~Check the live event page duration.~~ pulumi.com said **90 min** on the
-      Americas tab (EMEA already said 60). Fixed in
-      [pulumi/docs#21175](https://github.com/pulumi/docs/pull/21175) — merge it and
-      the page is right. There is no Luma; registration is a gated HubSpot form on
-      pulumi.com, delivery is BigMarker `f4d6709a7b01`.
+### 1. Timed run-through (the one that decides the rest)
 
-## AWS account — settled
+- [ ] **Full run-through against the clock.** 60 minutes, three live moments (Context
+      API query, Linear, PagerDuty), four clips. Needs the incident stack up first
+      (`pulumi up` in `demo/pulumi-ts`, ~5 min) and a trigger at the top of the ask beat.
+- [ ] **Decide the ask / delegate / scope dividers.** Still in; Adam wanted to judge them
+      in the walk-through. The corner strip only tracks the five big sections, so hiding
+      them breaks nothing.
+- [ ] **Judge scope at four slides** (divider, Four of them, reads-with-CLI, per-task
+      toggles). If it feels thin, the hidden `pulumi env run` slide comes back once the
+      read-only claim is true (item 3).
+- [ ] **Then delete the seven hidden slides** or un-hide the keepers. They are `hide: true`
+      in `slides/slides.md`; list in `INTERNAL.md`.
 
-**It's the work demo account.** `616138583583` — the same one your local `work-demo`
-SSO profile points at. **ESC → AWS OIDC verified working Aug 25**: `pulumi up` created
-an S3 bucket in 5s, `pulumi destroy` removed it.
+### 2. The unmanaged-security-group beat (decide, don't leave conditional)
 
-The credential reasoning — why not `shared/cloud-creds`, what the read-only environment
-is for, and how the precedence test is designed — lives in
-[`docs/credentials.md`](docs/credentials.md). Don't restate it here.
+The incident demo's notes and the delegate "What just happened" slide still mention a
+security group open on 5432 that no program describes. It only exists if
+`create-unmanaged.sh` has been run, and in the Sep 2 rehearsal Neo invented one.
 
-## Together, Thursday Aug 27 build block
+- [ ] **Arm it or cut it.** Arm: `create-unmanaged.sh` after `pulumi up`, confirm
+      `pulumi stack --show-urns | grep -i security` prints nothing, and add the nudge
+      prompt to the rehearsal. Cut: drop the bullet from the slide and the two lines from
+      the notes.
+- [ ] **If armed, time the Context API index lag** (`unmanaged-security-groups.json` on a
+      clock) so the "index vs live" line in the notes is measured, not guessed.
 
-- [x] ~~Upgrade the Pulumi CLI.~~ v3.237.0 → **v3.259.0** (Aug 27). Clears both
-      bars: `pulumi api` needs 3.243.0+, `pulumi neo acp` needs 3.254.0+.
-      Homebrew needed `brew trust pulumi/tap` first (official tap, already the
-      install source).
-- [ ] **Time the Context API index lag.** After `create-unmanaged.sh`, run
-      `pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-groups.json`
-      (from `demo/context-api/`) on a clock and
-      find out how long the scan takes to notice the new group. The demo-2 beat
-      depends on the answer: index-behind-live if slow, "here's when it
-      noticed" if fast. Don't script the punchline until this is measured.
-- [x] ~~`pulumi up` `demo/pulumi-ts`~~ **Deployed, rehearsed end-to-end, and torn
-      down again — all Sep 2.** Full chain worked: trigger → page (2m53s) → Neo
-      read the incident over MCP → fix PR. PR #1 **closed unmerged** (⛔ never
-      merge a fault-fix PR before the Sep 30 EMEA repeat — merging un-plants
-      FAULT 1). Stack config survives teardown; re-setup is `pulumi up` (~5 min)
-      + two triggers, morning of Sep 8. The code now lives in its own repo:
-      `adamgordonbell/neo-workshop-incident` (checkout at `demo/pulumi-ts`,
-      gitignored — keep it on `main`, the branch with the bug).
-- [ ] `pulumi up` **`esc-readonly-role`** (now in the incident repo). Still only
-      typechecks — and the AWS CLI integration needs its env (see above).
-- [ ] **Credential-precedence test.** The open question: when `pulumi neo` runs
-      locally and asks for `aws`, does it resolve the org's ESC integration or
-      your laptop credentials? Docs don't say. The read-only role makes this
-      decidable — if it can't write, ESC won.
-- [ ] **Decide beat 5** — scheduled automations, or the editor integration.
-- [ ] **Arm the unmanaged-resource finding**: `demo/create-unmanaged.sh` after
-      `pulumi up`, then confirm Pulumi can't see it —
-      `pulumi stack --show-urns | grep -i security` should print nothing.
-      Reset between rehearsals with `demo/cleanup.sh` (calls
-      `remove-unmanaged.sh`), re-arm with `create-unmanaged.sh`.
-- [ ] **Decide: does the scope section keep the IAM video, or lean on demo 2?**
-      Demo 2 now surfaces an unmanaged resource, which makes the scope argument
-      live rather than recorded. The `iam-narrow` video may now be redundant.
-      Judge it in the run-through.
-- [ ] **A 5th QR: sign up / try Neo.** Slides 7–8 now tell the room to go play with
-      it, and the closing slide has no way to act on that. Add one to
-      `scripts/make-qr.py` alongside repo / blog / docs / EMEA.
-- [ ] **Time the opening.** The stage-setter is budgeted at 90s + 30s. `why` was
-      already the shortest beat; check it hasn't eaten into `ask`.
-- [ ] Full run-through against the clock. 60 minutes, two live demos.
+### 3. Credentials: make the read-only story true, or say less
 
-## The `ask` movement — what it still needs
+Slide "It reads with the CLI" now says "give it a read-only role, as I did." On Sep 2 the
+local `pulumi neo` runs used ambient admin credentials with no aws CLI integration
+connected. Reasoning in `docs/credentials.md`.
 
-Restructured Aug 27 (slides 19–22). Three loose ends:
+- [ ] `pulumi up` **`esc-readonly-role`** (in the incident repo). Still only typechecks.
+- [ ] **Connect the aws CLI integration to that environment** (⛔ not `shared/cloud-creds`).
+- [ ] **Precedence test:** with the integration on, does a local `pulumi neo` use the ESC
+      role or the laptop creds? Read-only makes it decidable. Until then, the slide's "as I
+      did" is the thing to soften.
 
-- [ ] **Tape your own Linear run.** `neo-linear.mp4` isn't your footage and is
-      no longer wired in as the fallback. You'll run this repeatedly in
-      rehearsal, so the clip is free — capture one good complete run and make it
-      the safety net for slide 21.
-- [ ] **Consider re-taping the connect clip with Linear.** Slide 19 currently
-      shows Honeycomb being connected and slide 21 uses Linear. Nobody may
-      notice, but same-integration would make the movement seamless — and you'll
-      be in that UI anyway.
-- [ ] **Slide 22's PR link is a placeholder** (`neo-examples#5`). Swap it for
-      whatever the rehearsal run actually opens, so the receipt is a receipt for
-      the thing they just watched.
+### 4. Assets
 
-## Polish pass — de-risk the demos, then make the slides visual
+- [ ] **Editor slide has no demo.** Clip or talking slide; the Aug 27 plan was a Zed clip.
+      Decide in the run-through. A clip is safer than a fourth live surface.
+- [ ] **Re-tape the Linear fallback.** `neo-linear.mp4` is not Adam's footage (different
+      encoder pipeline, different org). Every rehearsal run is a free capture; keep one.
+- [ ] **Clip re-exports to 16:9**, optional polish. Raws are probably in
+      `~/Screen Studio Projects/` (8 bundles, mapping unconfirmed; open them to match).
+      Hide the chrome, zoom the app not the video.
+- [ ] **QR codes.** The closing slide's repo QR points at `github.com/PLACEHOLDER`.
+      Regenerate with `scripts/make-qr.py` once this repo is public (item 5), and add a
+      5th QR for "go try Neo" (app.pulumi.com) since slide 7 tells the room to.
+- [x] ~~Verify the Neo task URL shape.~~ Confirmed by Adam Sep 3:
+      `app.pulumi.com/adamgordonbell-org/neo/tasks/<task-id>`. Deck links the drift
+      session (9dd90791) and the Linear session (40c356f4).
 
-Adam, Aug 27: not today, but this is the shape of the remaining work. Two passes,
-in this order — the demo decisions change what the slides have to say.
+### 5. ⛔ Before this repo goes public
 
-**1. Lower the lift at presentation time.** The goal is that nothing on stage
-depends on a model finishing a task while 200 people watch.
+Attendees clone it (QR on the closing slide). Scanned Aug 27; still to do:
 
-- [ ] **Decide live vs recorded per demo, deliberately.** Currently three live
-      (slide 12 Insights, 20 Linear, 25 PagerDuty) and four recorded (16, 33,
-      38, 39). Every live one is a place the clock can run away.
-- [ ] **Pre-bake Neo sessions to walk through** rather than start cold. A
-      finished session with visible task history, opened and read aloud, shows
-      the same thing as a live run and costs seconds instead of minutes. This
-      overlaps with "Neo Cloud sessions to recreate" below — same work, and it
-      now has a second reason.
-- [ ] **Prefer artifacts over runs.** A merged PR is instant, permanent, and
-      can't fail; the deck already links four. Where a beat can end on a PR
-      instead of a completion, it should.
-- [ ] **Tape more in Neo while the demos are being built**, not after. Every
-      real run is a free clip if it's being captured at the time.
+- [ ] **`docs/PLAN.md`** — eight internal Slack permalinks incl. a private DM, an
+      "all internal, pre-launch" section, an unannounced launch. Drop it from the tree.
+- [ ] **AWS account `616138583583`** in `docs/PLAN.md`, `docs/credentials.md` → placeholder.
+- [ ] **`docs/since-launch.md`** — four internal Slack permalinks; re-cite to public sources.
+- [ ] `INTERNAL.md` stays gitignored.
+- [ ] Before pushing: `git grep -niE "slack.com|616138583583|pre-launch|agent teams"`
+- [ ] Commit `slides/` and push; then QR.
 
-**2. Make the recorded clips look legit.** Right now they don't fill the frame:
+### 6. People and pages
 
-| clip | size | aspect | duration |
-|---|---|---|---|
-| honey-comb | 1440×1080 | 4:3 | 24s |
-| iam-narrow | 1686×868 | ~1.94:1 | 60s |
-| neo-schedule-setup | 1440×1080 | 4:3 | 18s |
-| neo-cis-pr | 1440×864 | 5:3 | 17s |
-| neo-linear (fallback) | 1736×1080 | ~1.6:1 | 76s |
+- [ ] **Engin needs the deck and a heads-up** for Sep 30: part two, and the Custom Agents
+      ⛔ may not hold for his date. Adam sends.
+- [ ] **Merge [pulumi/docs#21175](https://github.com/pulumi/docs/pull/21175)** so the
+      Americas event page says 60 min, not 90.
 
-- [ ] **Re-export, don't re-record — the Screen Studio raws are still here.**
-      All six clips came from the "10 more things" blog post (they're in
-      `~/sandbox/docs/content/blog/10-more-things-you-can-do-with-neo/`, shipped
-      May 19 2026), sized for an inline blog figure. That's the whole reason
-      none of them are 16:9.
-      `~/Screen Studio Projects/` holds 8 bundles, 4.7 GB, captured at retina
-      (2560×1600 → 3840×2160) — including `deploy-to-aws.screenstudio` and its
-      `-edited` sibling, near-certainly the source of `deploy-to-aws2.mp4`, plus
-      three Chrome captures from May 11–15 that bracket the blog post's date.
-      ⚠️ **The 1:1 mapping is unconfirmed** — the bundles are named app +
-      timestamp and their fragmented MP4s don't probe for duration. Opening the
-      8 projects in Screen Studio is the quick way to match them to clips.
-      If they match, this stops being a re-record and becomes a re-export at
-      1920×1080 with the framing/zoom set in the editor — hours cheaper.
-      Nothing is in the Beta app's store (9 MB, raws long gone).
-- [ ] **`neo-linear.mp4` is not Adam's footage — replace it, don't re-export.**
-      Adam, Aug 27: "the linear one wasn't by me, that is for sure." The file
-      metadata agrees. The other five clips were all muxed by `Lavf61.7.100`
-      and carry a stream-level `Lavc61.19.101 libx264` encoder tag; `neo-linear`
-      was muxed by `Lavf59.16.100` and carries no stream encoder tag at all —
-      a different pipeline. It's also 30fps at 1.6 Mbps against a house style of
-      20fps at 0.4–0.7 Mbps, and it's the only clip with no candidate raw in
-      `~/Screen Studio Projects/`.
-      ⚠️ This matters more than the framing: the deck uses it as the **fallback
-      for the live Linear demo** (slide 20 notes — "play /video/neo-linear.mp4
-      (76s), it's the same thing"). A fallback you reach for under time pressure
-      should not be someone else's screen and someone else's org. Re-tape it —
-      which is the same work as pre-baking the Linear demo, already on this list.
-- [ ] **Hide the chrome.** `iam-narrow`'s notes already say Chrome is hidden;
-      make that the rule for all of them — no tab bar, no bookmarks, no dock.
-- [ ] **Zoom the app, not the video.** Browser zoom before capture keeps text
-      sharp; scaling a small capture up on the slide does not.
+### 7. Morning of Sep 8
 
-**3. Then the visual pass on the slides.** Many are still paragraphs.
+Checklist with commands is in `INTERNAL.md` (pre-flight). Headline: `pulumi up` the
+incident stack, trigger twice (resolve one, keep one spare), re-run the Context API
+counts, click every demo button once in the right Chrome profile.
 
-- [ ] Go slide by slide and cut prose to the one thing being said out loud,
-      moving the rest into speaker notes. **The notes are the presenter's
-      script — losing them to make a slide pretty is a regression, not a win.**
-      Every fact that tells Adam how to walk the beat stays in the deck, just
-      below the fold rather than on the wall.
-- [ ] Reach for the three-box map on slide 8 as the pattern: it replaced a
-      bullet list and carries more.
+## Settled (don't re-open)
 
-## ⛔ Before this repo goes public
+- **PagerDuty trial** started Sep 2, expires Sep 16 (Sep 8 = day 6). Account
+  `pulumi-bot-test.pagerduty.com`, one user (`v-adam+pulumi-trail@`, owner); the
+  account-level key is the stack secret. MCP verified: Neo read incident #1.
+- **Linear** test workspace `agb-demo-test`, ticket
+  <https://linear.app/agb-demo-test/issue/PUL-5/add-versioning-to-the-staging-bucket>.
+- **Incident demo** proven end to end Sep 2: trigger → page in 2m53s → Neo read it over
+  MCP → fix PR. Code lives in `adamgordonbell/neo-workshop-incident` (checkout at
+  `demo/pulumi-ts`, gitignored, stays on `main`). Stack destroyed, config kept; re-up is
+  one `pulumi up`. ⛔ Never merge a fault-fix PR before Sep 30 (un-plants FAULT 1).
+- **Drift demo** is real: `adamgordonbell/neo-drift-demo` (prod-audit stack, bucket +
+  `audit-reader` role + `infra/runbooks/drift.md`). Local `pulumi neo -p` drift check opened
+  PR #1 citing the runbook; infra destroyed after, stack kept empty. ⛔ Leave PR #1 open (it
+  is an import; the role is gone). Rerun prompt in `INTERNAL.md`.
+- **AWS account** is the work demo account (`work-demo` SSO profile); ESC → AWS OIDC verified.
+- **Pulumi CLI** v3.259.0 (needs 3.254+ for `pulumi neo acp`).
+- **Org** is `adamgordonbell-org` = the corecursive Google account = Chrome *Default* profile.
+- **Repo remotes** are all `adamgordonbell/*`.
+- **Event page:** gated HubSpot form on pulumi.com, delivery BigMarker `f4d6709a7b01`, no Luma.
+- **Deck conventions (Sep 2):** one `demo.md` tutorial, no presenter script; speaker notes are
+  talking points only; demo slides carry `class: demo` (tint + bar + watermark) and show
+  title + one button, never the finding; clips go full screen on click.
+- **Beat 5** is settled: both the editor and scheduled tasks have slots in `runs`.
+- **IAM clip stays** (Adam likes it); scope leans on it plus per-task toggles.
 
-The repo ships to attendees (QR on the closing slide) and **has no remote yet** — which
-makes now the cheap moment to decide, since git history is permanent once pushed.
-Adam's call (Aug 27): keep everything here for working, clean up before release.
+## Linkable artifacts (all wired into the deck)
 
-Scanned Aug 27, tracked files that need a pass:
-
-- [ ] **`docs/PLAN.md`** — the worst of it. Eight internal Slack permalinks including a
-      **private DM**, a section headed "all internal, pre-launch", and an unannounced
-      **September "agent teams" launch**. It's already marked superseded; the simplest
-      answer is to drop it from the published tree rather than redact it line by line.
-- [ ] **AWS account `616138583583`** appears in `TODO.md`, `docs/PLAN.md`,
-      `docs/credentials.md`. Not a secret, but not for broadcast — swap for a placeholder.
-- [ ] **`docs/since-launch.md`** — four internal Slack permalinks. The *facts* are public
-      (blog posts, changelog, docs); re-cite them to the public sources and drop the links.
-- [ ] **`INTERNAL.md`** — already gitignored, keep it that way. Pre-release Custom Agents
-      detail; nothing in it may reach a slide, the README, or the stage.
-- [ ] Re-run the check before pushing:
-      `git grep -niE "slack.com|616138583583|pre-launch|agent teams"`
-
-## Linkable artifacts
-
-Demo slides now carry a click-through button, so each one needs a real URL.
-
-**PRs that already exist** (wired into the deck):
-
-| Slide | PR | State |
+| Where | Link | State |
 |---|---|---|
-| Every demo ends in a PR | [neo-examples#9](https://github.com/adamgordonbell/neo-examples/pull/9) — restrict bastion SSH to VPC | merged |
-| Unused resources | [neo-examples#7](https://github.com/adamgordonbell/neo-examples/pull/7) — remove 3 unused resources | merged |
-| Burst capacity | [neo-examples#5](https://github.com/adamgordonbell/neo-examples/pull/5) — add burst node group | merged |
-| IAM narrowing | [iam-narrow-demo#1](https://github.com/adamgordonbell/iam-narrow-demo/pull/1) — narrow to least privilege | closed |
+| Runs · next morning; trail | [neo-examples#9](https://github.com/adamgordonbell/neo-examples/pull/9) restrict bastion SSH | merged |
+| Trail | [neo-examples#7](https://github.com/adamgordonbell/neo-examples/pull/7) remove unused resources | merged |
+| Trail | [neo-examples#5](https://github.com/adamgordonbell/neo-examples/pull/5) burst node group | merged |
+| Scope · IAM clip; trail | [iam-narrow-demo#1](https://github.com/adamgordonbell/iam-narrow-demo/pull/1) narrow IAM | closed (say closed) |
+| Runs · runbook; trail | [neo-drift-demo#1](https://github.com/adamgordonbell/neo-drift-demo/pull/1) encode inline policy | open, leave open |
+| Ask · what just happened | [neo-workshop-incident#2](https://github.com/adamgordonbell/neo-workshop-incident/pull/2) staging bucket versioning | open, leave open |
+| (rehearsal only) | [neo-workshop-incident#1](https://github.com/adamgordonbell/neo-workshop-incident/pull/1) fix dead-lettering | closed unmerged |
 
-`iam-narrow-demo#1` is closed rather than merged. Fine to click into — the diff
-and the evidence-in-the-PR-body point both still read — but don't call it merged
-on stage.
-
-- [ ] **Neo Cloud sessions to recreate.** The PRs survived; the sessions behind
-      them didn't leave links in the PR bodies. For the "browse previous sessions,
-      then show the PRs they produced" slide we need 3–4 sessions in the demo org
-      with visible task history. Recreating them also re-runs the work, which
-      would produce fresh PRs we could link instead of the old ones.
-      Worth doing on Aug 27 if there's time; the slide degrades to just the PRs
-      if not.
+Neo tasks in the org from Sep 2 (visible task history, so the "browse sessions" idea is
+now possible): drift check `9dd90791`, CIS benchmark ×2, Linear ticket `40c356f4`, dead-
+lettering fix `e6747aa4`, PagerDuty investigation `60843786`.
