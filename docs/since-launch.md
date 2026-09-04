@@ -115,7 +115,7 @@ produce a wrong answer rather than an error":
 So the honest distinction is **index versus live**, not "can't see it at all":
 the graph is a periodically-ingested index that explicitly disclaims freshness;
 the CLI reads the account right now. A security group created minutes ago —
-which is exactly what `create-unmanaged.sh` does — is the case the primer says
+which is exactly what `add-db-sg.sh` does — is the case the primer says
 the index may miss.
 
 **Say it that way on stage.** Do not claim the graph cannot see unmanaged

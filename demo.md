@@ -58,16 +58,16 @@ Deploy the payment pipeline Neo will diagnose, plus the entire PagerDuty side
 
 ```bash
 pulumi up                # ~5 min; the RDS instance is the slow part
-./create-unmanaged.sh    # the fault that is NOT in the program (see below)
+./add-db-sg.sh           # the fault that is NOT in the program (see below)
 ./prewarm.sh             # 9 checks, all must be ok
 pulumi stack --show-urns | grep -i security   # expect nothing
 ```
 
-The program carries three deliberate faults — see the `FAULT` comments in
-[`index.ts`](https://github.com/adamgordonbell/neo-workshop-incident/blob/main/index.ts)
-and the write-up in `FINDINGS.md` beside it. `create-unmanaged.sh` plants a fourth
-one outside the program: a security group open to the world on 5432, created with
-the raw aws CLI and attached to the database, standing in for "somebody opened the
+The program carries three deliberate faults, written up in
+[`docs/FINDINGS.md`](docs/FINDINGS.md) here, not in the incident repo: nothing in
+Neo's working directory names them. `add-db-sg.sh` plants a fourth one outside
+the program: a security group open to the world on 5432, created with the raw
+aws CLI and attached to the database, standing in for "somebody opened the
 console at 2am and never came back." Nothing in Pulumi state describes it, so Neo
 can only find it by reading the live account. `cleanup.sh` removes it again.
 
@@ -157,7 +157,7 @@ pulumi neo
 > database is running that this program doesn't describe. Open a PR.
 
 Neo reads the incident over the PagerDuty MCP, reads live queue state through
-the `aws` CLI integration, and lands on FAULT 1 — `maxReceiveCount: 1`, no
+the `aws` CLI integration, and lands on fault 1 — `maxReceiveCount: 1`, no
 retry, every transient failure dead-letters. The second sentence of the prompt
 is what sends it to the planted security group; without it, Neo stays inside
 the program. Expect it to report the open rule and the mitigating factor (the
@@ -175,7 +175,7 @@ Reset between runs:
 
 ```bash
 ./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves; removes the planted security group
-./create-unmanaged.sh        # re-plant it before the next run
+./add-db-sg.sh        # re-plant it before the next run
 git checkout main
 ```
 

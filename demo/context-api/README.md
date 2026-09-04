@@ -84,7 +84,7 @@ itself, under "Traps that produce a wrong answer rather than an error":
 > carries real stakes — deleting "unused" infrastructure, a compliance
 > attestation — confirm against stack state before acting.
 
-`create-unmanaged.sh` makes a security group minutes before the demo. That is
+`add-db-sg.sh` makes a security group minutes before the demo. That is
 exactly the resource the primer says the index may not have yet.
 
 **Which makes a better beat than either half alone.** Ask the graph, get

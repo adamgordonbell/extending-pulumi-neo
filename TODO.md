@@ -13,7 +13,7 @@ slide, the speaker notes are these lines): `~/para/scratch/neo-workshop-causal-c
 
 | Step | Result | Time |
 |---|---|---|
-| `pulumi up` + `create-unmanaged.sh` + `prewarm.sh` | 16 resources, 9/9 ok | 5 min |
+| `pulumi up` + `add-db-sg.sh` + `prewarm.sh` | 16 resources, 9/9 ok | 5 min |
 | Context API query | 1305 / 144, matches slide 13 | seconds |
 | Linear ticket → PR #3 + comment on PUL-5 | passed | 4 min 36 s |
 | trigger → PagerDuty page | passed | 2 min 33 s |
@@ -51,18 +51,14 @@ Today's run left residue that would change what Neo does next time.
       the block below; the security group is re-planted by that block. Teardown order is
       `cleanup.sh` then `destroy`; both scripts were fixed today (incident repo 8a020f7, eceb855).
 
-### 2b. ⚠ The answer key is in Neo's working directory
+### 2b. Answer key — stripped Sep 4
 
-Both Sep 4 runs read `index.ts`, `FINDINGS.md` and `create-unmanaged.sh` within the first
-minute. `index.ts` says "deliberate configuration faults for Neo to find, documented in
-FINDINGS.md" and marks each one `FAULT 1/2/3`; `FINDINGS.md` is titled "What Neo is
-supposed to find"; Neo's PR body even says "this stack backs a repeatable incident demo."
-The PagerDuty and aws reads are real, but the diagnosis is not earned.
-
-- [ ] **Strip the tells from the incident repo's `main`:** remove the header paragraph and
-      the `FAULT` comments from `index.ts`; move `FINDINGS.md` and the explanatory headers
-      of `create-unmanaged.sh` / `remove-unmanaged.sh` into this repo under `docs/`.
-      Adam's call; it changes what the room and the PR body say.
+Both Sep 4 runs read `index.ts`, `FINDINGS.md` and the security-group script within the
+first minute, and all three named the faults. Incident repo 199eacd removed the header
+paragraph and the `FAULT` comments from `index.ts` (code unchanged, tsc clean), moved
+`FINDINGS.md` to `docs/FINDINGS.md` here, and renamed the scripts to `add-db-sg.sh` /
+`remove-db-sg.sh` with neutral headers. The run-through (item 1) is the first run against
+the clean checkout; if Neo still lands on `maxReceiveCount` it earned it.
 
 ### 3. Credentials — settled Sep 4: say less
 
@@ -98,7 +94,7 @@ in `docs/credentials.md` if it ever comes back. The Sep 4 run read AWS via
 ```bash
 export AWS_PROFILE=work-demo && aws sso login --profile work-demo
 pulumi login && pulumi whoami -v        # expect org: adamgordonbell-org
-cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts && pulumi up && ./create-unmanaged.sh && ./prewarm.sh
+cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts && pulumi up && ./add-db-sg.sh && ./prewarm.sh
 cd ../context-api && pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.json
 ```
 
