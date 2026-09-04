@@ -57,13 +57,19 @@ Deploy the payment pipeline Neo will diagnose, plus the entire PagerDuty side
 (team, rotation, escalation policy, service, CloudWatch integration):
 
 ```bash
-pulumi up          # ~5 min; the RDS instance is the slow part
-./prewarm.sh       # 9 checks, all must be ok
+pulumi up                # ~5 min; the RDS instance is the slow part
+./create-unmanaged.sh    # the fault that is NOT in the program (see below)
+./prewarm.sh             # 9 checks, all must be ok
+pulumi stack --show-urns | grep -i security   # expect nothing
 ```
 
-The program carries deliberate faults — see the `FAULT` comments in
+The program carries three deliberate faults — see the `FAULT` comments in
 [`index.ts`](https://github.com/adamgordonbell/neo-workshop-incident/blob/main/index.ts)
-and the write-up in `FINDINGS.md` beside it.
+and the write-up in `FINDINGS.md` beside it. `create-unmanaged.sh` plants a fourth
+one outside the program: a security group open to the world on 5432, created with
+the raw aws CLI and attached to the database, standing in for "somebody opened the
+console at 2am and never came back." Nothing in Pulumi state describes it, so Neo
+can only find it by reading the live account. `cleanup.sh` removes it again.
 
 ## 1. What it knows — one query against the Context API
 
@@ -139,12 +145,17 @@ pulumi neo
 
 > We're getting paged. Check PagerDuty for the open incident, find out why
 > payment messages are dead-lettering, and fix the cause in this program.
-> Open a PR.
+> While you are in the account, check whether anything attached to the
+> database is running that this program doesn't describe. Open a PR.
 
 Neo reads the incident over the PagerDuty MCP, reads live queue state through
 the `aws` CLI integration, and lands on FAULT 1 — `maxReceiveCount: 1`, no
-retry, every transient failure dead-letters. The fix arrives as a PR on your
-fork; the incident resolves back in PagerDuty.
+retry, every transient failure dead-letters. The second sentence of the prompt
+is what sends it to the planted security group; without it, Neo stays inside
+the program. Expect it to report the open rule and the mitigating factor (the
+database is not publicly accessible), and to adopt and narrow the group in the
+same PR rather than delete it. The fix arrives as a PR on your fork; the
+incident resolves back in PagerDuty.
 
 Reset between runs:
 

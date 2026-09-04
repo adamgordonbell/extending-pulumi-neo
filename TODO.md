@@ -16,27 +16,27 @@ slide, the speaker notes are these lines): `~/para/scratch/neo-workshop-causal-c
       click-throughs (runbook PR, the PR trail). Needs the incident stack up first:
       `aws sso login --profile work-demo`, then `pulumi up` in `demo/pulumi-ts` (~5 min),
       then fire `./trigger-incident.sh` at the top of the Linear beat.
-- [ ] **Unmanaged security group: arm or cut** (decision pending, see below).
+- [ ] **Unmanaged security group is armed** via `demo.md` setup (`create-unmanaged.sh` +
+      the second sentence of the incident prompt). Watch in the run-through whether Neo
+      reports it without the nudge going further; if it stays flaky, cut (item 2).
 - [ ] **After the run-through, delete the eleven hidden slides** or restore keepers.
       `hide: true` in `slides/slides.md`: It's a toggle · Every demo ends the same way ·
       ask / delegate / scope dividers · Connecting one · Here's mine · The receipt ·
       What's a toggle now · So what can this thing reach · `pulumi env run` · Least
       privilege setup · In your editor.
 
-### 2. The unmanaged security group (decide, don't leave conditional)
+### 2. The unmanaged security group (armed Sep 4; confirm in the run-through)
 
 Slide 21 bullet 4 ("found something the program never mentioned") and slide 23 ("the
 security group that was in the account and in no program") describe a fourth planted
 fault: `demo/pulumi-ts/create-unmanaged.sh` makes a security group open on 5432 with
-the raw aws CLI and attaches it to the demo DB. It only exists if that script has run;
-Neo needs a nudge to look for it; in the Sep 2 rehearsal Neo invented one.
+the raw aws CLI and attaches it to the demo DB. `demo.md` setup now runs the script, and
+the incident prompt's second sentence sends Neo to look. In the Sep 2 rehearsal the
+script had not been run and Neo invented one.
 
-- [ ] **Cut** (recommended): drop bullet 4 on slide 21 and the "you just watched that"
-      sentence on slide 23. The dead-letter read through aws already proves "reads the
-      live account."
-- [ ] **Or arm:** run `create-unmanaged.sh` after `pulumi up`, confirm
-      `pulumi stack --show-urns | grep -i security` prints nothing, and keep the nudge:
-      "Is there anything running in the account that this program doesn't describe?"
+- [ ] **Run-through check:** Neo reports the group, the mitigating factor (DB not publicly
+      accessible), and adopts-and-narrows it in the PR. If it stays flaky, cut: drop bullet
+      4 on slide 21 and the "you just watched that" sentence on slide 23.
 
 ### 3. Credentials: make the read-only story true, or say less
 
@@ -78,7 +78,7 @@ Reasoning in `docs/credentials.md`.
 ```bash
 export AWS_PROFILE=work-demo && aws sso login --profile work-demo
 pulumi login && pulumi whoami -v        # expect org: adamgordonbell-org
-cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts && pulumi up && ./prewarm.sh
+cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts && pulumi up && ./create-unmanaged.sh && ./prewarm.sh
 cd ../context-api && pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.json
 ```
 
