@@ -202,6 +202,8 @@ runbook. The exact prompt is in `TODO.md`.
 
 ```bash
 cd neo-workshop-incident
+./cleanup.sh         # resolves open incidents and removes the planted security group first;
+                     # PagerDuty refuses to delete the schedule while an incident is open
 pulumi destroy       # removes the AWS chain and the PagerDuty config
 pulumi stack rm dev
 ```

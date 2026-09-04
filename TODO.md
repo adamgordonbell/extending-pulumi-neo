@@ -47,8 +47,9 @@ Today's run left residue that would change what Neo does next time.
       lives in the Neo integration.
 - [ ] **Incident repo PRs:** #2, #3 (bucket versioning) and #4 (dead-letter fix + security
       group) are open. ⛔ Never merge #4 or #1. Close or leave as receipts; decide.
-- [ ] **Stack:** destroyed Sep 4 after the run, config kept. Morning-of re-up per the block
-      below; the security group is re-planted by that block.
+- [x] **Stack:** destroyed Sep 4 after the run (0 resources), config kept. Morning-of re-up per
+      the block below; the security group is re-planted by that block. Teardown order is
+      `cleanup.sh` then `destroy`; both scripts were fixed today (incident repo 8a020f7, eceb855).
 
 ### 2b. ⚠ The answer key is in Neo's working directory
 
