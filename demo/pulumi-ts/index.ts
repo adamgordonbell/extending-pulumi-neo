@@ -87,7 +87,10 @@ const cloudwatchIntegration = new pagerduty.ServiceIntegration("payments-cloudwa
 // The alerting path: alarm -> SNS -> PagerDuty
 // ---------------------------------------------------------------------------
 
-const alarmTopic = new aws.sns.Topic("payment-alarms", {});
+const alarmTopic = new aws.sns.Topic("payment-alarms", {
+    // CIS AWS: encrypt at rest with the AWS-managed SNS key.
+    kmsMasterKeyId: "alias/aws/sns",
+});
 
 // The integration key is minted by PagerDuty and consumed here, so Pulumi will
 // not create the subscription before the integration exists. No copy-paste step.
@@ -104,6 +107,8 @@ new aws.sns.TopicSubscription("payment-alarms-to-pagerduty", {
 
 const dlq = new aws.sqs.Queue("payment-dlq", {
     messageRetentionSeconds: 60 * 60 * 24,
+    // CIS AWS: encrypt at rest with an AWS-managed SQS key.
+    sqsManagedSseEnabled: true,
 });
 
 const paymentQueue = new aws.sqs.Queue("payment-queue", {
@@ -120,6 +125,8 @@ const paymentQueue = new aws.sqs.Queue("payment-queue", {
         maxReceiveCount: 1,
     }),
     visibilityTimeoutSeconds: 5,
+    // CIS AWS: encrypt at rest with an AWS-managed SQS key.
+    sqsManagedSseEnabled: true,
 });
 
 const dlqAlarm = new aws.cloudwatch.MetricAlarm("payment-dlq-alarm", {
@@ -173,6 +180,9 @@ const db = new aws.rds.Instance("payments-db", {
     skipFinalSnapshot: true,
     applyImmediately: true,
     publiclyAccessible: false,
+    // CIS AWS: encrypt storage at rest and block accidental deletion.
+    storageEncrypted: true,
+    deletionProtection: true,
 });
 
 export const paymentQueueUrl = paymentQueue.url;
