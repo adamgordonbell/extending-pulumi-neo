@@ -45,8 +45,8 @@ Today's run left residue that would change what Neo does next time.
       status is still Todo. Otherwise Neo may point at the existing PR instead of working.
       Or file a fresh ticket and repoint the slide 17 button. Browser only; the Linear key
       lives in the Neo integration.
-- [ ] **Incident repo PRs:** #2, #3 (bucket versioning) and #4 (dead-letter fix + security
-      group) are open. ⛔ Never merge #4 or #1. Close or leave as receipts; decide.
+- [x] **Incident repo PRs:** #1–#4 all closed unmerged (Sep 4). The fault stays planted. The
+      live run on the day opens a fresh one; show that.
 - [x] **Stack:** destroyed Sep 4 after the run (0 resources), config kept. Morning-of re-up per
       the block below; the security group is re-planted by that block. Teardown order is
       `cleanup.sh` then `destroy`; both scripts were fixed today (incident repo 8a020f7, eceb855).
