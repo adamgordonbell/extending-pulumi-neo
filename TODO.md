@@ -9,40 +9,67 @@ slide, the speaker notes are these lines): `~/para/scratch/neo-workshop-causal-c
 
 ## What's left, in order
 
-### 1. Timed run-through (decides the rest)
+### 0. Demo verification — DONE Sep 4 (Claude ran `demo.md` end to end)
 
-- [ ] **Full run-through against the clock.** 60 minutes, three live moments (Context
-      API query, Linear, PagerDuty), three clips (IAM, schedule, next morning), two
-      click-throughs (runbook PR, the PR trail). Needs the incident stack up first:
-      `aws sso login --profile work-demo`, then `pulumi up` in `demo/pulumi-ts` (~5 min),
-      then fire `./trigger-incident.sh` at the top of the Linear beat.
-- [ ] **Unmanaged security group is armed** via `demo.md` setup (`create-unmanaged.sh` +
-      the second sentence of the incident prompt). Watch in the run-through whether Neo
-      reports it without the nudge going further; if it stays flaky, cut (item 2).
+| Step | Result | Time |
+|---|---|---|
+| `pulumi up` + `create-unmanaged.sh` + `prewarm.sh` | 16 resources, 9/9 ok | 5 min |
+| Context API query | 1305 / 144, matches slide 13 | seconds |
+| Linear ticket → PR #3 + comment on PUL-5 | passed | 4 min 36 s |
+| trigger → PagerDuty page | passed | 2 min 33 s |
+| Incident → PR #4 (redrive fix + adopted security group) | passed, interactive TUI | 10 min 30 s |
+
+Neo found the planted security group, stated the mitigating factor, and adopted-and-
+narrowed it in the same PR. It asked two questions on the way (see `demo.md`).
+`pulumi neo -p` (print mode) is unusable for the incident: it exits on a spurious
+"final" flag mid-task, twice. Use the interactive TUI on stage.
+
+### 1. Timed run-through against the clock (Adam)
+
+- [ ] **Full run-through, 60 minutes.** Three live moments verified above; three clips;
+      two click-throughs. Before starting: reset per item 2, then the morning-of block.
+- [ ] **What to say during the waits.** Linear is ~5 min of Neo working, the incident
+      ~10 min with two prompts to answer. Decide the narration (the tool-call stream is
+      the content) and whether to kick the Linear task off at the map slide.
 - [ ] **After the run-through, delete the eleven hidden slides** or restore keepers.
       `hide: true` in `slides/slides.md`: It's a toggle · Every demo ends the same way ·
       ask / delegate / scope dividers · Connecting one · Here's mine · The receipt ·
       What's a toggle now · So what can this thing reach · `pulumi env run` · Least
       privilege setup · In your editor.
 
-### 2. The unmanaged security group (armed Sep 4; confirm in the run-through)
+### 2. Reset before every rehearsal and before Sep 8
 
-Slide 21 bullet 4 ("found something the program never mentioned") and slide 23 ("the
-security group that was in the account and in no program") describe a fourth planted
-fault: `demo/pulumi-ts/create-unmanaged.sh` makes a security group open on 5432 with
-the raw aws CLI and attaches it to the demo DB. `demo.md` setup now runs the script, and
-the incident prompt's second sentence sends Neo to look. In the Sep 2 rehearsal the
-script had not been run and Neo invented one.
+Today's run left residue that would change what Neo does next time.
 
-- [ ] **Run-through check:** Neo reports the group, the mitigating factor (DB not publicly
-      accessible), and adopts-and-narrows it in the PR. If it stays flaky, cut: drop bullet
-      4 on slide 21 and the "you just watched that" sentence on slide 23.
+- [ ] **Linear ticket PUL-5:** delete Neo's two PR-link comments (Sep 2, Sep 4) and confirm
+      status is still Todo. Otherwise Neo may point at the existing PR instead of working.
+      Or file a fresh ticket and repoint the slide 17 button. Browser only; the Linear key
+      lives in the Neo integration.
+- [ ] **Incident repo PRs:** #2, #3 (bucket versioning) and #4 (dead-letter fix + security
+      group) are open. ⛔ Never merge #4 or #1. Close or leave as receipts; decide.
+- [ ] **Stack:** destroyed Sep 4 after the run, config kept. Morning-of re-up per the block
+      below; the security group is re-planted by that block.
+
+### 2b. ⚠ The answer key is in Neo's working directory
+
+Both Sep 4 runs read `index.ts`, `FINDINGS.md` and `create-unmanaged.sh` within the first
+minute. `index.ts` says "deliberate configuration faults for Neo to find, documented in
+FINDINGS.md" and marks each one `FAULT 1/2/3`; `FINDINGS.md` is titled "What Neo is
+supposed to find"; Neo's PR body even says "this stack backs a repeatable incident demo."
+The PagerDuty and aws reads are real, but the diagnosis is not earned.
+
+- [ ] **Strip the tells from the incident repo's `main`:** remove the header paragraph and
+      the `FAULT` comments from `index.ts`; move `FINDINGS.md` and the explanatory headers
+      of `create-unmanaged.sh` / `remove-unmanaged.sh` into this repo under `docs/`.
+      Adam's call; it changes what the room and the PR body say.
 
 ### 3. Credentials: make the read-only story true, or say less
 
-Slide 23 says "give it a read-only role, as I did." On Sep 2 the local `pulumi neo`
-runs used ambient admin credentials with no aws CLI integration connected.
-Reasoning in `docs/credentials.md`.
+Slide 23 says "give it a read-only role, as I did." Sep 4 finding: Neo's local run
+chose on its own to read AWS via `pulumi env run adamgordonbell-org/payments/dev -- aws …`,
+and that environment emits `pulumi-environments-oidc`, which is AdministratorAccess. So
+the reads went through ESC, but through an admin role, and no aws CLI integration was
+involved. Reasoning in `docs/credentials.md`.
 
 - [ ] `pulumi up` **`esc-readonly-role`** (in `demo/pulumi-ts/esc-readonly-role`).
 - [ ] **Connect the aws CLI integration to that environment** (⛔ not `shared/cloud-creds`,
@@ -99,8 +126,8 @@ cd ../context-api && pulumi api GraphQuery -F orgName=adamgordonbell-org --input
 |---|---|---|
 | Open: what Neo is, day two, go play, the map | 5–8 | 12:02–12:05 |
 | What it knows: Context API query | 9–13 | 12:05–12:07 |
-| What it can reach: Linear ticket · ⏱ fire `trigger-incident.sh` at the top | 14–18 | 12:07–12:14 |
-| The incident | 19–21 | 12:14–12:34 |
+| What it can reach: Linear ticket (~5 min of Neo) · ⏱ fire `trigger-incident.sh` at the top | 14–18 | 12:07–12:14 |
+| The incident (~10½ min of Neo, two questions to answer) | 19–21 | 12:14–12:34 |
 | The reach question: four CLIs, read-only, per-task off | 22–24 | 12:34–12:40 |
 | Where it runs: IAM clip, schedule, next morning, runbook | 25–30 | 12:40–12:50 |
 | So what, the trail, where next, thanks | 31–36 | 12:50–12:53 |

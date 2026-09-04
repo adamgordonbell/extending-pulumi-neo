@@ -117,6 +117,7 @@ your `neo-workshop-incident` clone:
 
 ```bash
 cd neo-workshop-incident     # Pulumi.yaml + the git remote live here — Neo needs both
+git checkout main
 pulumi neo
 ```
 
@@ -124,7 +125,13 @@ pulumi neo
 > this program, and open a PR. Comment back on the ticket with the PR link.
 
 Neo reads the ticket over MCP, plans against the real stack, opens the PR, and
-comments back on the ticket. Nothing was pasted.
+comments back on the ticket. Nothing was pasted. About 4½ minutes end to end
+(Sep 4). Neo leaves the checkout on its feature branch; `git checkout main`
+before the next demo.
+
+Use the interactive `pulumi neo`, not `pulumi neo -p`. Print mode exits the
+first time the agent marks a message final, which today happened mid-task on
+both attempts of the incident demo.
 
 ## 3. What it can reach — a PagerDuty incident, end to end
 
@@ -140,6 +147,7 @@ When the page arrives (check your PagerDuty service and your inbox), hand the
 incident to Neo:
 
 ```bash
+git checkout main
 pulumi neo
 ```
 
@@ -157,11 +165,22 @@ database is not publicly accessible), and to adopt and narrow the group in the
 same PR rather than delete it. The fix arrives as a PR on your fork; the
 incident resolves back in PagerDuty.
 
+Timing and the two questions (Sep 4 run): 10½ minutes from prompt to PR.
+Neo stops twice to ask. After about 4 minutes it lays out its plan and asks
+"Proceed?" — answer **yes**. After the preview it asks whether to `pulumi up`
+or just open the PR — answer **skip the deploy, open the PR**. Deploying
+would fix the fault for real and un-plant the demo.
+
 Reset between runs:
 
 ```bash
-./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves
+./cleanup.sh                 # purge queues → alarm OK → incident auto-resolves; removes the planted security group
+./create-unmanaged.sh        # re-plant it before the next run
+git checkout main
 ```
+
+Never merge the fix PR: merging un-plants the fault. Close it, or leave it
+open as a receipt.
 
 ## The rest of the session: clips and real pull requests
 
