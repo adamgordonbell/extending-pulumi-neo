@@ -168,7 +168,8 @@ This part is fun. Everything I show today started as me poking at it.
 </style>
 
 <!--
-Therefore try it out now. It is on in your org already.
+- Day two is the job, and Neo is built for it.
+- So try it now. It is already on in your org.
 -->
 
 ---
@@ -289,7 +290,9 @@ routeAlias: stage-map
 </style>
 
 <!--
-And it keeps getting new features. Today covers some of them in three categories: what it knows, what it can reach, where it runs.
+- You can go and use it today.
+- And it keeps getting new features. Today: some of them, in three categories.
+- What it knows. What it can reach. Where it runs.
 -->
 
 ---
@@ -356,7 +359,8 @@ class: demo
 </div>
 
 <!--
-Here is one query against my own org.
+- One graph over the whole account, queryable.
+- Here is one query against my own org.
 -->
 
 ---
@@ -590,7 +594,8 @@ class: demo
 </div>
 
 <!--
-So the demo: hand Neo the ticket itself.
+- Linear is connected, and there is a ticket nobody has time for: versioning on the staging bucket.
+- So the demo: hand Neo the ticket itself, not a description of it.
 -->
 
 ---
@@ -780,7 +785,10 @@ class: demo
 </div>
 
 <!--
-So with PagerDuty connected, Neo reads the incident, reads the live account through the aws CLI, and finds the cause.
+- Triage is reading four systems, and reading is what an integration is for.
+- So with PagerDuty connected, Neo reads the incident.
+- With the aws CLI connected, it reads the live account.
+- And it finds the cause.
 -->
 
 ---
@@ -973,7 +981,10 @@ layout: two-cols
 </div>
 
 <!--
-And you can turn any integration off for a single task, and each instance carries a note Neo reads. Org-level default, per-task override. That is the second category.
+- The role bounds what the CLI can do.
+- And you can turn any integration off for a single task. Each instance carries a note Neo reads.
+- Org-level default, per-task override.
+- That is the second category.
 -->
 
 ---
@@ -1110,7 +1121,8 @@ class: demo
 </div>
 
 <!--
-So the next morning there is a PR that exists because of a schedule, not a session.
+- Set once: every morning, read the failures, open a PR per fix.
+- So the next morning there is a PR that exists because of a schedule, not a session.
 -->
 
 ---
@@ -1139,7 +1151,10 @@ section it followed.</p>
 </div>
 
 <!--
-But not every drift should be reverted. So you write the runbook once, and Neo cites the section it followed. That is the third category.
+- A scheduled task opened that PR with nobody there.
+- But not every drift should be reverted. Some was on purpose.
+- So you write the runbook once, and Neo cites the section it followed.
+- That is the third category.
 -->
 
 ---
@@ -1230,7 +1245,8 @@ Platform engineers used to keep these things in their heads. Then they handed th
 </style>
 
 <!--
-And what it left behind is real PRs from real sessions, which you can click.
+- Those tasks ran on a schedule, with nobody initiating them.
+- And what they left behind is real PRs from real sessions. Click any of them.
 -->
 
 ---
