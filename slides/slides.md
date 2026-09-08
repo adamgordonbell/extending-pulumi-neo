@@ -1206,7 +1206,18 @@ layout: quote
 > Platform engineers used to keep these things in their heads. Then they delegated them to Neo. Then those tasks started running on a schedule, without anyone initiating them.
 
 <!--
-Platform engineers used to keep these things in their heads. Then they handed them to Neo. Then the tasks started running on a schedule with nobody initiating them.
+- What we covered, in the three categories:
+  - Knows: one graph over the whole account, including the 90% Pulumi never managed.
+  - Reaches: the ticket tracker, the pager, the cloud CLIs. You chose the role, the toggle, and the note.
+  - Runs: console, terminal, editor, and on a schedule with nobody there. Following a runbook, so drift gets adopted instead of undone.
+- Each one on its own is useful. Neo from Slack. Neo clearing the low-priority backlog. Neo reading the page before you do.
+- The real thing is when they compound.
+  - A scheduled run reads the backlog, the open pages, the low-priority policy findings.
+  - It reaches into the accounts and the tools to check them against what is live.
+  - And it hands back PRs, with the evidence, that a human still merges.
+- That is day two with intelligence in the loop. A provider goes out of date: a PR appears. Something hits end of life: a PR appears. A minor incident: a PR with the suggested fix, and the reasoning beside it.
+- Platform engineers used to keep these things in their heads. Then they handed them to Neo. Then the tasks started running on a schedule with nobody initiating them.
+- I use this every week. Day one made a good demo. Day two is the job, and this is what it looks like now.
 -->
 
 ---
