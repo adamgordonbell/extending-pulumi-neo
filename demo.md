@@ -34,16 +34,21 @@ CLI tools:   aws → an ESC environment. Scope it as narrowly as you are comfort
 
 ## Setup
 
-Two checkouts. This repo holds the walkthrough, the slides, and the Context API
-queries; everything runnable lives in the incident repo — **fork that one**,
-because Neo opens its fix PRs against it:
+Two repos. This one holds the walkthrough, the slides, and the Context API
+queries; everything runnable lives in the incident repo, checked out at
+`demo/pulumi-ts` (its own git repo, gitignored here). Neo opens its fix PRs
+against that repo, so if you are following along in your own org, **fork it**
+and clone your fork there instead:
 
 ```bash
-git clone https://github.com/adamgordonbell/extending-pulumi-neo
-git clone https://github.com/adamgordonbell/neo-workshop-incident   # fork first, clone your fork
-cd neo-workshop-incident
+cd extending-pulumi-neo/demo/pulumi-ts   # or: git clone <your fork> demo/pulumi-ts
 npm install
-pulumi stack init adamgordonbell-org/dev
+pulumi stack select adamgordonbell-org/dev   # first time: pulumi stack init adamgordonbell-org/dev
+```
+
+First-time stack config (already set on the demo stack):
+
+```bash
 pulumi config set aws:region ca-central-1
 pulumi config set --secret pagerduty:token   # paste your PagerDuty API token
 pulumi config set pagerdutyEmail you@example.com   # where the page lands — a real inbox
@@ -113,10 +118,10 @@ Full write-up + a curl form for older CLIs: [`demo/context-api/README.md`](demo/
 ## 2. What it can reach — a Linear ticket becomes a PR
 
 With the Linear MCP connected and a ticket waiting, hand Neo the ticket. From
-your `neo-workshop-incident` clone:
+the incident checkout:
 
 ```bash
-cd neo-workshop-incident     # Pulumi.yaml + the git remote live here — Neo needs both
+cd extending-pulumi-neo/demo/pulumi-ts   # Pulumi.yaml + the git remote live here — Neo needs both
 git checkout main
 pulumi neo
 ```
@@ -139,7 +144,7 @@ Cause a real page. The script sends a poison payment message, then plays the
 failing consumer:
 
 ```bash
-cd neo-workshop-incident
+cd extending-pulumi-neo/demo/pulumi-ts
 ./trigger-incident.sh        # incident opens ~3 min later
 ```
 
@@ -201,7 +206,7 @@ runbook. The exact prompt is in `TODO.md`.
 ## Teardown
 
 ```bash
-cd neo-workshop-incident
+cd extending-pulumi-neo/demo/pulumi-ts
 ./cleanup.sh         # resolves open incidents and removes the planted security group first;
                      # PagerDuty refuses to delete the schedule while an incident is open
 pulumi destroy       # removes the AWS chain and the PagerDuty config
