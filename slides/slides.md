@@ -1036,7 +1036,7 @@ Same integrations, same permissions. Only the doorway changes.
 
 <div class="demo-foot !mt-4 gap-6">
   <DemoCta href="https://www.pulumi.com/docs/ai/neo/editors/" label="Neo in your editor (ACP)" />
-  <DemoCta href="https://www.pulumi.com/docs/ai/neo/cli/" label="pulumi neo, the CLI" />
+  <DemoCta href="https://www.pulumi.com/docs/ai/neo/pulumi-cli/" label="pulumi neo, the CLI" />
 </div>
 
 <!--
