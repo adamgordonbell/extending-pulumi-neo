@@ -644,8 +644,9 @@ The ticket and the PR end up linked, and the backlog gets one item shorter.
 </div>
 
 <div class="demo-foot !mt-6 gap-6">
-  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/neo/tasks/40c356f4-47e6-4bd7-8bd3-d56c9682d67c" label="The task record" />
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/neo/tasks" label="The task record" />
   <DemoCta href="https://github.com/adamgordonbell/neo-workshop-incident/pulls" label="The PR it opened" />
+  <DemoCta href="https://linear.app/agb-demo-test/issue/PUL-5/add-versioning-to-the-staging-bucket" label="The ticket, with its comment" />
 </div>
 
 <style scoped>
@@ -653,7 +654,8 @@ The ticket and the PR end up linked, and the backlog gets one item shorter.
 </style>
 
 <!--
-It read the ticket, planned against the real stack, opened a PR, and commented back on the ticket.
+- Neo read the ticket itself, planned against the real stack, opened a PR, and commented back on the ticket.
+- Click the ticket: the comment and the PR link are on it now. Backlog one item shorter.
 -->
 
 ---
