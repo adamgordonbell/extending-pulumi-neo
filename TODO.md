@@ -96,11 +96,14 @@ export AWS_PROFILE=work-demo && aws sso login --profile work-demo
 pulumi login && pulumi whoami -v        # expect org: adamgordonbell-org
 cd ~/sandbox/extending-pulumi-neo/demo/pulumi-ts && pulumi up && ./add-db-sg.sh && ./prewarm.sh
 cd ../context-api && pulumi api GraphQuery -F orgName=adamgordonbell-org --input coverage-by-tool.json
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input old-provider-blast-radius.json   # payments pipeline should now be in it
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input safe-to-upgrade-first.json       # leaves of the payments stack
 ```
 
 - [ ] PagerDuty trial alive (started Sep 2, dies Sep 16; Sep 8 is day 6)
 - [ ] PagerDuty + Linear MCP connected in the org; ticket PUL-5 open and waiting
 - [ ] Context API counts re-run; slide 13 has 1305 / 144 printed on it, fix if moved
+- [ ] The four Neo questions in demo.md §1 asked once against the live stack; note the answers in demo/context-api/README.md. Impact + cleanup only mean anything with the stack up
 - [ ] Trigger TWICE: resolve one as rehearsal, keep one open as the spare
 - [ ] Click every demo button once, logged in, right account: Integrations, the Linear
       ticket, PagerDuty incidents, both Neo task links, the runbook PR, the trail PRs

@@ -1,0 +1,8 @@
+{
+  "scope": { "stacks": ["neo-workshop-incident/*"] },
+  "anchor": { "nodeType": "resource", "limit": 100 },
+  "traverse": [
+    { "edgeTypes": ["reference"], "direction": "in", "depth": { "min": 1, "max": 4 }, "target": { "absent": true }, "alias": "leaves" }
+  ],
+  "return": { "select": ["leaves"] }
+}

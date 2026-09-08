@@ -113,6 +113,28 @@ pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-by-type.js
 pulumi api GraphQuery -F orgName=adamgordonbell-org --input unmanaged-security-groups.json
 ```
 
+Then the same graph in natural language. Neo writes and runs the selector itself:
+
+```bash
+pulumi neo --org adamgordonbell-org
+```
+
+Ask, in this order; each one is a question the launch post says the graph exists to answer:
+
+| Ask Neo | What comes back (verified Sep 8, stack destroyed) |
+|---|---|
+| **Coverage** — "From what Pulumi knows about my org, how much of my AWS account does Pulumi actually manage, and what kinds of things are outside it?" | Pulumi 144 / Other 1305; CloudFront distributions, cache policies, OAIs lead the unmanaged pile |
+| **Impact** — "Which of my resources are still managed by an AWS provider older than 7.0, and in which stacks?" | With the payments stack up: the whole pipeline (`@pulumi/aws` is pinned to 6.83) plus the 50 momentum-infra resources on 6.x |
+| **Cleanup** — "In the neo-workshop-incident stack, which resources does nothing else depend on? What could I change first?" | The dependency leaves: `target.absent` on inbound `reference` edges |
+| **Tie-in** — "Which security groups in my account are not managed by Pulumi?" | 3 on Aug 27. Whether the planted one shows depends on scan lag; either way is a beat (see README) |
+
+Say "from what Pulumi knows" or "using the Context API": with the aws CLI
+connected, Neo will otherwise happily answer the last two with `aws ec2 describe-*`
+and never touch the graph. Skip the post's "which stacks consume outputs from
+payments/prod": this org has zero cross-stack edges, so it returns nothing.
+The selectors Neo should arrive at are in `demo/context-api/` as files, so the
+typed and the asked forms can be compared on screen.
+
 Full write-up + a curl form for older CLIs: [`demo/context-api/README.md`](demo/context-api/README.md).
 
 ## 2. What it can reach — a Linear ticket becomes a PR

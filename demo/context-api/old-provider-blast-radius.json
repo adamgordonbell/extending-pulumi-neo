@@ -1,0 +1,13 @@
+{
+  "anchor": {
+    "nodeType": "resource",
+    "match": {
+      "type": "pulumi:providers:aws",
+      "fields": { "provider_version": { "op": "lt", "value": "7.0.0" } }
+    }
+  },
+  "traverse": [
+    { "edgeTypes": ["provided_by"], "direction": "in", "depth": { "min": 1, "max": 1 }, "alias": "managed" }
+  ],
+  "return": { "select": ["anchor", "managed"] }
+}

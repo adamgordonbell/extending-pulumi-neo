@@ -67,6 +67,30 @@ pulumi api GraphQuery -F orgName=$ORG --input unmanaged-security-groups.json
 
 Verified: **3 unmanaged security groups**, all in `aws-ca-central/ca-central-1`.
 
+### 4 and 5. The blog's own questions, pointed at the payments stack
+
+The launch post's examples are impact ("what does an outdated provider manage")
+and cleanup ("what is safe to change first"). Both have real answers here,
+because the incident repo pins `@pulumi/aws` to **6.83**, and the org's only
+other AWS provider is 7.7.0 (momentum-infra).
+
+```bash
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input old-provider-blast-radius.json
+pulumi api GraphQuery -F orgName=adamgordonbell-org --input safe-to-upgrade-first.json
+```
+
+Verified Sep 8 with the payments stack **destroyed**: the first walk returned
+the 50 momentum-infra resources under its 6.x provider, `resultMode: exact`. With
+the stack up it should return the whole payment pipeline as well; the second
+query is scoped to that stack and returns the resources nothing depends on (on
+`dadjoke/dev` it returned the function app, the two providers, and the Stack
+resource). **Re-run both after `pulumi up` on the morning of** and note the
+counts here before saying them on stage.
+
+The blog's headline question, "which stacks consume outputs from payments/prod",
+has nothing to chew on in this org: zero `consumes_outputs_of` edges across all
+69 stacks. Don't ask it.
+
 ## ⚠️ Read this before wiring it to demo 2
 
 **The graph can see unmanaged security groups.** Three of them, today, without
