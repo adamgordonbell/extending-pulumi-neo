@@ -111,13 +111,11 @@ Ask, and it answers, investigates, reviews, or opens a pull request. The result 
 </p>
 
 <!--
-Neo is Pulumi's own infrastructure agent. It reads your organization's live state in Pulumi Cloud: your programs, your stacks, what is actually running.
-
-Ask it something and, depending on what you asked, it will answer, investigate, review a change, or open a pull request against your IaC. The picture is the shape of every task: a prompt in, Neo reads what Pulumi knows, and out comes a plan and a diff. Here that is a cluster upgrade; today it will be an incident.
-
-The result is not a console click but a diff, with a preview, that your reviewers still gate.
-
-Announced Sep 2025, heavily used since. It reads your Pulumi and hands back a PR a human merges.
+- Neo is Pulumi's own infrastructure agent. Announced Sep 2025, heavily used since.
+- It reads your org's live state in Pulumi Cloud: programs, stacks, what is actually running.
+- Ask it something and it answers, investigates, reviews a change, or opens a PR against your IaC.
+- The picture is the shape of every task: prompt in, Neo reads what Pulumi knows, plan and diff out. Here a cluster upgrade; today an incident.
+- The result is not a console click. It is a diff, with a preview, that your reviewers still gate.
 -->
 
 ---
@@ -131,11 +129,12 @@ Day one makes a good demo. Day two is a job, and it is what the rest of this hou
 </p>
 
 <!--
-Day zero, one, two is the ops split. Day zero is design: what are we building. Day one is deploying it for the first time: the tutorial, the first pulumi up, the green check. Day two is operating it for the rest of its life: patching, alerts, drift, upgrades, the thing somebody changed by hand.
-
-Day one happens once. Day two is every day after.
-
-And that makes it great at day two, where the hard work is and where state, preview, and a reviewable diff already earn their keep.
+- Day zero, one, two is the ops split.
+- Day zero: design, what are we building.
+- Day one: deploy it for the first time. The tutorial, the first pulumi up, the green check.
+- Day two: operate it for the rest of its life. Patching, alerts, drift, upgrades, the thing somebody changed by hand.
+- Day one happens once. Day two is every day after.
+- And that makes Neo great at day two: state, preview, and a reviewable diff already earn their keep there.
 -->
 
 ---
@@ -354,7 +353,8 @@ Neo already knew what Pulumi knew: your programs, your stacks, your state. But m
 </div>
 
 <!--
-So Neo now has one graph over the whole account, including what nothing manages. The Context API, shipped last week.
+- Pulumi's records stop at what Pulumi manages.
+- So Neo now has one graph over the whole account, including what nothing manages. The Context API, shipped last week.
 -->
 
 ---
@@ -415,13 +415,13 @@ Second category: what it can reach.
 <TwoDirections />
 
 <!--
-Neo could already reach out through Pulumi itself: preview, deploy, open a PR. Now it can touch the other surfaces too.
-
-Out, to the systems you operate with. MCP servers: PagerDuty, Linear, Datadog, Honeycomb, Atlassian, Supabase. Pulumi Cloud holds those credentials, encrypted per org. And the cloud CLIs: aws, gcloud, az, kubectl. Those credentials you hold yourself, in Pulumi ESC.
-
-In, from where you already work. Mention Neo in a PR thread or a Slack channel and a task starts, without opening Pulumi Cloud at all.
-
-The two sides answer different questions. Out is about what Neo can see. In is about how the work gets started. Both of today's demos live on the out side.
+- Neo could already reach out through Pulumi itself: preview, deploy, open a PR. Now it can touch the other surfaces too.
+- Out, to the systems you operate with.
+  - MCP servers: PagerDuty, Linear, Datadog, Honeycomb, Atlassian, Supabase. Pulumi Cloud holds those credentials, encrypted per org.
+  - Cloud CLIs: aws, gcloud, az, kubectl. Those credentials you hold yourself, in Pulumi ESC.
+- In, from where you already work. Mention Neo in a PR thread or a Slack channel and a task starts, without opening Pulumi Cloud.
+- Different questions. Out is what Neo can see. In is how the work gets started.
+- Both of today's demos live on the out side.
 -->
 
 ---
@@ -524,7 +524,9 @@ hide: true
 </style>
 
 <!--
-Here is what that buys you. You have backlog tickets nobody gets to. You discover problems in Slack. With Linear connected, those get dealt with.
+- Neo can now reach Linear and PagerDuty over MCP. Here is what that buys you.
+- You have backlog tickets nobody gets to. You discover problems in Slack.
+- With Linear connected, those get dealt with.
 -->
 
 ---
@@ -794,7 +796,9 @@ So with PagerDuty connected, Neo reads the incident, reads the live account thro
 </style>
 
 <!--
-It found the thing no program mentioned, and both fixes arrived as a diff with the evidence beside them. But if Neo is off running aws and kubectl against my accounts, don't I risk things going wrong?
+- Neo read the page in PagerDuty, then read the live account with the aws CLI.
+- It found the thing no program mentioned, and both fixes arrived as a diff with the evidence beside them.
+- But if Neo is off running aws and kubectl against my accounts, don't I risk things going wrong?
 -->
 
 ---
@@ -834,7 +838,8 @@ hide: true
 </div>
 
 <!--
-No. The CLIs are four named integrations, each backed by an ESC environment your org owns.
+- We just watched Neo run aws against my account. Isn't that a risk?
+- No. The CLIs are four named integrations, each backed by an ESC environment your org owns.
 -->
 
 ---
@@ -848,11 +853,10 @@ The CLI can only do what its credentials allow. You choose the role. Give it a <
 </p>
 
 <!--
-Reading. Neo shells out to the CLI to look: list the buckets, describe the instance, check the firewall rule. That is how it sees the live account, including the parts Pulumi never managed. You just watched that: the security group that was in the account and in no program.
-
-Writing. Neo changes the program, previews it, and opens a pull request. You merge it, and Pulumi makes the change. There is no second write path.
-
-And the CLI can only do what its credentials allow. You choose the role. With a read-only role the pull request is the only write path.
+- Reading: Neo shells out to the CLI to look. List the buckets, describe the instance, check the firewall rule.
+- That is how it sees the live account, including what Pulumi never managed. You just watched that: the security group in the account and in no program.
+- Writing: Neo changes the program, previews it, opens a pull request. You merge, Pulumi makes the change. No second write path.
+- And the CLI can only do what its credentials allow. You choose the role. Read-only, and the pull request is the only write path.
 -->
 
 ---
@@ -990,11 +994,12 @@ Same integrations, same permissions. Only the doorway changes.
 </p>
 
 <!--
-Neo already ran in Pulumi Cloud. That is where an org admin turns integrations on, and where the task history lives.
-
-Now it is the same agent in four places. The terminal, pulumi neo: everything you watched today ran here. Your editor: Zed, JetBrains, VS Code, Cursor, over the Agent Client Protocol. And on a schedule, with nobody there at all. That one is next.
-
-Same integrations, same permissions. Only the doorway changes.
+- Neo already ran in Pulumi Cloud: where an admin turns integrations on, where task history lives.
+- Now the same agent in four places.
+  - The terminal, pulumi neo: everything you watched today ran here.
+  - Your editor: Zed, JetBrains, VS Code, Cursor, over the Agent Client Protocol.
+  - On a schedule, with nobody there at all. That one is next.
+- Same integrations, same permissions. Only the doorway changes.
 -->
 
 ---
@@ -1076,7 +1081,8 @@ class: demo
 </div>
 
 <!--
-And the schedule is the one where nobody is there. Set it once: every morning, read the benchmark failures, open a PR per fix.
+- That was the terminal. The schedule is the one where nobody is there.
+- Set it once: every morning, read the benchmark failures, open a PR per fix.
 -->
 
 ---
