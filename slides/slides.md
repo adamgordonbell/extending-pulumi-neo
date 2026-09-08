@@ -701,7 +701,11 @@ hide: true
 </style>
 
 <!--
-So we handed Neo a ticket and got back a PR. But what about an incident? When a page fires, the first twenty minutes are not fixing. They are reading four systems to assemble the picture. That assembly is reading, and reading is what an integration is for.
+- We handed Neo a ticket, got back a PR.
+- But what about an incident?
+- A page fires. First twenty minutes are not fixing.
+- They are reading four systems to assemble the picture: what deployed, what changed, what the metrics did, when it started.
+- That assembly is reading. Reading is what an integration is for.
 -->
 
 ---
