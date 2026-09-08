@@ -1205,6 +1205,12 @@ layout: quote
 
 > Platform engineers used to keep these things in their heads. Then they delegated them to Neo. Then those tasks started running on a schedule, without anyone initiating them.
 
+<div class="demo-foot !mt-10 gap-6">
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/neo-settings/integrations/cli" label="CLI tools: Kubernetes, Google Cloud too" />
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/neo-settings/general" label="Organization instructions" />
+  <DemoCta href="https://www.pulumi.com/docs/ai/skills/" label="Agent Skills" />
+</div>
+
 <!--
 - What we covered, in the three categories:
   - Knows: one graph over the whole account, including the 90% Pulumi never managed.
@@ -1215,6 +1221,7 @@ layout: quote
   - A scheduled run reads the backlog, the open pages, the low-priority policy findings.
   - It reaches into the accounts and the tools to check them against what is live.
   - And it hands back PRs, with the evidence, that a human still merges.
+- Two more knobs, shown not demoed (buttons below): the same CLI page has Kubernetes and Google Cloud one Connect away, with the same role-and-note controls. Organization instructions, on the settings page, are the standing brief every task reads. And the Agent Skills catalog is how you teach it your shop's way of doing things.
 - That is day two with intelligence in the loop. A provider goes out of date: a PR appears. Something hits end of life: a PR appears. A minor incident: a PR with the suggested fix, and the reasoning beside it.
 - Platform engineers used to keep these things in their heads. Then they handed them to Neo. Then the tasks started running on a schedule with nobody initiating them.
 - I use this every week. Day one made a good demo. Day two is the job, and this is what it looks like now.
