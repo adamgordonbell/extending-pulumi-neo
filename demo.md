@@ -137,6 +137,39 @@ typed and the asked forms can be compared on screen.
 
 Full write-up + a curl form for older CLIs: [`demo/context-api/README.md`](demo/context-api/README.md).
 
+## Tour — the thing Neo is about to work on (slide 14, while triggering)
+
+Slide 14 carries the orange cue. Run the trigger from the `pulumi-ts` terminal,
+then give the two-minute tour while the page is on its way. Order: code, Pulumi
+Cloud, AWS, then the two tools.
+
+```bash
+cd extending-pulumi-neo/demo/pulumi-ts
+./trigger-incident.sh        # page lands in ~3 min; 30-min auto-resolve clock starts
+```
+
+**The line:** a payments service. Messages go on a queue; anything that fails to
+process lands in a dead-letter queue; a CloudWatch alarm watches that queue and,
+through SNS, pages me in PagerDuty. A Postgres database and a staging bucket sit
+next to it. One Pulumi program stands up all of it, PagerDuty side included.
+
+1. **The program** — `index.ts` in the editor. Scroll once: queue + DLQ, the two
+   alarms, SNS → PagerDuty, the bucket, the RDS instance, and the PagerDuty team,
+   schedule, escalation policy and service. Do not linger on the redrive policy.
+2. **Pulumi Cloud** — the stack, 16 resources, and the resource graph:
+   <https://app.pulumi.com/adamgordonbell-org/neo-workshop-incident/dev>
+   (Resources tab → graph view). This is what Neo already knew.
+3. **AWS** — "this is a real account, not a mock." Two clicks:
+   - RDS: <https://ca-central-1.console.aws.amazon.com/rds/home?region=ca-central-1#database:id=payments-db3a72bce;is-cluster=false>
+   - SQS: <https://ca-central-1.console.aws.amazon.com/sqs/v3/home?region=ca-central-1#/queues>
+   Do not open the security-group tab on the database.
+4. **PagerDuty** — a real on-call setup, service `payments`, and the incident list
+   where the page will land: <https://pulumi-bot-test.pagerduty.com/incidents>
+5. **Linear** — a real tracker with one ticket waiting:
+   <https://linear.app/agb-demo-test/issue/PUL-5/add-versioning-to-the-staging-bucket>
+
+Then slide 15. The page arrives during 15–16; let the phone buzz.
+
 ## 2. What it can reach — a Linear ticket becomes a PR
 
 With the Linear MCP connected and a ticket waiting, hand Neo the ticket. From
