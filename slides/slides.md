@@ -404,8 +404,29 @@ routeAlias: stage-reaches
 
 <StageMap size="lg" />
 
+<div class="cue">
+  <ph-bell-ringing class="cue-ico" />
+  <span>ADAM: run <code>./trigger-incident.sh</code> now</span>
+</div>
+
+<style scoped>
+.cue {
+  position: absolute; right: 4rem; top: 5.5rem;
+  display: flex; align-items: center; gap: 1rem; white-space: nowrap;
+  padding: 1rem 2rem; border-radius: 1rem;
+  background: #ff7a00; color: #fff;
+  font-size: 2rem; font-weight: 700; letter-spacing: .02em;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  animation: cue-pulse 1.2s ease-in-out infinite;
+}
+.cue code { background: rgba(0,0,0,.25); color: #fff; padding: .1em .45em; border-radius: .4em; }
+.cue-ico { font-size: 2.6rem; }
+@keyframes cue-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+</style>
+
 <!--
-Second category: what it can reach.
+- Trigger the incident here. Page lands in about 3 minutes; the 30-minute auto-resolve clock starts now.
+- Second category: what it can reach.
 -->
 
 ---
