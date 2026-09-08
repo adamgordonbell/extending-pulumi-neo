@@ -593,9 +593,15 @@ class: demo
   <DemoCta href="https://linear.app/agb-demo-test/issue/PUL-5/add-versioning-to-the-staging-bucket" label="Open the ticket" />
 </div>
 
+<div class="demo-foot">
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/neo/tasks/02a8a4c1-73aa-4076-b13c-0a79c5171d18" label="Backup: the Sep 4 run" />
+  <DemoCta href="https://github.com/adamgordonbell/neo-workshop-incident/pull/3" label="Backup: its PR (#3)" />
+</div>
+
 <!--
 - Linear is connected, and there is a ticket nobody has time for: versioning on the staging bucket.
 - So the demo: hand Neo the ticket itself, not a description of it.
+- BACKUP if Neo stalls: open the Sep 4 task transcript (button), scroll to the summary, then its PR #3. Same prompt, same ticket. Say "this is Thursday's run of the same thing."
 -->
 
 ---
@@ -784,11 +790,17 @@ class: demo
   <DemoCta href="https://pulumi-bot-test.pagerduty.com/incidents" label="Open PagerDuty" />
 </div>
 
+<div class="demo-foot">
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/neo/tasks/38b04f8a-e65a-482c-a87e-875d8c0c8bdd" label="Backup: the Sep 4 run" />
+  <DemoCta href="https://github.com/adamgordonbell/neo-workshop-incident/pull/4" label="Backup: its PR (#4)" />
+</div>
+
 <!--
 - Triage is reading four systems, and reading is what an integration is for.
 - So with PagerDuty connected, Neo reads the incident.
 - With the aws CLI connected, it reads the live account.
 - And it finds the cause.
+- BACKUP if the page never lands or Neo stalls: open the Sep 4 task transcript (button). Its summary has both findings: maxReceiveCount 1, and the out-of-band security group open on 5432. Then PR #4 shows the diff. Say "this is Thursday's run of the same incident."
 -->
 
 ---
@@ -850,12 +862,18 @@ hide: true
 <p class="!mt-4 !text-[1.6rem] !leading-relaxed">AWS, Google Cloud, Azure, and Kubernetes, on the same settings page under a separate <strong>CLI tools</strong> section.</p>
 
 <div class="flex justify-center !mt-6">
-  <img src="/img/cli-integrations.png" class="rounded-xl shadow-2xl max-h-[56vh]" alt="Neo Settings, CLI tools tab: two connected integrations for AWS and Kubernetes, and four available CLI types — AWS, Google Cloud, Azure and Kubernetes" />
+  <img src="/img/cli-integrations.png" class="rounded-xl shadow-2xl max-h-[50vh]" alt="Neo Settings, CLI tools tab: two connected integrations for AWS and Kubernetes, and four available CLI types — AWS, Google Cloud, Azure and Kubernetes" />
+</div>
+
+<div class="demo-foot">
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/neo-settings/integrations/cli" label="Open CLI tools (live)" />
 </div>
 
 <!--
 - We just watched Neo run aws against my account. Isn't that a risk?
 - No. The CLIs are four named integrations, each backed by an ESC environment your org owns.
+- CLICK the button: my org, live. aws-payments and azure-dev under Connected. Open aws-payments: name, the ESC environment it is bound to (payments/dev), and the note Neo reads. That is the whole setup.
+- The screenshot is the fallback if the console is slow.
 -->
 
 ---

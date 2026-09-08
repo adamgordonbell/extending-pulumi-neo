@@ -193,6 +193,13 @@ Use the interactive `pulumi neo`, not `pulumi neo -p`. Print mode exits the
 first time the agent marks a message final, which today happened mid-task on
 both attempts of the incident demo.
 
+
+**Backup, if Neo stalls or Linear is down.** The Sep 4 run of this exact prompt:
+task [`02a8a4c1`](https://app.pulumi.com/adamgordonbell-org/neo/tasks/02a8a4c1-73aa-4076-b13c-0a79c5171d18), scroll to the summary, then
+[neo-workshop-incident#3](https://github.com/adamgordonbell/neo-workshop-incident/pull/3).
+Both are buttons on the demo slide. The clip `slides/public/video/neo-linear.mp4`
+is the last resort. Say "this is Thursday's run of the same thing" and move on.
+
 ## 3. What it can reach — a PagerDuty incident, end to end
 
 Cause a real page. The script sends a poison payment message, then plays the
@@ -241,6 +248,14 @@ git checkout main
 
 Never merge the fix PR: merging un-plants the fault. Close it, or leave it
 open as a receipt.
+
+
+**Backup, if the page never lands or Neo stalls.** The Sep 4 run: task
+[`38b04f8a`](https://app.pulumi.com/adamgordonbell-org/neo/tasks/38b04f8a-e65a-482c-a87e-875d8c0c8bdd). Its summary names both findings, `maxReceiveCount: 1` and the
+out-of-band security group open on 5432, and links
+[neo-workshop-incident#4](https://github.com/adamgordonbell/neo-workshop-incident/pull/4)
+for the diff. Both are buttons on the demo slide. Say "this is Thursday's run of the
+same incident."
 
 ## The rest of the session: clips and real pull requests
 
