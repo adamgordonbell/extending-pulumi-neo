@@ -382,7 +382,7 @@ Here is one query against my own org.
     <div class="!mt-3 text-[1.5rem] opacity-80">found by cloud scan,<br/>no IaC tool</div>
   </div>
   <div class="text-center">
-    <div class="text-[5.5rem] leading-none font-bold opacity-60">144</div>
+    <div class="text-[5.5rem] leading-none font-bold opacity-60">162</div>
     <div class="!mt-3 text-[1.5rem] opacity-80">managed by<br/>Pulumi</div>
   </div>
 </div>
@@ -390,7 +390,7 @@ Here is one query against my own org.
 <p class="!mt-10 !text-[1.6rem] !leading-relaxed text-center">One query against my own org, this morning.</p>
 
 <!--
-Ninety percent of that account is not Pulumi. 1305 resources no IaC tool claims, against 144 in Pulumi. Neo can now reason about all of it. That is the first category.
+Ninety percent of that account is not Pulumi. 1305 resources no IaC tool claims, against 162 in Pulumi. Neo can now reason about all of it. That is the first category.
 -->
 
 ---
@@ -1271,7 +1271,7 @@ Where this goes next: the inbound half we named but did not demo, more of the gr
 
 **What we went deeper on**
 
-- [Pulumi Context API](https://www.pulumi.com/blog/pulumi-context-api/) — the graph behind that 1305 / 144
+- [Pulumi Context API](https://www.pulumi.com/blog/pulumi-context-api/) — the graph behind that 1305 / 162
 - [Neo Automations](https://www.pulumi.com/blog/neo-automations/) — scheduled tasks, shipped as pull requests
 - [Incident Response as Code](https://www.pulumi.com/blog/incident-response-as-code-pagerduty-pulumi/) — Engin's PagerDuty program, the one I seeded the demo with
 - [Bringing Neo to GitHub and Slack](https://www.pulumi.com/blog/neo-github-slack/) — the inbound half
