@@ -104,61 +104,37 @@ defaults:
 
 # What Neo is
 
-<div class="zoom-content">
+<img src="/img/neo-hero.svg" class="!mt-6 mx-auto max-h-[52vh]" alt="A prompt to Neo on the left, Neo in the middle, three upgraded EKS clusters on the right" />
 
-<p class="!mt-6 !text-[1.7rem] !leading-relaxed">
-Pulumi's own <strong>infrastructure agent</strong>. It reads your organization's
-live state in Pulumi Cloud — your programs, your stacks, what's actually running.
+<p class="!mt-6 !text-[1.6rem] !leading-relaxed text-center opacity-85">
+Ask, and it answers, investigates, reviews, or opens a pull request. The result is a diff your reviewers still gate.
 </p>
-
-<p class="!mt-7 !text-[1.7rem] !leading-relaxed">
-Ask it something, and depending on what you asked it will
-<strong>answer</strong>, <strong>investigate</strong>, <strong>review a change</strong>,
-or <strong>open a pull request</strong> against your IaC.
-</p>
-
-<p class="!mt-7 !text-[1.7rem] !leading-relaxed opacity-85">
-The result is not a console click but a diff, with a preview, that your reviewers still gate.
-</p>
-
-</div>
-
-<style scoped>
-.zoom-content { zoom: 1.25; }
-</style>
 
 <!--
-Neo is an infrastructure agent. Announced Sep 2025, heavily used since. It reads your Pulumi and hands back a PR a human merges.
+Neo is Pulumi's own infrastructure agent. It reads your organization's live state in Pulumi Cloud: your programs, your stacks, what is actually running.
+
+Ask it something and, depending on what you asked, it will answer, investigate, review a change, or open a pull request against your IaC. The picture is the shape of every task: a prompt in, Neo reads what Pulumi knows, and out comes a plan and a diff. Here that is a cluster upgrade; today it will be an incident.
+
+The result is not a console click but a diff, with a preview, that your reviewers still gate.
+
+Announced Sep 2025, heavily used since. It reads your Pulumi and hands back a PR a human merges.
 -->
 
 ---
 
 # Day two
 
-<div class="zoom-content">
+<DayTwoStrip />
 
-<p class="!mt-6 !text-[1.7rem] !leading-relaxed">
-<strong>Day one</strong> is standing it up: the tutorial, the first <code>pulumi up</code>,
-the green check.
-</p>
-
-<p class="!mt-7 !text-[1.7rem] !leading-relaxed">
-<strong>Day two</strong> is every day after that: the alert at 2am, the provider that
-went out of date, the security group somebody added by hand and never mentioned,
-the upgrade nobody has time for.
-</p>
-
-<p class="!mt-7 !text-[1.7rem] !leading-relaxed !text-[var(--p-primary)] !font-semibold">
+<p class="!mt-8 !text-[1.7rem] !leading-relaxed !text-[var(--p-primary)] !font-semibold text-center">
 Day one makes a good demo. Day two is a job, and it is what the rest of this hour is about.
 </p>
 
-</div>
-
-<style scoped>
-.zoom-content { zoom: 1.22; }
-</style>
-
 <!--
+Day zero, one, two is the ops split. Day zero is design: what are we building. Day one is deploying it for the first time: the tutorial, the first pulumi up, the green check. Day two is operating it for the rest of its life: patching, alerts, drift, upgrades, the thing somebody changed by hand.
+
+Day one happens once. Day two is every day after.
+
 And that makes it great at day two, where the hard work is and where state, preview, and a reviewable diff already earn their keep.
 -->
 
@@ -242,9 +218,6 @@ routeAlias: stage-map
 
 </div>
 
-<p class="!mt-8 !text-[1.45rem] text-center opacity-85">
-The title is about the second question. The first and third show how far it now reaches.
-</p>
 
 <StageMap size="lg" />
 
@@ -436,53 +409,19 @@ Second category: what it can reach.
 -->
 
 ---
-layout: two-cols
----
-
-::header::
 
 # Two directions
 
-::left::
-
-<div class="!mt-6">
-<div class="!text-[1.55rem] !font-semibold opacity-60 !mb-2">OUT — to the systems you operate with</div>
-<div class="!text-[2.1rem] !font-semibold !text-[var(--p-primary)]">MCP &nbsp;·&nbsp; Cloud CLI</div>
-
-<p class="!mt-5 !text-[1.4rem] !leading-relaxed opacity-85">
-<strong>MCP</strong> — PagerDuty · Linear · Datadog · Honeycomb · Atlassian · Supabase.
-Pulumi Cloud holds the credentials, encrypted per org.
-</p>
-
-<p class="!mt-5 !text-[1.4rem] !leading-relaxed opacity-85">
-<strong>Cloud CLI</strong> — <code>aws</code> · <code>gcloud</code> · <code>az</code> ·
-<code>kubectl</code>. You hold the credentials, in Pulumi ESC.
-</p>
-
-<p class="!mt-5 !text-[1.4rem] !leading-relaxed !text-[var(--p-primary)] !font-semibold">
-Both of today's demos live here.
-</p>
-</div>
-
-::right::
-
-<div class="!mt-6">
-<div class="!text-[1.55rem] !font-semibold opacity-60 !mb-2">IN — from where you already work</div>
-<div class="!text-[2.1rem] !font-semibold !text-[var(--p-primary)]">GitHub &nbsp;·&nbsp; Slack</div>
-
-<p class="!mt-5 !text-[1.4rem] !leading-relaxed opacity-85">
-Mention Neo in a PR thread or a channel and a task starts — without opening
-Pulumi Cloud at all.
-</p>
-
-<p class="!mt-5 !text-[1.4rem] !leading-relaxed opacity-85">
-This is a different question from the left-hand side. It is not about
-<em>what Neo can see</em>, but about <em>how the work gets started</em>.
-</p>
-</div>
+<TwoDirections />
 
 <!--
-Neo could already reach out through Pulumi itself: preview, deploy, open a PR. Now it can touch the other surfaces too. Out, to the MCP servers and the cloud CLIs. In, from GitHub and Slack.
+Neo could already reach out through Pulumi itself: preview, deploy, open a PR. Now it can touch the other surfaces too.
+
+Out, to the systems you operate with. MCP servers: PagerDuty, Linear, Datadog, Honeycomb, Atlassian, Supabase. Pulumi Cloud holds those credentials, encrypted per org. And the cloud CLIs: aws, gcloud, az, kubectl. Those credentials you hold yourself, in Pulumi ESC.
+
+In, from where you already work. Mention Neo in a PR thread or a Slack channel and a task starts, without opening Pulumi Cloud at all.
+
+The two sides answer different questions. Out is about what Neo can see. In is about how the work gets started. Both of today's demos live on the out side.
 -->
 
 ---
@@ -895,39 +834,21 @@ No. The CLIs are four named integrations, each backed by an ESC environment your
 -->
 
 ---
-layout: two-cols
----
-
-::header::
 
 # It reads with the CLI. It writes with Pulumi.
 
-::left::
+<ReadWrite />
 
-<div class="!mt-5 !text-[1.4rem] !leading-relaxed space-y-4">
-
-<p class="!text-[1.8rem] !font-semibold !text-[var(--p-primary)]">Reading — <code>aws</code>, <code>gcloud</code>, <code>az</code>, <code>kubectl</code></p>
-
-<p class="opacity-85">Neo shells out to the CLI to <strong>look</strong>: list the buckets, describe the instance, check the firewall rule.</p>
-
-<p class="opacity-85">That's how it sees the live account — including the parts <strong>Pulumi never managed</strong>. You just watched that: the security group that was in the account and in no program.</p>
-
-</div>
-
-::right::
-
-<div class="!mt-5 !text-[1.4rem] !leading-relaxed space-y-4">
-
-<p class="!text-[1.8rem] !font-semibold !text-[var(--p-primary)]">Writing — through Pulumi</p>
-
-<p class="opacity-85">Neo changes the program, previews it, and opens a pull request. You merge it, and <strong>Pulumi</strong> makes the change.</p>
-
-<p class="opacity-85">The CLI can only do what its credentials allow. You choose the role. Give it a <strong>read-only</strong> one and the only way to change anything is the pull request.</p>
-
-</div>
+<p class="!mt-8 !text-[1.45rem] !leading-relaxed text-center opacity-85">
+The CLI can only do what its credentials allow. You choose the role. Give it a <strong>read-only</strong> one and the pull request is the only way to change anything.
+</p>
 
 <!--
-And it reads with the CLI and writes only through Pulumi. You choose the role, and with a read-only role the pull request is the only write path.
+Reading. Neo shells out to the CLI to look: list the buckets, describe the instance, check the firewall rule. That is how it sees the live account, including the parts Pulumi never managed. You just watched that: the security group that was in the account and in no program.
+
+Writing. Neo changes the program, previews it, and opens a pull request. You merge it, and Pulumi makes the change. There is no second write path.
+
+And the CLI can only do what its credentials allow. You choose the role. With a read-only role the pull request is the only write path.
 -->
 
 ---
@@ -1058,36 +979,18 @@ Third category: where it runs.
 
 # Same agent, four places
 
-<div class="grid grid-cols-2 gap-x-10 gap-y-6 !mt-8 !text-[1.4rem] leading-relaxed">
+<FourDoors />
 
-<div>
-<p class="!m-0"><strong class="!text-[var(--p-primary)]">Pulumi Cloud</strong><br/>
-<span class="opacity-85">Where an org admin turns integrations on, and where the task history lives.</span></p>
-</div>
-
-<div>
-<p class="!m-0"><strong class="!text-[var(--p-primary)]"><code>pulumi neo</code></strong><br/>
-<span class="opacity-85">The terminal. Everything you watched today ran here.</span></p>
-</div>
-
-<div>
-<p class="!m-0"><strong class="!text-[var(--p-primary)]">Your editor</strong><br/>
-<span class="opacity-85">Zed, JetBrains, VS Code, Cursor — over the Agent Client Protocol.</span></p>
-</div>
-
-<div>
-<p class="!m-0"><strong class="!text-[var(--p-primary)]">On a schedule</strong><br/>
-<span class="opacity-85">Nobody is there at all. That one is next.</span></p>
-</div>
-
-</div>
-
-<p class="!mt-9 !text-[1.5rem] !leading-relaxed">
-It is the same agent, with the same integrations and permissions. Only the doorway changes.
+<p class="!mt-7 !text-[1.5rem] !leading-relaxed text-center">
+Same integrations, same permissions. Only the doorway changes.
 </p>
 
 <!--
-Neo already ran in Pulumi Cloud. Now it is the same agent in four places: the console, the terminal, your editor, and on a schedule. Same integrations, same permissions. Only the doorway changes.
+Neo already ran in Pulumi Cloud. That is where an org admin turns integrations on, and where the task history lives.
+
+Now it is the same agent in four places. The terminal, pulumi neo: everything you watched today ran here. Your editor: Zed, JetBrains, VS Code, Cursor, over the Agent Client Protocol. And on a schedule, with nobody there at all. That one is next.
+
+Same integrations, same permissions. Only the doorway changes.
 -->
 
 ---
@@ -1450,4 +1353,3 @@ layout: end
 </style>
 
 <p class="!mt-4 !text-[1.7rem] !font-semibold text-center">Questions?</p>
-
