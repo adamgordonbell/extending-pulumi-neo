@@ -1034,6 +1034,11 @@ Third category: where it runs.
 Same integrations, same permissions. Only the doorway changes.
 </p>
 
+<div class="demo-foot !mt-4 gap-6">
+  <DemoCta href="https://www.pulumi.com/docs/ai/neo/editors/" label="Neo in your editor (ACP)" />
+  <DemoCta href="https://www.pulumi.com/docs/ai/neo/cli/" label="pulumi neo, the CLI" />
+</div>
+
 <!--
 - Neo already ran in Pulumi Cloud: where an admin turns integrations on, where task history lives.
 - Now the same agent in four places.
