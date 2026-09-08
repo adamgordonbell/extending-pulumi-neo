@@ -309,33 +309,20 @@ First category: what it knows.
 
 ---
 
-# Neo already knew what Pulumi knew
+# Neo was already an infrastructure agent
 
-<div class="zoom-content">
+<KnewMap />
 
-<p class="!mt-10 !text-[1.7rem] !leading-relaxed">
-It could read your programs, your stacks, and your state, and it could write a
-change, preview it, and deploy it.
-</p>
-
-<p class="!mt-8 !text-[1.7rem] !leading-relaxed opacity-85">
-What it couldn’t see was everything Pulumi doesn’t record: the alert in PagerDuty,
-the ticket in Linear, the metric in Datadog, and the parts of your cloud account
-<strong>Pulumi doesn’t manage</strong>.
-</p>
-
-<p class="!mt-8 !text-[1.7rem] !leading-relaxed">
+<p class="!mt-7 !text-[1.6rem] !leading-relaxed text-center">
 So a human read three consoles, and <em>then</em> asked for the change.
 </p>
 
-</div>
-
-<style scoped>
-.zoom-content { zoom: 1.4; }
-</style>
-
 <!--
-Neo already knew what Pulumi knew: your programs, your stacks, your state. But most of your cloud is not in there. Pulumi's records stop at what Pulumi manages, and the security group somebody added by hand is not in any program.
+- Neo was never a chatbot on top of Pulumi. A coding agent purpose-built for infrastructure.
+- Inside the box: it knew your programs, stacks, state. It knew the providers and the registry, so it wrote the right code for your cloud.
+- And it could act: preview a change, check it against policy, open the pull request a human merges.
+- The gap is narrow. Only what Pulumi never records: the page, the ticket, the metric, and the parts of your account Pulumi doesn't manage.
+- So a human read three consoles first, and then asked for the change.
 -->
 
 ---
