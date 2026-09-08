@@ -867,14 +867,16 @@ hide: true
   <img src="/img/cli-integrations.png" class="rounded-xl shadow-2xl max-h-[50vh]" alt="Neo Settings, CLI tools tab: two connected integrations for AWS and Kubernetes, and four available CLI types — AWS, Google Cloud, Azure and Kubernetes" />
 </div>
 
-<div class="demo-foot">
-  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/neo-settings/integrations/cli" label="Open CLI tools (live)" />
+<div class="demo-foot gap-6">
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/neo-settings/integrations/mcp" label="MCP servers: Linear, PagerDuty (live)" />
+  <DemoCta href="https://app.pulumi.com/adamgordonbell-org/settings/neo-settings/integrations/cli" label="CLI tools: aws, az (live)" />
 </div>
 
 <!--
 - We just watched Neo run aws against my account. Isn't that a risk?
 - No. The CLIs are four named integrations, each backed by an ESC environment your org owns.
-- CLICK the button: my org, live. aws-payments and azure-dev under Connected. Open aws-payments: name, the ESC environment it is bound to (payments/dev), and the note Neo reads. That is the whole setup.
+- CLICK, my org, live. MCP servers first: Linear and PagerDuty under Connected, four more one Authorize away. That was the whole Linear setup.
+- Then CLI tools: aws-payments and azure-dev under Connected. Open aws-payments: name, the ESC environment it is bound to (payments/dev), and the note Neo reads. That is the whole setup.
 - The screenshot is the fallback if the console is slow.
 -->
 
