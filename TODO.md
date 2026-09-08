@@ -47,7 +47,13 @@ Today's run left residue that would change what Neo does next time.
       lives in the Neo integration.
 - [x] **Incident repo PRs:** #1–#4 all closed unmerged (Sep 4). The fault stays planted. The
       live run on the day opens a fresh one; show that.
-- [x] **Stack:** destroyed Sep 4 after the run (0 resources), config kept. Morning-of re-up per
+- [x] **Stack:** destroyed again Sep 8 after the workshop (0 resources), config kept. The
+      planted security group was orphaned and deleted by hand. **Watch out for Sep 30:** an
+      account sweeper (`lambda-for-account-cleanup`) deleted the RDS instance at 12:00 ET on Sep 8,
+      about 3h after deploy, before the talk. The demo never touches the DB so nothing broke, but
+      `remove-db-sg.sh` fails once the instance is gone (delete the SG by hand), and the RDS
+      console link in demo.md's slide-14 tour goes 404. Deploy as late as possible on the day.
+- [x] **Stack (Sep 4):** destroyed Sep 4 after the run (0 resources), config kept. Morning-of re-up per
       the block below; the security group is re-planted by that block. Teardown order is
       `cleanup.sh` then `destroy`; both scripts were fixed today (incident repo 8a020f7, eceb855).
 
