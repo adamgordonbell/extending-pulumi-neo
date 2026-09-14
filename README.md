@@ -32,7 +32,6 @@ pull request. Neo proposes; a human merges.
 - A Pulumi organization with Neo enabled
 - PagerDuty and Linear tokens for the MCP integrations
 - An AWS account reachable from an ESC environment (read-only is enough — the pull request is the only write path)
-- See [`docs/demo-setup.md`](docs/demo-setup.md) for the account and credential setup
 
 ## Running the demos
 
