@@ -29,7 +29,7 @@ Connect the integrations in the Pulumi console — **Settings → Neo → Integr
 MCP tools:   PagerDuty (your bot user's token), Linear (your API key)
 CLI tools:   aws → an ESC environment. Scope it as narrowly as you are comfortable with;
              a read-only role means the pull request is the only write path.
-             (reasoning: docs/credentials.md; esc-readonly-role/ in the incident repo)
+             (reasoning: docs/demo-setup.md; esc-readonly-role/ in the incident repo)
 ```
 
 ## Setup
@@ -68,9 +68,8 @@ pulumi up                # ~5 min; the RDS instance is the slow part
 pulumi stack --show-urns | grep -i security   # expect nothing
 ```
 
-The program carries three deliberate faults, written up in
-[`docs/FINDINGS.md`](docs/FINDINGS.md) here, not in the incident repo: nothing in
-Neo's working directory names them. `add-db-sg.sh` plants a fourth one outside
+The program carries three deliberate faults, documented outside this repo so that
+nothing in Neo's working directory names them. `add-db-sg.sh` plants a fourth one outside
 the program: a security group open to the world on 5432, created with the raw
 aws CLI and attached to the database, standing in for "somebody opened the
 console at 2am and never came back." Nothing in Pulumi state describes it, so Neo
@@ -271,7 +270,7 @@ opened in an earlier session, so you can read the same thing the room saw.
 
 To reproduce the runbook one: deploy `neo-drift-demo`, add an inline policy to the
 `audit-reader` role out of band, and ask Neo to run the drift check against the
-runbook. The exact prompt is in `TODO.md`.
+runbook.
 
 ## Teardown
 

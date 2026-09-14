@@ -1,14 +1,12 @@
-# Credentials for the demo
+# Demo setup: accounts and credentials
 
-> Owns the *reasoning* about demo credentials. Current status of the AWS account and
-> what's still to do lives in [`../TODO.md`](../TODO.md).
+> What a presenter needs to stand up the demo org and scope credentials for it.
 
 **Settled Aug 25–27 2026:** the account is `616138583583` (Adam's `work-demo` SSO
 profile), and ESC → AWS OIDC is verified end to end. What follows is why the AWS CLI
 integration still needs its own narrow environment, and the one question left open.
 
-Notes for setting up the demo org. Nothing here is presented as-is; the on-stage version
-is beat 3 in [`OUTLINE.md`](OUTLINE.md).
+Notes for setting up the demo org. Nothing here is presented as-is.
 
 ## Org
 
